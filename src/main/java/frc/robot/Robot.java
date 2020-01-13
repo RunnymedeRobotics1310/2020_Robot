@@ -13,8 +13,8 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.oi.AutoSelector;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.CameraSubsystem;
-import frc.robot.subsystems.CanDriveSubsystem;
 import frc.robot.subsystems.ControlPanelSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
 
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 
     public static final List<TSubsystem>        subsystemLs             = new ArrayList<TSubsystem>();
 
-    public static final CanDriveSubsystem       driveSubsystem          = new CanDriveSubsystem();
+    public static final DriveSubsystem          driveSubsystem          = new DriveSubsystem();
     public static final PneumaticsSubsystem     pneumaticsSubsystem     = new PneumaticsSubsystem();
     public static final PowerSubsystem          powerSubsystem          = new PowerSubsystem();
     public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();

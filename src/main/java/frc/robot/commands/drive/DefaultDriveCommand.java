@@ -8,7 +8,7 @@ import com.torontocodingcollective.speedcontroller.TSpeeds;
 
 import frc.robot.Robot;
 import frc.robot.oi.OI;
-import frc.robot.subsystems.CanDriveSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * Default drive command for a drive base
@@ -19,7 +19,7 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
             DefaultDriveCommand.class.getSimpleName();
 
     OI                oi                = Robot.oi;
-    CanDriveSubsystem driveSubsystem    = Robot.driveSubsystem;
+    DriveSubsystem driveSubsystem    = Robot.driveSubsystem;
 
     TDifferentialDrive differentialDrive = new TDifferentialDrive();
 
