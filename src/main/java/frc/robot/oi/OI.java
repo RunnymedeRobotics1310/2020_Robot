@@ -10,6 +10,7 @@ import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.HoodPosition;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -100,6 +101,14 @@ public class OI extends TOi {
 
     public void setSpeedPidEnabled(boolean state) {
         speedPidToggle.set(state);
+    }
+
+    /*
+     * Shooter Subsystem commands
+     */
+
+    public HoodPosition getHoodPosition() {
+        return HoodPosition.CLOSE;
     }
 
     @Override

@@ -3,14 +3,13 @@ package frc.robot.subsystems;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.HoodPosition;
 import frc.robot.commands.shooter.DefaultShooterCommand;
 
 /**
  *
  */
 public class ShooterSubsystem extends TSubsystem {
-
-    public enum HoodPosition { CLOSE, MEDIUM, FAR };
 
     private HoodPosition curHoodPosition;
 
