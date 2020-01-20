@@ -3,6 +3,7 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import frc.robot.HoodPosition;
 import frc.robot.Robot;
 
 /**
@@ -42,6 +43,9 @@ public class DefaultShooterCommand extends TSafeCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+
+        HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
+        Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
 
     }
 
