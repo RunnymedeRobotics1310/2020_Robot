@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.climb.DefaultClimbCommand;
 import frc.robot.commands.pneumatics.DefaultPneumaticsCommand;
