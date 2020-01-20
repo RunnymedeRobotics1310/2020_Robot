@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.util.Color;
 /**
  *
  */
-public class ControlPanelSubsystem extends TSubsystem {
+public class ColorWheelSubsystem extends TSubsystem {
 
 
     /**
@@ -31,7 +31,7 @@ public class ControlPanelSubsystem extends TSubsystem {
     public static final Color YELLOW_TARGET = ColorMatch.makeColor(0.361, 0.524, 0.113);
     public static final Color UNKNOWN_TARGET = Color.kBlack;
 
-    public ControlPanelSubsystem() {
+    public ColorWheelSubsystem() {
         colorMatcher.addColorMatch(BLUE_TARGET);
         colorMatcher.addColorMatch(GREEN_TARGET);
         colorMatcher.addColorMatch(RED_TARGET);
