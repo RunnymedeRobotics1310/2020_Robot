@@ -14,6 +14,7 @@ import frc.robot.oi.AutoSelector;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ColorWheelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
 	public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();
 	public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
 	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
+	public static final ColorWheelSubsystem		colorWheelSubsystem		= new ColorWheelSubsystem();
 
 	public static OI                            oi;
 
@@ -48,6 +50,8 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(powerSubsystem);
 		subsystemLs.add(cameraSubsystem);
 		subsystemLs.add(shooterSubsystem);
+		subsystemLs.add(colorWheelSubsystem);
+
 	}
 
 	/**
