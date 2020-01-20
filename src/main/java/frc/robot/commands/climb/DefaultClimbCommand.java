@@ -18,7 +18,7 @@ public class DefaultClimbCommand extends TSafeCommand {
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.pneumaticsSubsystem);
+        requires(Robot.climbSubsystem);
     }
 
     @Override
@@ -43,11 +43,7 @@ public class DefaultClimbCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
-        if (Robot.oi.getCompressorEnabled()) {
-            Robot.pneumaticsSubsystem.enableCompressor();
-        } else {
-            Robot.pneumaticsSubsystem.disableCompressor();
-        }
+       
     }
 
     // Make this return true when this Command no longer needs to run execute()
