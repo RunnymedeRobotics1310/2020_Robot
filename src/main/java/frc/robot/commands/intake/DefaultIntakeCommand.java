@@ -1,4 +1,4 @@
-package frc.robot.commands.shooter;
+package frc.robot.commands.intake;
 
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
@@ -8,17 +8,17 @@ import frc.robot.Robot;
 /**
  *
  */
-public class DefaultShooterCommand extends TSafeCommand {
+public class DefaultIntakeCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultShooterCommand.class.getSimpleName();
+            DefaultIntakeCommand.class.getSimpleName();
 
-    public DefaultShooterCommand() {
+    public DefaultIntakeCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
+        requires(Robot.intakeSubsystem);
     }
 
     @Override
@@ -43,6 +43,7 @@ public class DefaultShooterCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
+       
     }
 
     // Make this return true when this Command no longer needs to run execute()

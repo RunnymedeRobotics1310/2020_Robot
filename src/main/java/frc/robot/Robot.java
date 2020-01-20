@@ -20,6 +20,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,8 +40,12 @@ public class Robot extends TimedRobot {
 	public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
 	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
 	public static final ColorWheelSubsystem		colorWheelSubsystem		= new ColorWheelSubsystem();
+<<<<<<< HEAD
 	public static final ConveyorSubsystem		conveyorSubsystem		= new ConveyorSubsystem();
 
+=======
+	public static final IntakeSubsystem			intakeSubsystem 			= new IntakeSubsystem();
+>>>>>>> 7cc4540d3dfa491b4c89992e0d831d553810eefa
 
 	public static OI                            oi;
 
@@ -55,8 +60,12 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(shooterSubsystem);
 		subsystemLs.add(climbSubsystem);
 		subsystemLs.add(colorWheelSubsystem);
+<<<<<<< HEAD
 		subsystemLs.add(conveyorSubsystem);
 
+=======
+		subsystemLs.add(intakeSubsystem);
+>>>>>>> 7cc4540d3dfa491b4c89992e0d831d553810eefa
 
 	}
 
