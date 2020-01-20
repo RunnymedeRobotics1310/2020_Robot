@@ -15,6 +15,7 @@ import frc.robot.oi.OI;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.ColorWheelSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
@@ -38,6 +39,8 @@ public class Robot extends TimedRobot {
 	public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
 	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
 	public static final ColorWheelSubsystem		colorWheelSubsystem		= new ColorWheelSubsystem();
+	public static final ConveyorSubsystem		conveyorSubsystem		= new ConveyorSubsystem();
+
 
 	public static OI                            oi;
 
@@ -52,6 +55,8 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(shooterSubsystem);
 		subsystemLs.add(climbSubsystem);
 		subsystemLs.add(colorWheelSubsystem);
+		subsystemLs.add(conveyorSubsystem);
+
 
 	}
 
