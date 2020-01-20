@@ -10,7 +10,7 @@ import frc.robot.commands.pneumatics.DefaultPneumaticsCommand;
 /**
  *
  */
-public class ClimbSubsystem extends TSubsystem {
+public class IntakeSubsystem extends TSubsystem {
 
 
     @Override
