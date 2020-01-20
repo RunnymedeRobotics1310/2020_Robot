@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.commands.colorWheel.DefaultColorWheelCommand;
 
 /**
  *
@@ -40,6 +41,7 @@ public class ColorWheelSubsystem extends TSubsystem {
 
     @Override
     protected void initDefaultCommand() {
+    	setDefaultCommand(new DefaultColorWheelCommand());
     }
 
     @Override
