@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(powerSubsystem);
 		subsystemLs.add(cameraSubsystem);
 		subsystemLs.add(shooterSubsystem);
+		subsystemLs.add(climbSubsystem);
 		subsystemLs.add(colorWheelSubsystem);
 
 	}
