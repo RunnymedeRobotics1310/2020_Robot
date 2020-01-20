@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
     public static final PowerSubsystem          powerSubsystem          = new PowerSubsystem();
     public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();
     public static final ControlPanelSubsystem   controlPanelSubsystem   = new ControlPanelSubsystem();
+    public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
 
     public static OI                            oi;
 
