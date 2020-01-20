@@ -18,6 +18,7 @@ import frc.robot.subsystems.ControlPanelSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,152 +29,153 @@ import frc.robot.subsystems.PowerSubsystem;
  */
 public class Robot extends TimedRobot {
 
-    public static final List<TSubsystem>        subsystemLs             = new ArrayList<TSubsystem>();
+	public static final List<TSubsystem>        subsystemLs             = new ArrayList<TSubsystem>();
 
-    public static final DriveSubsystem          driveSubsystem          = new DriveSubsystem();
-    public static final PneumaticsSubsystem     pneumaticsSubsystem     = new PneumaticsSubsystem();
-    public static final PowerSubsystem          powerSubsystem          = new PowerSubsystem();
-    public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();
-    public static final ControlPanelSubsystem   controlPanelSubsystem   = new ControlPanelSubsystem();
-    public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
+	public static final DriveSubsystem          driveSubsystem          = new DriveSubsystem();
+	public static final PneumaticsSubsystem     pneumaticsSubsystem     = new PneumaticsSubsystem();
+	public static final PowerSubsystem          powerSubsystem          = new PowerSubsystem();
+	public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();
+	public static final ControlPanelSubsystem   controlPanelSubsystem   = new ControlPanelSubsystem();
+	public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
+	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
 
-    public static OI                            oi;
+	public static OI                            oi;
 
-    private Command                             autoCommand;
+	private Command                             autoCommand;
 
-    // Add all of the subsystems to the subsystem list
-    static {
-        subsystemLs.add(driveSubsystem);
-        subsystemLs.add(pneumaticsSubsystem);
-        subsystemLs.add(powerSubsystem);
-        subsystemLs.add(cameraSubsystem);
-        subsystemLs.add(controlPanelSubsystem);
-    }
+	// Add all of the subsystems to the subsystem list
+	static {
+		subsystemLs.add(driveSubsystem);
+		subsystemLs.add(pneumaticsSubsystem);
+		subsystemLs.add(powerSubsystem);
+		subsystemLs.add(cameraSubsystem);
+		subsystemLs.add(controlPanelSubsystem);
+	}
 
-    /**
-     * This function is run when the robot is first started up and should be used
-     * for any initialization code.
-     */
-    @Override
-    public void robotInit() {
+	/**
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
+	 */
+	@Override
+	public void robotInit() {
 
-        oi = new OI();
-        oi.init();
+		oi = new OI();
+		oi.init();
 
-        for (TSubsystem subsystem : subsystemLs) {
-            subsystem.init();
-        }
+		for (TSubsystem subsystem : subsystemLs) {
+			subsystem.init();
+		}
 
-        AutoSelector.init();
-    }
+		AutoSelector.init();
+	}
 
-    /**
-     * This function is called once each time the robot enters Disabled mode. You
-     * can use it to reset any subsystem information you want to clear when the
-     * robot is disabled.
-     */
-    @Override
-    public void disabledInit() {
+	/**
+	 * This function is called once each time the robot enters Disabled mode. You
+	 * can use it to reset any subsystem information you want to clear when the
+	 * robot is disabled.
+	 */
+	@Override
+	public void disabledInit() {
 
-    }
+	}
 
-    @Override
-    public void disabledPeriodic() {
+	@Override
+	public void disabledPeriodic() {
 
-        oi.updatePeriodic();
+		oi.updatePeriodic();
 
-        Scheduler.getInstance().run();
-        updatePeriodic();
-    }
+		Scheduler.getInstance().run();
+		updatePeriodic();
+	}
 
-    /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable chooser
-     * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-     * remove all of the chooser code and uncomment the getString code to get the
-     * auto name from the text box below the Gyro
-     *
-     * You can add additional auto modes by adding additional commands to the
-     * chooser code above (like the commented example) or additional comparisons to
-     * the switch structure below with additional strings & commands.
-     */
-    @Override
-    public void autonomousInit() {
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select
+	 * between different autonomous modes using the dashboard. The sendable chooser
+	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+	 * remove all of the chooser code and uncomment the getString code to get the
+	 * auto name from the text box below the Gyro
+	 *
+	 * You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons to
+	 * the switch structure below with additional strings & commands.
+	 */
+	@Override
+	public void autonomousInit() {
 
-        // Turn on the drive pids for auto
-        Robot.oi.setSpeedPidEnabled(true);
-        driveSubsystem.enableSpeedPids();
+		// Turn on the drive pids for auto
+		Robot.oi.setSpeedPidEnabled(true);
+		driveSubsystem.enableSpeedPids();
 
-        // Reset the gyro and the encoders
-        Robot.driveSubsystem.setGyroAngle(0);
-        Robot.driveSubsystem.resetEncoders();
+		// Reset the gyro and the encoders
+		Robot.driveSubsystem.setGyroAngle(0);
+		Robot.driveSubsystem.resetEncoders();
 
-        // Initialize the robot command after initializing the game data
-        // because the game data will be used in the auto command.
-        autoCommand = new AutonomousCommand();
-        autoCommand.start();
-    }
+		// Initialize the robot command after initializing the game data
+		// because the game data will be used in the auto command.
+		autoCommand = new AutonomousCommand();
+		autoCommand.start();
+	}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    @Override
-    public void autonomousPeriodic() {
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	@Override
+	public void autonomousPeriodic() {
 
-        // Update the OI before running the commands
-        oi.updatePeriodic();
+		// Update the OI before running the commands
+		oi.updatePeriodic();
 
-        Scheduler.getInstance().run();
+		Scheduler.getInstance().run();
 
-        // Update all subsystems after running commands
-        updatePeriodic();
-    }
+		// Update all subsystems after running commands
+		updatePeriodic();
+	}
 
-    @Override
-    public void teleopInit() {
+	@Override
+	public void teleopInit() {
 
-        if (autoCommand != null) {
-            autoCommand.cancel();
-        }
+		if (autoCommand != null) {
+			autoCommand.cancel();
+		}
 
-        // Turn off the drive PIDs
-        // Save the battery in teleop by using the
-        // SpeedController built in braking.
-        Robot.oi.setSpeedPidEnabled(false);
-        driveSubsystem.disableSpeedPids();
+		// Turn off the drive PIDs
+		// Save the battery in teleop by using the
+		// SpeedController built in braking.
+		Robot.oi.setSpeedPidEnabled(false);
+		driveSubsystem.disableSpeedPids();
 
-    }
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    @Override
-    public void teleopPeriodic() {
+	/**
+	 * This function is called periodically during operator control
+	 */
+	@Override
+	public void teleopPeriodic() {
 
-        // Update the OI before running the commands
-        oi.updatePeriodic();
+		// Update the OI before running the commands
+		oi.updatePeriodic();
 
-        Scheduler.getInstance().run();
+		Scheduler.getInstance().run();
 
-        // Update all subsystems after running commands
-        updatePeriodic();
-    }
+		// Update all subsystems after running commands
+		updatePeriodic();
+	}
 
-    /**
-     * This function is called periodically during test mode
-     */
-    @Override
-    public void testPeriodic() {
-    }
+	/**
+	 * This function is called periodically during test mode
+	 */
+	@Override
+	public void testPeriodic() {
+	}
 
-    /**
-     * Update periodic
-     */
-    private void updatePeriodic() {
+	/**
+	 * Update periodic
+	 */
+	private void updatePeriodic() {
 
-        // Update all subsystems
-        for (TSubsystem subsystem : subsystemLs) {
-            subsystem.updatePeriodic();
-        }
-    }
+		// Update all subsystems
+		for (TSubsystem subsystem : subsystemLs) {
+			subsystem.updatePeriodic();
+		}
+	}
 }
