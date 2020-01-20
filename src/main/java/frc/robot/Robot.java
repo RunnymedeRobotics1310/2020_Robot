@@ -41,8 +41,7 @@ public class Robot extends TimedRobot {
 	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
 	public static final ColorWheelSubsystem		colorWheelSubsystem		= new ColorWheelSubsystem();
 	public static final ConveyorSubsystem		conveyorSubsystem		= new ConveyorSubsystem();
-
-	public static final IntakeSubsystem			intakeSubsystem 			= new IntakeSubsystem();
+	public static final IntakeSubsystem			intakeSubsystem 		= new IntakeSubsystem();
 
 
 	public static OI                            oi;
@@ -58,10 +57,7 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(shooterSubsystem);
 		subsystemLs.add(climbSubsystem);
 		subsystemLs.add(colorWheelSubsystem);
-
 		subsystemLs.add(conveyorSubsystem);
-
-
 		subsystemLs.add(intakeSubsystem);
 
 
