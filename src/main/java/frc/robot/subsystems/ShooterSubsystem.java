@@ -21,9 +21,10 @@ public class ShooterSubsystem extends TSubsystem {
         setDefaultCommand(new DefaultShooterCommand());
     }
 
-    /** Set the speed on the shooter
+    /**
+     * Set the speed on the shooter
      *
-     * @param speed value 0 to 1.0
+     * @param speed value 0 (stopped) to 1.0 (full speed)
      */
     public void setShooterSpeed(double speed) {
 
