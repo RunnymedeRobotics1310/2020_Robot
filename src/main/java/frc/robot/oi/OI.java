@@ -42,6 +42,7 @@ public class OI extends TOi {
     private DriveSelector   driveSelector    = new DriveSelector();
     
     private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
+    
 
     @Override
     public boolean getCancelCommand() {
@@ -112,13 +113,13 @@ public class OI extends TOi {
     public HoodPosition getHoodPosition() {
     	
     	if (driverController.getButton(TButton.A)) {
-    		return HoodPosition.CLOSE;
+    		previousHoodPosition = HoodPosition.CLOSE;
     	}
     	if(driverController.getButton(TButton.B)) {
-    		return HoodPosition.MEDIUM;
+    		previousHoodPosition = HoodPosition.MEDIUM;
     	}
     	if(driverController.getButton(TButton.Y)) {
-    		return HoodPosition.FAR;
+    		previousHoodPosition = HoodPosition.FAR;
     	}
     	return previousHoodPosition;
         
