@@ -43,6 +43,8 @@ public class RobotMap {
     // Pneumatics Ports
     // ******************************************
     public static final int                     SHIFTER_PNEUMATIC_PORT = 0;
+    public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
+    public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
 
     // Initializers if this code will be deployed to more than one
     // robot with different mappings

@@ -2,8 +2,10 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
+import frc.robot.RobotMap;
 import frc.robot.commands.shooter.DefaultShooterCommand;
 
 /**
@@ -11,6 +13,9 @@ import frc.robot.commands.shooter.DefaultShooterCommand;
  */
 public class ShooterSubsystem extends TSubsystem {
 
+	Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
+	Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
+	
     private HoodPosition curHoodPosition;
 
     @Override
@@ -38,13 +43,16 @@ public class ShooterSubsystem extends TSubsystem {
 
         switch (hoodPosition) {
         case CLOSE:
-            // Do close code
+            stopper.set(false);// Do close code
+            deployer.set(false);
             break;
         case MEDIUM:
-            // Do med code
+            stopper.set(true);// Do med code
+            deployer.set(true);
             break;
         case FAR:
-            // Do far code
+            stopper.set(true);// Do far code
+            deployer.set(false);
             break;
         }
 
@@ -55,6 +63,8 @@ public class ShooterSubsystem extends TSubsystem {
     @Override
     public void updatePeriodic() {
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
+        SmartDashboard.putBoolean("Stopper", stopper.get());
+        SmartDashboard.putBoolean("Deployer", deployer.get());
     }
 
 }
