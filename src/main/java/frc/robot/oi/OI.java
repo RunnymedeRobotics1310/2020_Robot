@@ -40,6 +40,8 @@ public class OI extends TOi {
     private TToggle         speedPidToggle   = new TToggle(driverController, TStick.RIGHT);
 
     private DriveSelector   driveSelector    = new DriveSelector();
+    
+    private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
 
     @Override
     public boolean getCancelCommand() {
@@ -108,7 +110,18 @@ public class OI extends TOi {
      */
 
     public HoodPosition getHoodPosition() {
-        return HoodPosition.CLOSE;
+    	
+    	if (driverController.getButton(TButton.A)) {
+    		return HoodPosition.CLOSE;
+    	}
+    	if(driverController.getButton(TButton.B)) {
+    		return HoodPosition.MEDIUM;
+    	}
+    	if(driverController.getButton(TButton.Y)) {
+    		return HoodPosition.FAR;
+    	}
+    	return previousHoodPosition;
+        
     }
 
     @Override
