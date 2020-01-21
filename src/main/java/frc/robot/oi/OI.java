@@ -42,7 +42,7 @@ public class OI extends TOi {
     private DriveSelector   driveSelector    = new DriveSelector();
     
     private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
-    
+    private double		    shooterSpeed = 0;
 
     @Override
     public boolean getCancelCommand() {
@@ -125,6 +125,22 @@ public class OI extends TOi {
         
     	
     }
+    
+	public double getShooterSpeed() {
+		
+		
+    	if (driverController.getButton(TButton.LEFT_BUMPER)) {
+    		shooterSpeed = shooterSpeed - 0.005;
+    		if (shooterSpeed<0)
+    			shooterSpeed = 0;
+    	}
+    	if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+    		shooterSpeed = shooterSpeed + 0.005;
+    		if (shooterSpeed>1)
+    			shooterSpeed = 1;
+    	}
+		return shooterSpeed;
+	}
 
     @Override
     public void updatePeriodic() {
@@ -139,4 +155,7 @@ public class OI extends TOi {
         SmartDashboard.putBoolean("Compressor Toggle", getCompressorEnabled());
         SmartDashboard.putString("Driver Controller", driverController.toString());
     }
+
+
+	
 }

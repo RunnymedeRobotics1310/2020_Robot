@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.torontocodingcollective.speedcontroller.TCanSpeedController;
+import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -15,7 +17,7 @@ public class ShooterSubsystem extends TSubsystem {
 
 	Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
 	Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
-	
+	TSpeedController shooter = new TCanSpeedController(RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS); 
     private HoodPosition curHoodPosition;
 
     @Override
@@ -36,6 +38,8 @@ public class ShooterSubsystem extends TSubsystem {
      * @param speed value 0 (stopped) to 1.0 (full speed)
      */
     public void setShooterSpeed(double speed) {
+    	
+    	shooter.set(speed);
 
     }
 
@@ -65,6 +69,7 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
+        SmartDashboard.putNumber( "Shooter Speed", shooter.get());
     }
 
 }

@@ -5,6 +5,7 @@ import com.torontocodingcollective.commands.TSafeCommand;
 
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  *
@@ -46,6 +47,9 @@ public class DefaultShooterCommand extends TSafeCommand {
 
         HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
+        
+        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
+        Robot.shooterSubsystem.setShooterSpeed(userSelectedShooterSpeed);
 
     }
 

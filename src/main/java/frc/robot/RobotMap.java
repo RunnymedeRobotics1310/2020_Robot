@@ -32,6 +32,9 @@ public class RobotMap {
 
     public static final boolean                 LEFT_DRIVE_CAN_ENCODER_ISINVERTED;
     public static final boolean                 RIGHT_DRIVE_CAN_ENCODER_ISINVERTED;
+    
+    public static final int                     SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
 
     // ******************************************
     // Gyro Ports
@@ -63,7 +66,7 @@ public class RobotMap {
             LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
             LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
 
-            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 20;
+            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 22;
             RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
             RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
             RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
@@ -72,6 +75,9 @@ public class RobotMap {
 
             GYRO_PORT       = 0;
             GYRO_ISINVERTED = TConst.NOT_INVERTED;
+            
+            SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 20;
+            SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
         }
     }
 }
