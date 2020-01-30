@@ -68,7 +68,7 @@ public class AutonomousCommand extends CommandGroup {
         /* ***********************************************************
          *  Drive Straight with with no GyroPID control
          *  ***********************************************************/
-        if (pattern.equals(AutoSelector.PATTERN_STR_NP)) {
+        if (pattern.equals(AutoSelector.PICK_UP_2_SHOOT_5)) {
             // Go forward 2 ft
             this.addSequential(
                     new TDriveTimeCommand(.95, 6, TConst.BRAKE_WHEN_FINISHED,
