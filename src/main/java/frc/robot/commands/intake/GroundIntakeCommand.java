@@ -38,11 +38,9 @@ public class GroundIntakeCommand extends TSafeCommand {
 		if (getCommandName().equals(COMMAND_NAME)) {
 			logMessage(getParmDesc() + " starting");
 		}
-	}
 
-	public void startGroundIntake() {
 		Robot.intakeSubsystem.extendIntake();
-		Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED);
+		Robot.intakeSubsystem.setIntakeSpeed(-RobotConst.INTAKE_SPEED, -RobotConst.INTAKE_SPEED);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

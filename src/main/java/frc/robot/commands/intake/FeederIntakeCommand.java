@@ -38,23 +38,20 @@ public class FeederIntakeCommand extends TSafeCommand {
 		if (getCommandName().equals(COMMAND_NAME)) {
 			logMessage(getParmDesc() + " starting");
 		}
-	}
 
-	public void startFeederIntake() {
-		Robot.intakeSubsystem.setIntakeSpeed(-RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED);;
+		Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED, -RobotConst.INTAKE_SPEED);
+		Robot.intakeSubsystem.retractIntake();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 }

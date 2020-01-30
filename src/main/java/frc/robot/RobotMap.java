@@ -37,13 +37,13 @@ public class RobotMap {
 	public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
 
 	public static final int						INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType	INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE;
+	public static final TCanSpeedControllerType	INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
 
 	public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE;
-	
+	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
+
 	public static final int                     CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
+	public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
 
 	public static final int						TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS;
 	public static final TCanSpeedControllerType	TOWER_MOTOR_SPEED_CONTROLLER_TYPE;
@@ -57,19 +57,19 @@ public class RobotMap {
 	// ******************************************
 	// Pneumatics Ports
 	// ******************************************
-	public static final int                     SHIFTER_PNEUMATIC_PORT = 0;
+	public static final int                     SHIFTER_PNEUMATIC_PORT = 6;
 	public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
 	public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
 
-	public static final int						INTAKE_EXTEND_PNEUMATIC_PORT = 3;
+	public static final int						INTAKE_EXTEND_PNEUMATIC_PORT = 0;
 
 	// ******************************************
-    // DIO Ports
-    // ******************************************
-	
+	// DIO Ports
+	// ******************************************
+
 	public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 4;
 	public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 5;
-	
+
 
 	// Initializers if this code will be deployed to more than one
 	// robot with different mappings
@@ -101,14 +101,14 @@ public class RobotMap {
 			SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 20;
 			SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
 
-			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 27;
-			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 28;
-			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 15;
+			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 16;
+			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 
 			TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
 			TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHED;
-			
+
 			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
 			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 

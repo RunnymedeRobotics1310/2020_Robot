@@ -14,8 +14,8 @@ import frc.robot.commands.intake.DefaultIntakeCommand;
  */
 public class IntakeSubsystem extends TSubsystem {
 
-	TSpeedController topRollerMotor = new TCanSpeedController(RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS);
-	TSpeedController bottomRollerMotor = new TCanSpeedController(RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS);
+	TSpeedController topRollerMotor = new TCanSpeedController(RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED, RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS);
+	TSpeedController bottomRollerMotor = new TCanSpeedController(RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED, RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS);
 
 	Solenoid intakePiston = new Solenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT);
 
@@ -33,14 +33,14 @@ public class IntakeSubsystem extends TSubsystem {
 		topRollerMotor.set(0);
 		bottomRollerMotor.set(0);
 
-		retractInake();
+		retractIntake();
 	}
 
 	public void extendIntake() {
 		intakePiston.set(true);;
 	}
 
-	public void retractInake() {
+	public void retractIntake() {
 		intakePiston.set(false);
 	}
 

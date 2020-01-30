@@ -3,6 +3,7 @@ package frc.robot.commands.intake;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 /**
@@ -43,6 +44,13 @@ public class DefaultIntakeCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
+		if (Robot.oi.runFeederIntake()) {
+			Scheduler.getInstance().add(new FeederIntakeCommand());
+		}
+
+		if (Robot.oi.runGroundIntake()) {
+			Scheduler.getInstance().add(new GroundIntakeCommand());
+		}
 
 	}
 
