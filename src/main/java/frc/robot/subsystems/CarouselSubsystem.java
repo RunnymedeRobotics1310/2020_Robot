@@ -4,6 +4,7 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.climb.DefaultClimbCommand;
 
@@ -12,7 +13,7 @@ import frc.robot.commands.climb.DefaultClimbCommand;
  */
 public class CarouselSubsystem extends TSubsystem {
 
-    TSpeedController carouselMotor = new TCanSpeedController();
+    TSpeedController carouselMotor = new TCanSpeedController(RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS);
 	
     @Override
 	public void init() {
@@ -25,6 +26,18 @@ public class CarouselSubsystem extends TSubsystem {
 
 	public void enableCompressor() {
 
+	}
+	
+	public void spinIntake () {
+	    carouselMotor.set(RobotConst.CAROUSEL_INTAKE_SPEED);
+	}
+	
+	public void spinShooter () {
+	    carouselMotor.set(RobotConst.CAROUSEL_SHOOTER_SPEED);
+	}
+	
+	public void spinStop () {
+	    carouselMotor.set(0);
 	}
 
 	@Override

@@ -41,6 +41,9 @@ public class RobotMap {
 
 	public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
 	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE;
+	
+	public static final int                        CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
 
 	// ******************************************
 	// Gyro Ports
@@ -92,6 +95,9 @@ public class RobotMap {
 			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 28;
 			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+			
+			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
+			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 		}
 	}
 }
