@@ -41,6 +41,9 @@ public class RobotMap {
 
 	public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
 	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE;
+	
+	public static final int                     CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
 
 	public static final int						TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS;
 	public static final TCanSpeedControllerType	TOWER_MOTOR_SPEED_CONTROLLER_TYPE;
@@ -98,6 +101,10 @@ public class RobotMap {
 
 			TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
 			TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHED;
+			
+			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
+			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+
 		}
 	}
 }
