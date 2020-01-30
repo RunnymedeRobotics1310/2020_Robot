@@ -58,6 +58,7 @@ public class AutonomousCommand extends CommandGroup {
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.PATTERN_STRAIGHT)) {
             // Go forward 2 ft
+        	// distance inches, degrees, speed, timeout
             this.addSequential(
                     new TDriveOnHeadingDistanceCommand(250, 0, .95, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
@@ -68,9 +69,20 @@ public class AutonomousCommand extends CommandGroup {
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.PICK_UP_2_SHOOT_5)) {
             // Go forward 2 ft
-            this.addSequential(
-                    new TDriveTimeCommand(.95, 6, TConst.BRAKE_WHEN_FINISHED,
+        	// distance inches, degrees, speed, timeout
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(250, 0, .5, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(250, 45, .5, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(250, 45, -.5, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(250, 0, -.5, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+                
         }
 
 
