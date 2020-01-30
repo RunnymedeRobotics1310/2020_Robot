@@ -5,6 +5,7 @@ import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.intake.DefaultIntakeCommand;
@@ -65,7 +66,9 @@ public class IntakeSubsystem extends TSubsystem {
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-
+		SmartDashboard.putBoolean("Intake Piston Extend", intakePiston.get());
+		SmartDashboard.putNumber("Intake Top Roller Speed", firstMotor.get());
+		SmartDashboard.putNumber("Intake Bottom Roller Speed", secondMotor.get());
 	}
 
 }
