@@ -26,7 +26,7 @@ public class RobotConst {
 	// *********************************************************
 	// INTAKE
 	// *********************************************************
-	public static final double  INTAKE_SPEED				= 0.1;
+	public static final double  INTAKE_SPEED				= 0.25;
 
 	// *********************************************************
 	// Carousel Constants
