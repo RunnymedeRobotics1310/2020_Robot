@@ -39,7 +39,7 @@ public class FeederIntakeCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED, -RobotConst.INTAKE_SPEED);
+		Robot.intakeSubsystem.setIntakeSpeed(-RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED);
 		Robot.intakeSubsystem.retractIntake();
 	}
 
