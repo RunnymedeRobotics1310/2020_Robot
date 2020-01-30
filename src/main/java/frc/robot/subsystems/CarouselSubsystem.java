@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
+import com.torontocodingcollective.speedcontroller.TCanSpeedController;
+import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import frc.robot.RobotMap;
 import frc.robot.commands.climb.DefaultClimbCommand;
 
 /**
@@ -9,8 +12,9 @@ import frc.robot.commands.climb.DefaultClimbCommand;
  */
 public class CarouselSubsystem extends TSubsystem {
 
-
-	@Override
+    TSpeedController carouselMotor = new TCanSpeedController();
+	
+    @Override
 	public void init() {
 
 	}
