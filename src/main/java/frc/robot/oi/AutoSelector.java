@@ -15,22 +15,17 @@ public class AutoSelector {
 
     public static final String            PATTERN_STRAIGHT  = "Straight";
     public static final String            PATTERN_STR_NP    = "Straight No PID";
-    public static final String            PATTERN_BOX       = "Box";
+    public static final String            NO_DRIVE       = "No drive";
 
     static {
 
-        // Robot Position Options
-        robotStartPosition = new SendableChooser<String>();
-        robotStartPosition.addOption(ROBOT_LEFT, ROBOT_LEFT);
-        robotStartPosition.setDefaultOption(ROBOT_CENTER, ROBOT_CENTER);
-        robotStartPosition.addOption(ROBOT_RIGHT, ROBOT_RIGHT);
 
         SmartDashboard.putData("Robot Start", robotStartPosition);
 
         // Robot Pattern Options
         pattern = new SendableChooser<String>();
         pattern.setDefaultOption(PATTERN_STRAIGHT, PATTERN_STRAIGHT);
-        pattern.addOption(PATTERN_BOX, PATTERN_BOX);
+        pattern.addOption(NO_DRIVE, NO_DRIVE);
         pattern.addOption(PATTERN_STR_NP, PATTERN_STR_NP);
 
         SmartDashboard.putData("Auto Pattern", pattern);
