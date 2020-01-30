@@ -24,14 +24,6 @@ public class IntakeSubsystem extends TSubsystem {
 
 	}
 
-	public void disableCompressor() {
-
-	}
-
-	public void enableCompressor() {
-
-	}
-
 	public void setIntakeSpeed (double topSpeed, double bottomSpeed) {
 		topRollerMotor.set(topSpeed);
 		bottomRollerMotor.set(bottomSpeed);
