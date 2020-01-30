@@ -113,21 +113,21 @@ public class OI extends TOi {
 	 * Shooter Subsystem commands
 	 */
 
-	//    public HoodPosition getHoodPosition() {
-	//
-	//        if (driverController.getButton(TButton.A)) {
-	//            previousHoodPosition = HoodPosition.CLOSE;
-	//        }
-	//        if(driverController.getButton(TButton.B)) {
-	//            previousHoodPosition = HoodPosition.MEDIUM;
-	//        }
-	//        if(driverController.getButton(TButton.Y)) {
-	//            previousHoodPosition = HoodPosition.FAR;
-	//        }
-	//        return previousHoodPosition;
-	//
-	//
-	//    }
+	public HoodPosition getHoodPosition() {
+
+		//	        if (driverController.getButton(TButton.A)) {
+		//	            previousHoodPosition = HoodPosition.CLOSE;
+		//	        }
+		//	        if(driverController.getButton(TButton.B)) {
+		//	            previousHoodPosition = HoodPosition.MEDIUM;
+		//	        }
+		//	        if(driverController.getButton(TButton.Y)) {
+		//	            previousHoodPosition = HoodPosition.FAR;
+		//	        }
+		return previousHoodPosition;
+
+
+	}
 
 	public double getShooterSpeed() {
 
