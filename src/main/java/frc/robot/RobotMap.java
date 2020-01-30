@@ -14,70 +14,84 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController.TCanSpeed
  */
 public class RobotMap {
 
-    // ******************************************
-    // Speed Controllers and encoders
-    // CAN addresses
-    // ******************************************
-    public static final int                     LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
-    public static final int                     LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
-    public static final boolean                 LEFT_DRIVE_CAN_MOTOR_ISINVERTED;
+	// ******************************************
+	// Speed Controllers and encoders
+	// CAN addresses
+	// ******************************************
+	public static final int                     LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
+	public static final int                     LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
+	public static final boolean                 LEFT_DRIVE_CAN_MOTOR_ISINVERTED;
 
-    public static final int                     RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
-    public static final int                     RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
-    public static final boolean                 RIGHT_DRIVE_CAN_MOTOR_ISINVERTED;
+	public static final int                     RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
+	public static final int                     RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
+	public static final boolean                 RIGHT_DRIVE_CAN_MOTOR_ISINVERTED;
 
-    public static final boolean                 LEFT_DRIVE_CAN_ENCODER_ISINVERTED;
-    public static final boolean                 RIGHT_DRIVE_CAN_ENCODER_ISINVERTED;
-    
-    public static final int                     SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS;
-    public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
+	public static final boolean                 LEFT_DRIVE_CAN_ENCODER_ISINVERTED;
+	public static final boolean                 RIGHT_DRIVE_CAN_ENCODER_ISINVERTED;
 
-    // ******************************************
-    // Gyro Ports
-    // ******************************************
-    public static final int                     GYRO_PORT;
-    public static final boolean                 GYRO_ISINVERTED;
+	public static final int                     SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
 
-    // ******************************************
-    // Pneumatics Ports
-    // ******************************************
-    public static final int                     SHIFTER_PNEUMATIC_PORT = 0;
-    public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
-    public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
+	public static final int						INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType	INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE;
 
-    // Initializers if this code will be deployed to more than one
-    // robot with different mappings
-    static {
+	public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
+	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE;
 
-        switch (RobotConst.robot) {
+	// ******************************************
+	// Gyro Ports
+	// ******************************************
+	public static final int                     GYRO_PORT;
+	public static final boolean                 GYRO_ISINVERTED;
 
-        case RobotConst.TEST_ROBOT:
-        default:
-            // CAN Constants
-            // Talon and Victor connected through the CAN Bus
-            LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS           = 10;
-            LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.TALON_SRX;
-            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS  = 11;
-            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.VICTOR_SPX;
-            LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
-            LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
+	// ******************************************
+	// Pneumatics Ports
+	// ******************************************
+	public static final int                     SHIFTER_PNEUMATIC_PORT = 0;
+	public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
+	public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
 
-            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 22;
-            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
-            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
-            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
-            RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.NOT_INVERTED;
-            RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.NOT_INVERTED;
+	public static final int						INTAKE_EXTEND_PNEUMATIC_PORT = 3;
 
-            GYRO_PORT       = 0;
-            GYRO_ISINVERTED = TConst.NOT_INVERTED;
-            
-            SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 20;
-            SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
-        }
-    }
+
+	// Initializers if this code will be deployed to more than one
+	// robot with different mappings
+	static {
+
+		switch (RobotConst.robot) {
+
+		case RobotConst.TEST_ROBOT:
+		default:
+			// CAN Constants
+			// Talon and Victor connected through the CAN Bus
+			LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS           = 10;
+			LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.TALON_SRX;
+			LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS  = 11;
+			LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.VICTOR_SPX;
+			LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
+			LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
+
+			RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 22;
+			RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
+			RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
+			RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
+			RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.NOT_INVERTED;
+			RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.NOT_INVERTED;
+
+			GYRO_PORT       = 0;
+			GYRO_ISINVERTED = TConst.NOT_INVERTED;
+
+			SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 20;
+			SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
+
+			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 27;
+			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 28;
+			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+		}
+	}
 }
