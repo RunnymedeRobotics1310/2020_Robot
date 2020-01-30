@@ -14,43 +14,43 @@ import frc.robot.commands.tower.DefaultTowerCommand;
  */
 public class TowerSubsystem extends TSubsystem {
 
-    TSpeedController towerMotor= new TCanSpeedController(RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_TYPE, RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS);
-    TLimitSwitch ballDetector = new TLimitSwitch (RobotMap.TOWER_BALL_DETECT_LIMIT_SWITCH);
+	TSpeedController towerMotor= new TCanSpeedController(RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_TYPE, RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS);
+	TLimitSwitch ballDetector = new TLimitSwitch (RobotMap.TOWER_BALL_DETECT_LIMIT_SWITCH);
 
-    @Override
-    public void init() {
+	@Override
+	public void init() {
 
-    }
+	}
 
-    public void setTowerMotorSpeed(double speed) {
-        towerMotor.set(speed);
-    }
+	public void setTowerMotorSpeed(double speed) {
+		towerMotor.set(speed);
+	}
 
-    public boolean isFull() {
+	public boolean isFull() {
 
-        if (ballDetector.atLimit()) {
-            return true;
-        }
-        else
-            return false;
-    }
+		if (ballDetector.atLimit()) {
+			return true;
+		}
+		else
+			return false;
+	}
 
-    public void stopTowerMotor () {
-        towerMotor.set(0);
-    }
+	public void stopTowerMotor () {
+		towerMotor.set(0);
+	}
 
-    @Override
-    protected void initDefaultCommand() {
-        setDefaultCommand(new DefaultTowerCommand());
-    }
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new DefaultTowerCommand());
+	}
 
-    // Periodically update the dashboard and any PIDs or sensors
-    @Override
-    public void updatePeriodic() {
-        SmartDashboard.putNumber("Tower Speed", towerMotor.get());
-        SmartDashboard.putBoolean("Tower Filled", ballDetector.atLimit());
+	// Periodically update the dashboard and any PIDs or sensors
+	@Override
+	public void updatePeriodic() {
+		SmartDashboard.putNumber("Tower Speed", towerMotor.get());
+		SmartDashboard.putBoolean("Tower Filled", ballDetector.atLimit());
 
 
-    }
+	}
 
 }
