@@ -45,6 +45,8 @@ public class IntakeSubsystem extends TSubsystem {
 	public void stopIntake() {
 		firstMotor.set(0);
 		secondMotor.set(0);
+
+		retractInake();
 	}
 
 	public void extendIntake() {
