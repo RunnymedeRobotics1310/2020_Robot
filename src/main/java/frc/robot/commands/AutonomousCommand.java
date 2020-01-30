@@ -79,7 +79,7 @@ public class AutonomousCommand extends CommandGroup {
         /* ***********************************************************
          *  Drive forward 2ft and then drive a 3ft box pattern
          *  ***********************************************************/
-        if (pattern.equals(AutoSelector.PATTERN_BOX)) {
+        if (pattern.equals(AutoSelector.NO_DRIVE)) {
             // Go forward 2 ft
             this.addSequential(
                     // 24 in, 0 deg, .5 speed, 5 sec, Brake
