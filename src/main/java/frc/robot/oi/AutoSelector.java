@@ -5,12 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoSelector {
 
-    public static SendableChooser<String> robotStartPosition;
-
-    public static final String            ROBOT_LEFT   = "Robot Left";
-    public static final String            ROBOT_CENTER = "Robot Center";
-    public static final String            ROBOT_RIGHT  = "Robot Right";
-
     public static SendableChooser<String> pattern;
 
     public static final String            PATTERN_STRAIGHT  = "Straight";
@@ -19,8 +13,6 @@ public class AutoSelector {
 
     static {
 
-
-        SmartDashboard.putData("Robot Start", robotStartPosition);
 
         // Robot Pattern Options
         pattern = new SendableChooser<String>();
@@ -52,16 +44,8 @@ public class AutoSelector {
      *
      * @return 'L' for left, 'R' for right or 'C' for center
      */
-    public static String getRobotStartPosition() {
 
-        String selectedStartPosition = robotStartPosition.getSelected();
-
-        if (selectedStartPosition == null) {
-            return ROBOT_CENTER;
-        }
-
-        return selectedStartPosition;
-    }
+        
 
     public static void init() {}
 }
