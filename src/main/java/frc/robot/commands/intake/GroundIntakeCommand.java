@@ -45,10 +45,6 @@ public class GroundIntakeCommand extends TSafeCommand {
 		Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED);
 	}
 
-	public void startFeederIntake() {
-		Robot.intakeSubsystem.setIntakeSpeed(-RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED);;
-	}
-
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
