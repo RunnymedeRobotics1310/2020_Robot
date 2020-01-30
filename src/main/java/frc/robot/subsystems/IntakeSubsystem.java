@@ -6,7 +6,6 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.intake.DefaultIntakeCommand;
 
@@ -15,8 +14,8 @@ import frc.robot.commands.intake.DefaultIntakeCommand;
  */
 public class IntakeSubsystem extends TSubsystem {
 
-	TSpeedController firstMotor = new TCanSpeedController(RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS);
-	TSpeedController secondMotor = new TCanSpeedController(RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS);
+	TSpeedController topRollerMotor = new TCanSpeedController(RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS);
+	TSpeedController bottomRollerMotor = new TCanSpeedController(RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS);
 
 	Solenoid intakePiston = new Solenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT);
 
@@ -33,19 +32,14 @@ public class IntakeSubsystem extends TSubsystem {
 
 	}
 
-	public void startGroundIntake() {
-		firstMotor.set(RobotConst.INTAKE_SPEED);
-		secondMotor.set(RobotConst.INTAKE_SPEED);
-	}
-
-	public void startFeederIntake() {
-		firstMotor.set(-RobotConst.INTAKE_SPEED);
-		secondMotor.set(RobotConst.INTAKE_SPEED);
+	public void setIntakeSpeed (double topSpeed, double bottomSpeed) {
+		topRollerMotor.set(topSpeed);
+		bottomRollerMotor.set(bottomSpeed);
 	}
 
 	public void stopIntake() {
-		firstMotor.set(0);
-		secondMotor.set(0);
+		topRollerMotor.set(0);
+		bottomRollerMotor.set(0);
 
 		retractInake();
 	}
@@ -67,8 +61,8 @@ public class IntakeSubsystem extends TSubsystem {
 	@Override
 	public void updatePeriodic() {
 		SmartDashboard.putBoolean("Intake Piston Extend", intakePiston.get());
-		SmartDashboard.putNumber("Intake Top Roller Speed", firstMotor.get());
-		SmartDashboard.putNumber("Intake Bottom Roller Speed", secondMotor.get());
+		SmartDashboard.putNumber("Intake Top Roller Speed", topRollerMotor.get());
+		SmartDashboard.putNumber("Intake Bottom Roller Speed", bottomRollerMotor.get());
 	}
 
 }
