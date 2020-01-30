@@ -8,6 +8,7 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
+import frc.robot.commands.carousel.DefaultCarouselCommand;
 import frc.robot.commands.climb.DefaultClimbCommand;
 
 /**
@@ -22,7 +23,7 @@ public class CarouselSubsystem extends TSubsystem {
 
 	}
 
-	public void spinCarouselMotor (double speed) {
+	public void setCarouselMotorSpeed (double speed) {
 	    carouselMotor.set(speed);
 	}
 	
@@ -40,7 +41,7 @@ public class CarouselSubsystem extends TSubsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new DefaultClimbCommand());
+		setDefaultCommand(new DefaultCarouselCommand());
 	}
 
 	// Periodically update the dashboard and any PIDs or sensors
