@@ -42,7 +42,7 @@ public class CarouselSubsystem extends TSubsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new DefaultClimbCommand());
+		//(new DefaultClimbCommand());
 	}
 
 	// Periodically update the dashboard and any PIDs or sensors

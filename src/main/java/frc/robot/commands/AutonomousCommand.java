@@ -7,6 +7,7 @@ import com.torontocodingcollective.commands.gyroDrive.TRotateToHeadingCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frc.robot.commands.drive.DriveBackwardsCommand;
 import frc.robot.oi.AutoSelector;
 
 /**
@@ -60,7 +61,7 @@ public class AutonomousCommand extends CommandGroup {
             // Go forward 2 ft
         	// distance inches, degrees, speed, timeout
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(250, 0, .95, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(60, 0, .95, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         }
 
@@ -70,18 +71,17 @@ public class AutonomousCommand extends CommandGroup {
         if (pattern.equals(AutoSelector.PICK_UP_2_SHOOT_5)) {
             // Go forward 2 ft
         	// distance inches, degrees, speed, timeout
+        	Robot.driveSubsystem.setGyroAngle(180);
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(250, 0, .5, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(110, 180 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(250, 45, .5, 15, TConst.BRAKE_WHEN_FINISHED,
+        			new DriveBackwardsCommand(12, .5));
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(18, 210 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(250, 45, -.5, 15, TConst.BRAKE_WHEN_FINISHED,
-                            Robot.oi, Robot.driveSubsystem));
-        	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(250, 0, -.5, 15, TConst.BRAKE_WHEN_FINISHED,
-                            Robot.oi, Robot.driveSubsystem));
+        			new DriveBackwardsCommand(132, .5));
                 
         }
 
