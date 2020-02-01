@@ -77,9 +77,7 @@ public class DriveBackwardsCommand extends TDefaultDriveCommand {
     @Override
     protected boolean isFinished() {
         
-    	if (distance > Math.abs(encoderDistance)){
-    		driveSubsystem.setSpeed(0,0);
-    	}
+    	
     	// The default command does not end
         return false;
     }
