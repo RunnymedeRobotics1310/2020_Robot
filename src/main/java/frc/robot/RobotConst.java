@@ -40,7 +40,13 @@ public class RobotConst {
 	public static final double  ULTRASONIC_VOLTAGE_20IN       = 0.191;
 	public static final double  ULTRASONIC_VOLTAGE_40IN       = 0.383;
 	public static final double  ULTRASONIC_VOLTAGE_80IN       = 0.764;
-
+	
+	// *********************************************************
+	// Tower Constants
+	// *********************************************************
+	public static final double TOWER_INTAKE_SPEED  = 0.15;
+	public static final double TOWER_SHOOTER_SPEED = 0.3;
+	
 	public static enum Direction {
 		FORWARD, BACKWARD
 	};
