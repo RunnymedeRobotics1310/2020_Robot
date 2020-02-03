@@ -80,20 +80,19 @@ public class RobotMap {
         case RobotConst.TEST_ROBOT:
         default:
             // CAN Constants
-            // Talon and Victor connected through the CAN Bus
             LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS           = 10;
-            LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.TALON_SRX;
+            LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS  = 11;
-            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.VICTOR_SPX;
-            LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
-            LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
+            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.NOT_INVERTED;
+            LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.NOT_INVERTED;
 
             RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 20;
-            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
+            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
-            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
-            RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.NOT_INVERTED;
-            RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.NOT_INVERTED;
+            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.INVERTED;
+            RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.INVERTED;
 
             GYRO_PORT       = 0;
             GYRO_ISINVERTED = TConst.NOT_INVERTED;
@@ -107,10 +106,10 @@ public class RobotMap {
             INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
 
             TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
-            TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHED;
+            TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.VICTOR_SPX;
 
             CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
-            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.VICTOR_SPX;
 
         }
     }
