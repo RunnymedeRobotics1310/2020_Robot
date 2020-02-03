@@ -77,7 +77,9 @@ public class DriveBackwardsCommand extends TDefaultDriveCommand {
     @Override
     protected boolean isFinished() {
         
-    	
+    	if(Math.abs(Robot.driveSubsystem.getDistanceInches()) > distance) {
+    		return true;
+    	}
     	// The default command does not end
         return false;
     }
