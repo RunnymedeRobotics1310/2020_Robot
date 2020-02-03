@@ -36,6 +36,18 @@ public class IntakeSubsystem extends TSubsystem {
 		retractIntake();
 	}
 
+	public boolean intakeRunning() {
+		if (topRollerMotor.get() > 0) {
+			return true;
+		}
+		if (bottomRollerMotor.get() > 0) {
+			return true;
+		}
+		return false;
+
+	}
+
+
 	public void extendIntake() {
 		intakePiston.set(true);;
 	}
