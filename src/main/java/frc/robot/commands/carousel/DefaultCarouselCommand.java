@@ -3,8 +3,11 @@ package frc.robot.commands.carousel;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.commands.intake.FeederIntakeCommand;
+import frc.robot.commands.intake.GroundIntakeCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -44,15 +47,23 @@ public class DefaultCarouselCommand extends TSafeCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        
+        if (Robot.oi.runIntakeCarousel()) {
+            Scheduler.getInstance().add(new IntakeCarouselCommand());
+        }
 
-        double userSelectedCarouselSpeed = Robot.oi.setCarouselSpeed();
-        if(userSelectedCarouselSpeed != 0) {
-        Robot.carouselSubsystem.setCarouselMotorSpeed(userSelectedCarouselSpeed);
-        }
-        else {
-        Robot.carouselSubsystem.stopCarouselMotor();
-        }
-           
+        //if (Robot.oi.runGroundIntake()) {
+        //    Scheduler.getInstance().add(new GroundIntakeCommand());
+        //}
+        
+        /*double userSelectedCarouselSpeed = Robot.oi.setCarouselSpeed();
+        *if(userSelectedCarouselSpeed != 0) {
+        *Robot.carouselSubsystem.setCarouselMotorSpeed(userSelectedCarouselSpeed);
+        *}
+        *else {
+        *Robot.carouselSubsystem.stopCarouselMotor();
+        *}
+         */  
     }
 
     // Make this return true when this Command no longer needs to run execute()

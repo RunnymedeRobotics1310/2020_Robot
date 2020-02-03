@@ -182,6 +182,13 @@ public class OI extends TOi {
 
 		return carouselSpeed;
 	}
+	public boolean runIntakeCarousel() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+
+        }
+        return false;
+    }
 
 	/*
 	 * Tower Subsystem commands
