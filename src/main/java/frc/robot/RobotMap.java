@@ -14,104 +14,104 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController.TCanSpeed
  */
 public class RobotMap {
 
-	// ******************************************
-	// Speed Controllers and encoders
-	// CAN addresses
-	// ******************************************
-	public static final int                     LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
-	public static final int                     LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
-	public static final boolean                 LEFT_DRIVE_CAN_MOTOR_ISINVERTED;
+    // ******************************************
+    // Speed Controllers and encoders
+    // CAN addresses
+    // ******************************************
+    public static final int                     LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
+    public static final int                     LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
+    public static final boolean                 LEFT_DRIVE_CAN_MOTOR_ISINVERTED;
 
-	public static final int                     RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
-	public static final int                     RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
-	public static final boolean                 RIGHT_DRIVE_CAN_MOTOR_ISINVERTED;
+    public static final int                     RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE;
+    public static final int                     RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE;
+    public static final boolean                 RIGHT_DRIVE_CAN_MOTOR_ISINVERTED;
 
-	public static final boolean                 LEFT_DRIVE_CAN_ENCODER_ISINVERTED;
-	public static final boolean                 RIGHT_DRIVE_CAN_ENCODER_ISINVERTED;
+    public static final boolean                 LEFT_DRIVE_CAN_ENCODER_ISINVERTED;
+    public static final boolean                 RIGHT_DRIVE_CAN_ENCODER_ISINVERTED;
 
-	public static final int                     SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
+    public static final int                     SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType SHOOTER_CAN_SPEED_CONTROLLER_TYPE;
 
-	public static final int						INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType	INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
+    public static final int						INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType	INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
 
-	public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
+    public static final int						INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType	INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED;
 
-	public static final int                     CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
+    public static final int                     CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE;
 
-	public static final int						TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS;
-	public static final TCanSpeedControllerType	TOWER_MOTOR_SPEED_CONTROLLER_TYPE;
+    public static final int						TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS;
+    public static final TCanSpeedControllerType	TOWER_MOTOR_SPEED_CONTROLLER_TYPE;
 
-	// ******************************************
-	// Gyro Ports
-	// ******************************************
-	public static final int                     GYRO_PORT;
-	public static final boolean                 GYRO_ISINVERTED;
+    // ******************************************
+    // Gyro Ports
+    // ******************************************
+    public static final int                     GYRO_PORT;
+    public static final boolean                 GYRO_ISINVERTED;
 
-	// ******************************************
-	// Pneumatics Ports
-	// ******************************************
-	public static final int                     SHIFTER_PNEUMATIC_PORT = 6;
-	public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
-	public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
+    // ******************************************
+    // Pneumatics Ports
+    // ******************************************
+    public static final int                     SHIFTER_PNEUMATIC_PORT = 6;
+    public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
+    public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
 
-	public static final int						INTAKE_EXTEND_PNEUMATIC_PORT = 0;
+    public static final int						INTAKE_EXTEND_PNEUMATIC_PORT = 0;
 
-	// ******************************************
-	// DIO Ports
-	// ******************************************
+    // ******************************************
+    // DIO Ports
+    // ******************************************
 
-	public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 4;
-	public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 5;
+    public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 4;
+    public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 5;
 
 
-	// Initializers if this code will be deployed to more than one
-	// robot with different mappings
-	static {
+    // Initializers if this code will be deployed to more than one
+    // robot with different mappings
+    static {
 
-		switch (RobotConst.robot) {
+        switch (RobotConst.robot) {
 
-		case RobotConst.TEST_ROBOT:
-		default:
-			// CAN Constants
-			// Talon and Victor connected through the CAN Bus
-			LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS           = 10;
-			LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.TALON_SRX;
-			LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS  = 11;
-			LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.VICTOR_SPX;
-			LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
-			LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
+        case RobotConst.TEST_ROBOT:
+        default:
+            // CAN Constants
+            // Talon and Victor connected through the CAN Bus
+            LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS           = 10;
+            LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.TALON_SRX;
+            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS  = 11;
+            LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE     = TCanSpeedControllerType.VICTOR_SPX;
+            LEFT_DRIVE_CAN_MOTOR_ISINVERTED                   = TConst.INVERTED;
+            LEFT_DRIVE_CAN_ENCODER_ISINVERTED                 = TConst.INVERTED;
 
-			RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 22;
-			RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
-			RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
-			RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
-			RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.NOT_INVERTED;
-			RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.NOT_INVERTED;
+            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS          = 20;
+            RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE             = TCanSpeedControllerType.TALON_SRX;
+            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS = 21;
+            RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.TALON_SRX;
+            RIGHT_DRIVE_CAN_MOTOR_ISINVERTED                  = TConst.NOT_INVERTED;
+            RIGHT_DRIVE_CAN_ENCODER_ISINVERTED                = TConst.NOT_INVERTED;
 
-			GYRO_PORT       = 0;
-			GYRO_ISINVERTED = TConst.NOT_INVERTED;
+            GYRO_PORT       = 0;
+            GYRO_ISINVERTED = TConst.NOT_INVERTED;
 
-			SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 20;
-			SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
+            SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS = 21;
+            SHOOTER_CAN_SPEED_CONTROLLER_TYPE = TCanSpeedControllerType.TALON_SRX;
 
-			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 15;
-			INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
-			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 16;
-			INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 15;
+            INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 16;
+            INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
 
-			TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
-			TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHED;
+            TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
+            TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.SPARK_MAX_BRUSHED;
 
-			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
-			CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 29;
+            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 
-		}
-	}
+        }
+    }
 }
