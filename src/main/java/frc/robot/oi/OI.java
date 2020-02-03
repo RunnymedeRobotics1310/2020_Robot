@@ -161,6 +161,20 @@ public class OI extends TOi {
 		return false;
 	}
 
+	public boolean stopIntake(boolean stop) {
+		if (runFeederIntake()) {
+			if (driverController.getButton(TButton.B)){
+				return true;
+			}
+		}
+		if (runGroundIntake()) {
+			if (driverController.getButton(TButton.Y)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/*
 	 * Carousel Subsystem commands
 	 */
