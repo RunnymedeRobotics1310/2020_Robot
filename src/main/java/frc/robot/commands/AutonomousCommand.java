@@ -72,16 +72,22 @@ public class AutonomousCommand extends CommandGroup {
             // Go forward 2 ft
         	// distance inches, degrees, speed, timeout
         	Robot.driveSubsystem.setGyroAngle(180);
+ 
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(60, 180 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(80, 180 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	this.addSequential(
         			new DriveBackwardsCommand(12, .5));
+        	
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(18, 210 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(18, 200 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
+        	
         	this.addSequential(
-        			new DriveBackwardsCommand(132, .5));
+        			new TRotateToHeadingCommand( 255, Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new DriveBackwardsCommand(100, .5));
                 
         }
 
