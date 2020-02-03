@@ -62,7 +62,12 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         // Drive according to the type of drive selected in the
         // operator input.
         TStickPosition leftStickPosition = oi.getDriveStickPosition(TStick.LEFT);
+        // Turn the max speed down to 1/3
+        leftStickPosition.y /= 3.0;
+
         TStickPosition rightStickPosition = oi.getDriveStickPosition(TStick.RIGHT);
+        // Turn the max turn down by 4
+        rightStickPosition.x /= 4.0;
 
         TSpeeds motorSpeeds = differentialDrive.arcadeDrive(leftStickPosition, rightStickPosition);
 
