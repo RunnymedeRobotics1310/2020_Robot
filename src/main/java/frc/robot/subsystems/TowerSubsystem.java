@@ -6,6 +6,7 @@ import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.tower.DefaultTowerCommand;
 
@@ -19,11 +20,11 @@ public class TowerSubsystem extends TSubsystem {
 
 	@Override
 	public void init() {
-
+		
 	}
 
 	public void setTowerMotorSpeed(double speed) {
-		towerMotor.set(speed);
+		towerMotor.set(RobotConst.TOWER_INTAKE_SPEED);
 	}
 
 	public boolean isFull() {
