@@ -145,13 +145,13 @@ public class OI extends TOi {
 		return shooterSpeed;
 	}
 
-	public boolean runGroundIntake() {
+	/**public boolean runGroundIntake() {
 		if(driverController.getButton(TButton.X)) {
 			return true;
 
 		}
 		return false;
-	}
+	}**/
 
 	public boolean runFeederIntake() {
 		if(driverController.getButton(TButton.A)) {
@@ -165,10 +165,10 @@ public class OI extends TOi {
 	 * Carousel Subsystem commands
 	 */
 
-	public double setCarouselSpeed() {
+	//public double setCarouselSpeed() {
 
 
-		if (driverController.getPOV() == 0) {
+		/**if (driverController.getPOV() == 0) {
 			carouselSpeed =  0.25;
 
 		}
@@ -181,14 +181,22 @@ public class OI extends TOi {
 		}
 
 		return carouselSpeed;
-	}
+	}**/
 	public boolean runIntakeCarousel() {
         if(driverController.getButton(TButton.X)) {
             return true;
-
         }
         return false;
     }
+	
+    public boolean runShooterCarousel() {
+        if(driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
+	
+	
 
 	/*
 	 * Tower Subsystem commands

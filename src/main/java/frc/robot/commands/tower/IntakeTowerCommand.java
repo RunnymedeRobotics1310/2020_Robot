@@ -3,19 +3,18 @@ package frc.robot.commands.tower;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.carousel.IntakeCarouselCommand;
+import frc.robot.RobotConst;
 
 /**
  *
  */
-public class DefaultTowerCommand extends TSafeCommand {
+public class IntakeTowerCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
 			DefaultTowerCommand.class.getSimpleName();
 
-	public DefaultTowerCommand() {
+	public IntakeTowerCommand() {
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -39,29 +38,21 @@ public class DefaultTowerCommand extends TSafeCommand {
 		if (getCommandName().equals(COMMAND_NAME)) {
 			logMessage(getParmDesc() + " starting");
 		}
+
+		Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_INTAKE_SPEED);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
-    protected void execute() {
-	    
-	    if (Robot.oi.runIntakeTower()) {
-            Scheduler.getInstance().add(new IntakeCarouselCommand());
+	protected void execute() {
 
-        /**double userSelectedTowerSpeed = Robot.oi.setTowerSpeed();
-        if(userSelectedTowerSpeed != 0) {
-        Robot.towerSubsystem.setTowerMotorSpeed(userSelectedTowerSpeed);
-        }
-        else {
-        Robot.towerSubsystem.stopTowerMotor();**/
-        }
-           
-    }
+
+	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 }
