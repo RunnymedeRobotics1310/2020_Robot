@@ -48,7 +48,7 @@ public class DefaultIntakeCommand extends TSafeCommand {
 
 		// else look for buttons.
 
-		if (Robot.carouselSubsystem.isFull() && Robot.towerSubsystem.isFull()) {
+		if (Robot.carouselSubsystem.isRobotFull() && Robot.towerSubsystem.isFull()) {
 			Robot.intakeSubsystem.stopIntake();
 		}
 
