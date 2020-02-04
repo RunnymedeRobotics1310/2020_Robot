@@ -27,7 +27,7 @@ public class TowerSubsystem extends TSubsystem {
 		towerMotor.set(RobotConst.TOWER_INTAKE_SPEED);
 	}
 
-	public boolean isFull() {
+	public boolean isTowerFull() {
 
 		if (ballDetector.atLimit()) {
 			return true;
