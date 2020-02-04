@@ -73,32 +73,74 @@ public class AutonomousCommand extends CommandGroup {
         	// distance inches, degrees, speed, timeout
         	Robot.driveSubsystem.setGyroAngle(180);
  
-        	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(80, 180 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
-                            Robot.oi, Robot.driveSubsystem));
-        	this.addSequential(
-        			new DriveBackwardsCommand(12, .5));
+        	
+        	//Start intake motor
         	
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(18, 200 , .5, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(100, 180 , 1, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	
         	this.addSequential(
-        			new TRotateToHeadingCommand( 255, Robot.oi, Robot.driveSubsystem));
+        			new DriveBackwardsCommand(12, 1));
         	
         	this.addSequential(
-        			new DriveBackwardsCommand(100, .5));
+                    new TDriveOnHeadingDistanceCommand(12, 200, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(255, Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new DriveBackwardsCommand(188, 1));
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(190, Robot.oi, Robot.driveSubsystem));
+        	
+        	//Start shooter midway through last drive
                 
         }
+        
+        if (pattern.equals(AutoSelector.SHOOT_3_PICK_UP_3_SHOOT_3)) {
+        	
+        	Robot.driveSubsystem.setGyroAngle(200);
+        	
+        	//Shoot
+        	
+        	
+        	this.addSequential(
+        			new TDriveOnHeadingDistanceCommand(112, 220, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        					Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(120, Robot.oi, Robot.driveSubsystem));
+        					
+        	this.addSequential(
+        			new TDriveOnHeadingDistanceCommand(18, 120, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        					Robot.oi, Robot.driveSubsystem));		
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new TDriveOnHeadingDistanceCommand(36, 70, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        					Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+
+        	
+        	//Shoot
+        }
+        
 
 
         /* ***********************************************************
          *  Drive forward 2ft and then drive a 3ft box pattern
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.NO_DRIVE)) {
-            // Go forward 2 ft
-        	this.addSequential(
-        			new DriveBackwardsCommand(132, .5));
+//            this.addSequential(
+//            		new TDriveOnHeadingDistanceCommand()
+        	
         	
         }
     }
