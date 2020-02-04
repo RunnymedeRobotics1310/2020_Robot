@@ -6,6 +6,7 @@ import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.carousel.DefaultCarouselCommand;
 
@@ -31,8 +32,11 @@ public class CarouselSubsystem extends TSubsystem {
 
     public boolean isRobotFull() {
 
-        // FIXME: Check the tower as well - the tower AND the carousel must both be full
-        // for the robot to be full.
+        if (isCarouselFull() == true && Robot.towerSubsystem.isTowerFull() == true)
+        {
+            return true;
+        }
+        
         return false;
     }
 
