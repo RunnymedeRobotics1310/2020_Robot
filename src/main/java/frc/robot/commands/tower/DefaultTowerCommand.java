@@ -53,6 +53,9 @@ public class DefaultTowerCommand extends TSafeCommand {
         if (Robot.oi.runShooterTower()) {
             Scheduler.getInstance().add(new ShooterTowerCommand());
         }
+        if (Robot.oi.stopRunTower()) {
+            Scheduler.getInstance().add(new StopTowerCommand());
+        }
         /**double userSelectedTowerSpeed = Robot.oi.setTowerSpeed();
         if(userSelectedTowerSpeed != 0) {
         Robot.towerSubsystem.setTowerMotorSpeed(userSelectedTowerSpeed);

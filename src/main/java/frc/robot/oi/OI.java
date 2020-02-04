@@ -146,10 +146,10 @@ public class OI extends TOi {
 	}
 
 	public boolean runGroundIntake() {
-		if(driverController.getButton(TButton.X)) {
+		/**if(driverController.getButton(TButton.X)) {
 			return true;
 
-		}
+		}**/
 		return false;
 	}
 
@@ -163,9 +163,9 @@ public class OI extends TOi {
 
 
 	public boolean stopIntake() {
-		if (driverController.getButton(TButton.Y)) {
+		/**if (driverController.getButton(TButton.Y)) {
 			return true;
-		}
+		}**/
 		return false;
 	}
 
@@ -192,18 +192,24 @@ public class OI extends TOi {
 		return carouselSpeed;
 	}**/
 	public boolean runIntakeCarousel() {
-		if(driverController.getButton(TButton.X)) {
+		if(driverController.getPOV() == 0) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean runShooterCarousel() {
-		if(driverController.getButton(TButton.Y)) {
+		if(driverController.getPOV() == 180) {
 			return true;
 		}
 		return false;
 	}
+    public boolean stopRunCarousel() {
+        if(driverController.getPOV() == 270) {
+       return true; 
+        }
+        return false;
+    }
 
 
 
@@ -241,6 +247,13 @@ public class OI extends TOi {
 	        }
 	        return false;
 	    }
+	   
+       public boolean stopRunTower() {
+           if(driverController.getButton(TButton.X)) {
+          return true; 
+           }
+           return false;
+       }
 
 	@Override
 	public void updatePeriodic() {
