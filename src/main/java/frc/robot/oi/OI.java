@@ -162,17 +162,10 @@ public class OI extends TOi {
 	}
 
 
-	public boolean stopIntake(boolean stop) {
-		if (runFeederIntake()) {
-			/**if (driverController.getButton(TButton.B)){
-				return true;
-			}**/
+	public boolean stopIntake() {
+		if (driverController.getButton(TButton.Y)) {
+			return true;
 		}
-		//				if (runGroundIntake()) {
-		//					if (driverController.getButton(TButton.Y)) {
-		//						return true;
-		//					}
-		//				}
 		return false;
 	}
 
@@ -230,6 +223,10 @@ public class OI extends TOi {
 
 		return towerSpeed;
 	}
+
+
+	public boolean runIntakeTower() {
+		return true;
 	**/
 	public boolean runIntakeTower() {
 	    if(driverController.getButton(TButton.A)) {
