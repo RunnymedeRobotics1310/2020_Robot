@@ -44,25 +44,23 @@ public class DefaultIntakeCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
-		// If the robot is full of balls, stop the intake
 
-		// else look for buttons.
-
-		if (Robot.carouselSubsystem.isCarouselFull() && Robot.towerSubsystem.isTowerFull()) {
+		if (Robot.carouselSubsystem.isRobotFull()) {
 			Robot.intakeSubsystem.stopIntake();
+			return;
 		}
 
-		else {
-			if (Robot.oi.runFeederIntake()) {
-				Scheduler.getInstance().add(new FeederIntakeCommand());
-			}
-			if (Robot.oi.runGroundIntake()) {
-				Scheduler.getInstance().add(new GroundIntakeCommand());
-			}
+		if (Robot.oi.stopIntake()) {
+			Robot.intakeSubsystem.stopIntake();
+			return;
 		}
 
-
-
+		if (Robot.oi.runFeederIntake()) {
+			Scheduler.getInstance().add(new FeederIntakeCommand());
+		}
+		if (Robot.oi.runGroundIntake()) {
+			Scheduler.getInstance().add(new GroundIntakeCommand());
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
