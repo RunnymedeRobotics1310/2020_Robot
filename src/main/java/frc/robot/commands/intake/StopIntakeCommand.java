@@ -4,17 +4,16 @@ import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
 import frc.robot.Robot;
-import frc.robot.RobotConst;
 
 /**
  *
  */
-public class GroundIntakeCommand extends TSafeCommand {
+public class StopIntakeCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
 			DefaultIntakeCommand.class.getSimpleName();
 
-	public GroundIntakeCommand() {
+	public StopIntakeCommand() {
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -39,24 +38,18 @@ public class GroundIntakeCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.intakeSubsystem.extendIntake();
-		Robot.intakeSubsystem.setIntakeSpeed(-RobotConst.INTAKE_SPEED, -RobotConst.INTAKE_SPEED);
+		Robot.intakeSubsystem.stopIntake();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (Robot.oi.stopIntake()) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 }

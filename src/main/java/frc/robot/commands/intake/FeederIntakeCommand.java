@@ -51,10 +51,10 @@ public class FeederIntakeCommand extends TSafeCommand {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (Robot.oi.stopIntake(true)) {
-			return false;
+		if (Robot.oi.stopIntake()) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 }
