@@ -46,10 +46,12 @@ public class DefaultIntakeCommand extends TSafeCommand {
 
 		if (Robot.carouselSubsystem.isRobotFull()) {
 			Robot.intakeSubsystem.stopIntake();
+			return;
 		}
 
 		if (Robot.oi.stopIntake()) {
 			Robot.intakeSubsystem.stopIntake();
+			return;
 		}
 
 		if (Robot.oi.runFeederIntake()) {
