@@ -58,7 +58,7 @@ public class AutonomousCommand extends CommandGroup {
          *  Drive Straight using GyroPID control
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.PATTERN_STRAIGHT)) {
-            // Go forward 2 ft
+            // Go forward 5 ft
         	// distance inches, degrees, speed, timeout
             this.addSequential(
                     new TDriveOnHeadingDistanceCommand(60, 0, .95, 15, TConst.BRAKE_WHEN_FINISHED,
@@ -69,7 +69,7 @@ public class AutonomousCommand extends CommandGroup {
          *  Drive Straight with with no GyroPID control
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.PICK_UP_2_SHOOT_5)) {
-            // Go forward 2 ft
+        	// start on far left side of field lining up with opponents trench, go pick up 2 balls and shoot 5
         	// distance inches, degrees, speed, timeout
         	Robot.driveSubsystem.setGyroAngle(180);
  
@@ -101,35 +101,32 @@ public class AutonomousCommand extends CommandGroup {
         }
         
         if (pattern.equals(AutoSelector.SHOOT_3_PICK_UP_3_SHOOT_3)) {
-        	
+        	//auto pattern starting to the left of the goal, shooting 3 balls, get 3 more balls and shoot 3
         	Robot.driveSubsystem.setGyroAngle(200);
         	
         	//Shoot
-        	
-        	
+
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(112, 220, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));
-        	
+        	//drive backwards to the rendavous point
         	this.addSequential(
         			new TRotateToHeadingCommand(120, Robot.oi, Robot.driveSubsystem));
-        					
+        	//turn to get better angle to line up for balls			
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(18, 120, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));		
-        	
+        	//drive backwards to line up for balls
         	this.addSequential(
         			new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
-        	
+        	//rotate in line with balls
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(36, 70, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));
-        	
+        	//drive into balls with intake side
         	this.addSequential(
         			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
-
-        	
-        	//Shoot
+        	//line up for shot and shoot
         }
         
 
@@ -139,7 +136,8 @@ public class AutonomousCommand extends CommandGroup {
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.NO_DRIVE)) {
 //            this.addSequential(
-//            		new TDriveOnHeadingDistanceCommand()
+//            		new TDriveOnHeadingDistanceCommand())
+        	
         	
         	
         }
