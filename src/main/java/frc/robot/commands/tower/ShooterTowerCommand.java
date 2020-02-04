@@ -39,7 +39,7 @@ public class ShooterTowerCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.carouselSubsystem.setCarouselMotorSpeed(RobotConst.CAROUSEL_SHOOTER_SPEED );
+		Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED );
 	}
 
 	// Called repeatedly when this Command is scheduled to run

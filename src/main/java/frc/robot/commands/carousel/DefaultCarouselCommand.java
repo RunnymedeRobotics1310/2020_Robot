@@ -51,6 +51,9 @@ public class DefaultCarouselCommand extends TSafeCommand {
         if (Robot.oi.runIntakeCarousel()) {
             Scheduler.getInstance().add(new IntakeCarouselCommand());
         }
+        if (Robot.oi.runShooterCarousel()) {
+            Scheduler.getInstance().add(new ShooterCarouselCommand());
+        }
         //if (Robot.oi.runGroundIntake()) {
         //    Scheduler.getInstance().add(new GroundIntakeCommand());
         //}
