@@ -44,10 +44,6 @@ public class DefaultIntakeCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
-		// If the robot is full of balls, stop the intake
-
-		// else look for buttons.
-
 		if (Robot.carouselSubsystem.isRobotFull() && Robot.towerSubsystem.isFull()) {
 			Robot.intakeSubsystem.stopIntake();
 		}
