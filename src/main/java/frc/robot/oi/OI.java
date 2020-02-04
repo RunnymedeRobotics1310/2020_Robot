@@ -161,6 +161,7 @@ public class OI extends TOi {
 		return false;
 	}
 
+
 	public boolean stopIntake(boolean stop) {
 		if (runFeederIntake()) {
 			if (driverController.getButton(TButton.B)){
@@ -174,6 +175,7 @@ public class OI extends TOi {
 		//				}
 		return false;
 	}
+
 
 	/*
 	 * Carousel Subsystem commands
@@ -227,6 +229,10 @@ public class OI extends TOi {
 		}
 
 		return towerSpeed;
+	}
+	
+	public boolean runIntakeTower() {
+	   return true; 
 	}
 
 	@Override
