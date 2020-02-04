@@ -44,7 +44,7 @@ public class DefaultIntakeCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
-		if (Robot.carouselSubsystem.isRobotFull() && Robot.towerSubsystem.isFull()) {
+		if (Robot.carouselSubsystem.isRobotFull() && Robot.towerSubsystem.isTowerFull()) {
 			Robot.intakeSubsystem.stopIntake();
 		}
 
