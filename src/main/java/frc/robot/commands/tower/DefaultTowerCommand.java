@@ -46,15 +46,18 @@ public class DefaultTowerCommand extends TSafeCommand {
     protected void execute() {
 	    
 	    if (Robot.oi.runIntakeTower()) {
-            Scheduler.getInstance().add(new IntakeCarouselCommand());
-
+            Scheduler.getInstance().add(new IntakeTowerCommand());
+	    }
+            if (Robot.oi.runShooterTower()) {
+                Scheduler.getInstance().add(new ShooterTowerCommand());
+            }
         /**double userSelectedTowerSpeed = Robot.oi.setTowerSpeed();
         if(userSelectedTowerSpeed != 0) {
         Robot.towerSubsystem.setTowerMotorSpeed(userSelectedTowerSpeed);
         }
         else {
-        Robot.towerSubsystem.stopTowerMotor();**/
-        }
+        Robot.towerSubsystem.stopTowerMotor();
+        }**/
            
     }
 

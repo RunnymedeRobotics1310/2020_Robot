@@ -154,19 +154,19 @@ public class OI extends TOi {
 	}
 
 	public boolean runFeederIntake() {
-		if(driverController.getButton(TButton.A)) {
+		/**if(driverController.getButton(TButton.A)) {
 
 			return true;
-		}
+		}**/
 		return false;
 	}
 
 
 	public boolean stopIntake(boolean stop) {
 		if (runFeederIntake()) {
-			if (driverController.getButton(TButton.B)){
+			/**if (driverController.getButton(TButton.B)){
 				return true;
-			}
+			}**/
 		}
 		//				if (runGroundIntake()) {
 		//					if (driverController.getButton(TButton.Y)) {
@@ -218,7 +218,7 @@ public class OI extends TOi {
 	 * Tower Subsystem commands
 	 */
 
-	public double setTowerSpeed() {
+	/**public double setTowerSpeed() {
 
 
 		if (driverController.getPOV() == 270) {
@@ -230,10 +230,20 @@ public class OI extends TOi {
 
 		return towerSpeed;
 	}
-	
+	**/
 	public boolean runIntakeTower() {
+	    if(driverController.getButton(TButton.A)) {
 	   return true; 
+	    }
+	    return false;
 	}
+	
+	   public boolean runShooterTower() {
+	        if(driverController.getButton(TButton.B)) {
+	       return true; 
+	        }
+	        return false;
+	    }
 
 	@Override
 	public void updatePeriodic() {
