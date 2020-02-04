@@ -5,52 +5,54 @@ import com.torontocodingcollective.commands.TSafeCommand;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.carousel.IntakeCarouselCommand;
 
 /**
  *
  */
 public class DefaultTowerCommand extends TSafeCommand {
 
-	private static final String COMMAND_NAME =
-			DefaultTowerCommand.class.getSimpleName();
+    private static final String COMMAND_NAME =
+            DefaultTowerCommand.class.getSimpleName();
 
-	public DefaultTowerCommand() {
+    public DefaultTowerCommand() {
 
-		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
+        super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.towerSubsystem);
-	}
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.towerSubsystem);
+    }
 
-	@Override
-	protected String getCommandName() { return COMMAND_NAME; }
+    @Override
+    protected String getCommandName() { return COMMAND_NAME; }
 
-	@Override
-	protected String getParmDesc() {
-		return super.getParmDesc();
-	}
+    @Override
+    protected String getParmDesc() {
+        return super.getParmDesc();
+    }
 
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-		// Print the command parameters if this is the current
-		// called command (it was not sub-classed)
-		if (getCommandName().equals(COMMAND_NAME)) {
-			logMessage(getParmDesc() + " starting");
-		}
-	}
+    // Called just before this Command runs the first time
+    @Override
+    protected void initialize() {
+        // Print the command parameters if this is the current
+        // called command (it was not sub-classed)
+        if (getCommandName().equals(COMMAND_NAME)) {
+            logMessage(getParmDesc() + " starting");
+        }
+    }
 
-	// Called repeatedly when this Command is scheduled to run
-	@Override
+    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-	    
-	    if (Robot.oi.runIntakeTower()) {
+
+        // TODO: If the tower is full, stop the tower
+
+        // else look for buttons
+        if (Robot.oi.runIntakeTower()) {
             Scheduler.getInstance().add(new IntakeTowerCommand());
-	    }
-            if (Robot.oi.runShooterTower()) {
-                Scheduler.getInstance().add(new ShooterTowerCommand());
-            }
+        }
+        if (Robot.oi.runShooterTower()) {
+            Scheduler.getInstance().add(new ShooterTowerCommand());
+        }
         /**double userSelectedTowerSpeed = Robot.oi.setTowerSpeed();
         if(userSelectedTowerSpeed != 0) {
         Robot.towerSubsystem.setTowerMotorSpeed(userSelectedTowerSpeed);
@@ -58,13 +60,13 @@ public class DefaultTowerCommand extends TSafeCommand {
         else {
         Robot.towerSubsystem.stopTowerMotor();
         }**/
-           
+
     }
 
-	// Make this return true when this Command no longer needs to run execute()
-	@Override
-	protected boolean isFinished() {
-		return false;
-	}
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    protected boolean isFinished() {
+        return false;
+    }
 
 }
