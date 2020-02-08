@@ -14,6 +14,7 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class BangBangCommand extends TSafeCommand {
 
+    private boolean up;
     private static final String COMMAND_NAME =
             BangBangCommand.class.getSimpleName();
 
@@ -41,6 +42,7 @@ public class BangBangCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
+        up = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -49,10 +51,14 @@ public class BangBangCommand extends TSafeCommand {
         
         SmartDashboard.putNumber( "Encoder Count", Robot.shooterSubsystem.getShooterEncoder());
         
-            if (Robot.shooterSubsystem.getShooterEncoder() < 2450.00) {
+            if (up && Robot.shooterSubsystem.getShooterEncoder() < 2450.00) {
+                up = false;
             Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
             }
-            else if (Robot.shooterSubsystem.getShooterEncoder() >= 2450.00) {
+            else if (up && Robot.shooterSubsystem.getShooterEncoder() < 2250.00) {
+                up = true;
+            }
+            else {
             Robot.shooterSubsystem.setShooterMotorSpeed(0);  
             }
         
