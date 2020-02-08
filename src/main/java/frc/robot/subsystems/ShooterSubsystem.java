@@ -9,6 +9,8 @@ import com.torontocodingcollective.subsystem.TDriveSubsystem.TSide;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
+import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter.DefaultShooterCommand;
 
@@ -39,7 +41,8 @@ public class ShooterSubsystem extends TSubsystem {
      * Set the speed on the shooter
      *
      * @param speed value 0 (stopped) to 1.0 (full speed)
-     */
+     **/
+    
     public void setShooterMotorSpeed(double speed) {
     	shooterMotor.set(speed);
     }
