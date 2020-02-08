@@ -78,6 +78,7 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
         SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
+        SmartDashboard.putNumber( "Encoder Count", shooterEncoder.get());
     }
 
 }
