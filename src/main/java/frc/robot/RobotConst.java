@@ -50,6 +50,10 @@ public class RobotConst {
 	public static enum Direction {
 		FORWARD, BACKWARD
 	};
+	   // *********************************************************
+    // Shooter Constants
+    // *********************************************************
+	   public static final double SHOOTER_BANGBANG_SPEED  = 1;
 
 	// The TorontoCodingCollective framework was developed to run on different
 	// robots through the use of multiple mappings and constants.

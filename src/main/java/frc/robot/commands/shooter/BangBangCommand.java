@@ -5,17 +5,18 @@ import com.torontocodingcollective.commands.TSafeCommand;
 
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  *
  */
-public class DefaultShooterCommand extends TSafeCommand {
+public class BangBangCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultShooterCommand.class.getSimpleName();
+            BangBangCommand.class.getSimpleName();
 
-    public DefaultShooterCommand() {
+    public BangBangCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -44,13 +45,19 @@ public class DefaultShooterCommand extends TSafeCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-
-        HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
-        Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
         
-     //   double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
-       // Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
-
+        Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED);
+        
+        if (Robot.oi.runShooterBB() == true)
+        {
+            if (Robot.shooterSubsystem.getShooterEncoder() < 2450.00) {
+            Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
+            }
+            else if (Robot.shooterSubsystem.getShooterEncoder() >= 2450.00) {
+            Robot.shooterSubsystem.setShooterMotorSpeed(0);  
+            }
+        }
+     
     }
 
     // Make this return true when this Command no longer needs to run execute()

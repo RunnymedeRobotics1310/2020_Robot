@@ -11,6 +11,7 @@ import com.torontocodingcollective.oi.TToggle;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
+import frc.robot.RobotConst;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -129,7 +130,7 @@ public class OI extends TOi {
 
 	}
 
-	public double getShooterSpeed() {
+	/**public double getShooterSpeed() {
 
 
 		if (driverController.getButton(TButton.LEFT_BUMPER)) {
@@ -143,6 +144,14 @@ public class OI extends TOi {
 				shooterSpeed = 1;
 		}
 		return shooterSpeed;
+	}**/
+	
+	public boolean runShooterBB() {
+	    if (driverController.getButton(TButton.A)) {
+	        shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
+	        return true;
+	    }
+	    return false;
 	}
 
 	public boolean runGroundIntake() {
@@ -235,9 +244,9 @@ public class OI extends TOi {
 		return true;
 	**/
 	public boolean runIntakeTower() {
-	    if(driverController.getButton(TButton.A)) {
+	   /** if(driverController.getButton(TButton.A)) {
 	   return true; 
-	    }
+	    }**/
 	    return false;
 	}
 	
