@@ -55,7 +55,7 @@ public class DefaultShooterCommand extends TSafeCommand {
         //Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
 
         if (Robot.oi.runShooterBB()) {
-            Scheduler.getInstance().add(new BangBangCommand());
+            Scheduler.getInstance().add(new BangBangShooterCommand());
         }
     }
 
