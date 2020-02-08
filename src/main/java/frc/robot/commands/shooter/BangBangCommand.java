@@ -3,6 +3,7 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
@@ -45,6 +46,8 @@ public class BangBangCommand extends TSafeCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        
+        SmartDashboard.putNumber( "Encoder Count", Robot.shooterSubsystem.getShooterEncoder());
         
             if (Robot.shooterSubsystem.getShooterEncoder() < 2450.00) {
             Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
