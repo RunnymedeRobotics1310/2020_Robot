@@ -60,9 +60,9 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
                 leftEncoder,  RobotMap.LEFT_DRIVE_CAN_MOTOR_ISINVERTED,
                 rightEncoder, RobotMap.RIGHT_DRIVE_CAN_MOTOR_ISINVERTED,
                 RobotConst.ENCODER_COUNTS_PER_INCH,
-                RobotConst.DRIVE_SPEED_PID_KP,
+                20,
                 RobotConst.DRIVE_SPEED_PID_KI,
-                RobotConst.MAX_LOW_GEAR_SPEED);
+                10000);
     }
 
     @Override
