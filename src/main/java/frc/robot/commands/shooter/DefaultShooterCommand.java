@@ -6,7 +6,7 @@ import com.torontocodingcollective.commands.TSafeCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
-import frc.robot.commands.intake.FeederIntakeCommand;
+import frc.robot.commands.shooter.BangBangShooterCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
