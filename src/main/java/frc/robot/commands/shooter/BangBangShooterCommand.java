@@ -53,13 +53,13 @@ public class BangBangShooterCommand extends TSafeCommand {
         
             if (up && Robot.shooterSubsystem.getShooterEncoder() < 2450.00) {
                 up = false;
-            Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
+                Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
             }
             else if (up && Robot.shooterSubsystem.getShooterEncoder() < 2250.00) {
                 up = true;
             }
             else {
-            Robot.shooterSubsystem.setShooterMotorSpeed(0);  
+                Robot.shooterSubsystem.setShooterMotorSpeed(0);  
             }
         
      
