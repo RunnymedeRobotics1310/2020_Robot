@@ -12,13 +12,13 @@ import frc.robot.subsystems.ShooterSubsystem;
 /**
  *
  */
-public class BangBangCommand extends TSafeCommand {
+public class BangBangShooterCommand extends TSafeCommand {
 
     private boolean up;
     private static final String COMMAND_NAME =
-            BangBangCommand.class.getSimpleName();
+            BangBangShooterCommand.class.getSimpleName();
 
-    public BangBangCommand() {
+    public BangBangShooterCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
