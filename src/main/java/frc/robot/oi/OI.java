@@ -182,26 +182,9 @@ public class OI extends TOi {
     /*
      * Carousel Subsystem commands
      */
-
-    //public double setCarouselSpeed() {
-
-
-    /**if (driverController.getPOV() == 0) {
-			carouselSpeed =  0.25;
-
-		}
-		if(driverController.getPOV() == 180) {
-			carouselSpeed = 0.5;
-		}
-
-		if(driverController.getPOV() == -1) {
-			carouselSpeed = 0;
-		}
-
-		return carouselSpeed;
-	}**/
     public boolean runIntakeCarousel() {
-        if(driverController.getPOV() == 0) {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
             return true;
         }
         return false;
@@ -226,7 +209,7 @@ public class OI extends TOi {
      * Tower Subsystem commands
      */
     public boolean runIntakeTower() {
-        if (   driverController.getButton(TButton.A)
+        if (       driverController.getButton(TButton.A)
                 || driverController.getButton(TButton.Y)) {
             return true;
         }
