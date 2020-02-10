@@ -145,36 +145,36 @@ public class OI extends TOi {
 		}
 		return shooterSpeed;
 	}**/
-	
+
 	public boolean runShooterBB() {
-	    if (driverController.getButton(TButton.A)) {
-	        shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
-	        return true;
-	    }
-	    return false;
+		if (driverController.getButton(TButton.A)) {
+			shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean runGroundIntake() {
-		/**if(driverController.getButton(TButton.X)) {
+		if(driverController.getButton(TButton.X)) {
 			return true;
 
-		}**/
+		}*
 		return false;
 	}
 
 	public boolean runFeederIntake() {
-		/**if(driverController.getButton(TButton.A)) {
+		if(driverController.getButton(TButton.A)) {
 
 			return true;
-		}**/
+		}
 		return false;
 	}
 
 
 	public boolean stopIntake() {
-		/**if (driverController.getButton(TButton.Y)) {
+		if (driverController.getButton(TButton.Y)) {
 			return true;
-		}**/
+		}
 		return false;
 	}
 
@@ -213,12 +213,12 @@ public class OI extends TOi {
 		}
 		return false;
 	}
-    public boolean stopRunCarousel() {
-        if(driverController.getPOV() == 270) {
-       return true; 
-        }
-        return false;
-    }
+	public boolean stopRunCarousel() {
+		if(driverController.getPOV() == 270) {
+			return true;
+		}
+		return false;
+	}
 
 
 
@@ -242,27 +242,27 @@ public class OI extends TOi {
 
 	public boolean runIntakeTower() {
 		return true;
-	**/
+	 **/
 	public boolean runIntakeTower() {
-	   /** if(driverController.getButton(TButton.A)) {
-	   return true; 
+		/** if(driverController.getButton(TButton.A)) {
+	   return true;
 	    }**/
-	    return false;
+		return false;
 	}
-	
-	   public boolean runShooterTower() {
-	        if(driverController.getButton(TButton.B)) {
-	       return true; 
-	        }
-	        return false;
-	    }
-	   
-       public boolean stopRunTower() {
-           if(driverController.getButton(TButton.X)) {
-          return true; 
-           }
-           return false;
-       }
+
+	public boolean runShooterTower() {
+		if(driverController.getButton(TButton.B)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean stopRunTower() {
+		if(driverController.getButton(TButton.X)) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void updatePeriodic() {
