@@ -13,7 +13,10 @@ import frc.robot.Robot;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter.DefaultShooterCommand;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 /**
  *
  */
@@ -81,6 +84,21 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
         SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry tx = table.getEntry("tx");
+        NetworkTableEntry ty = table.getEntry("ty");
+        NetworkTableEntry ta = table.getEntry("ta");
+
+        //read values periodically
+        double x = tx.getDouble(0.0);
+        double y = ty.getDouble(0.0);
+        double area = ta.getDouble(0.0);
+
+        //post to smart dashboard periodically
+        SmartDashboard.putNumber("LimelightX", x);
+        SmartDashboard.putNumber("LimelightY", y);
+        SmartDashboard.putNumber("LimelightArea", area);
 
     }
 
