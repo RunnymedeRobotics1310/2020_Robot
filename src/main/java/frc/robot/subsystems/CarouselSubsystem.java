@@ -56,7 +56,7 @@ public class CarouselSubsystem extends TSubsystem {
     @Override
     public void updatePeriodic() {
         SmartDashboard.putNumber("Carousel Speed", carouselMotor.get());
-        SmartDashboard.putBoolean("Carousel Filled", carouselFilled.atLimit());
+        SmartDashboard.putBoolean("Carousel Filled", isCarouselFull());
 
     }
 
