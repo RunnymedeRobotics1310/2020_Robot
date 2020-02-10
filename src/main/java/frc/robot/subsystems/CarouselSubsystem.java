@@ -36,7 +36,6 @@ public class CarouselSubsystem extends TSubsystem {
         {
             return true;
         }
-        
         return false;
     }
 
@@ -45,7 +44,6 @@ public class CarouselSubsystem extends TSubsystem {
         if (carouselFilled.atLimit()) {
             return true;
         }
-
         return false;
     }
 
