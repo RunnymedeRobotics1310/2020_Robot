@@ -67,8 +67,8 @@ public class RobotMap {
 	// DIO Ports
 	// ******************************************
 
-	public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 4;
-	public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 5;
+	public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 0;
+	public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 1;
 
 
 	// Initializers if this code will be deployed to more than one
