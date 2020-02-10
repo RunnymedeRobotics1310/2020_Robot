@@ -197,7 +197,7 @@ public class OI extends TOi {
         return false;
     }
     public boolean stopRunCarousel() {
-        if(driverController.getPOV() == 270) {
+        if(driverController.getButton(TButton.X)) {
             return true;
         }
         return false;
