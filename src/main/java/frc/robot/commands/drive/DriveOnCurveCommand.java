@@ -41,7 +41,7 @@ public class DriveOnCurveCommand extends TSafeCommand {
     	this.curveRight = curveRight;
     	
     	if (curveRight == true) {
-    		rightMotorSpeed = 
+    		rightMotorSpeed = speed;
     	}
     	
     	
