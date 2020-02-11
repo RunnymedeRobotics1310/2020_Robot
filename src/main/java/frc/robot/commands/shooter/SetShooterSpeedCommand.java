@@ -8,12 +8,12 @@ import frc.robot.Robot;
 /**
  *
  */
-public class StopShooterCommand extends TSafeCommand {
+public class SetShooterSpeedCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
 			DefaultShooterCommand.class.getSimpleName();
 
-	public StopShooterCommand() {
+	public SetShooterSpeedCommand() {
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -38,7 +38,7 @@ public class StopShooterCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.shooterSubsystem.stopShooterMotor();
+		Robot.shooterSubsystem.setShooterMotorSpeed(Robot.oi.getShooterSpeed());
 	}
 
 	// Called repeatedly when this Command is scheduled to run
