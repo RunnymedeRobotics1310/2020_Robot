@@ -42,6 +42,7 @@ public class RobotConst {
 	public static final double  ULTRASONIC_VOLTAGE_80IN       = 0.764;
 	
 	public static final double  ROBOT_WIDTH;
+	
 
 
 	public static enum Direction {

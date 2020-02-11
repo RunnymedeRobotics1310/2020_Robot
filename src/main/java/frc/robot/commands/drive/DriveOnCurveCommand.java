@@ -4,6 +4,7 @@ import com.torontocodingcollective.commands.TDifferentialDrive;
 import com.torontocodingcollective.commands.TSafeCommand;
 
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -24,6 +25,7 @@ public class DriveOnCurveCommand extends TSafeCommand {
     boolean curveRight;
     double rightMotorSpeed;
     double leftMotorSpeed;
+    double speedConstant;
     
     /**
      * 
@@ -40,8 +42,15 @@ public class DriveOnCurveCommand extends TSafeCommand {
     	this.radius = radius;
     	this.curveRight = curveRight;
     	
+    	speedConstant = (radius - (RobotConst.ROBOT_WIDTH/2)) / (radius + (RobotConst.ROBOT_WIDTH/2));
+    	
     	if (curveRight == true) {
+    		leftMotorSpeed = speed;
+    		rightMotorSpeed = speedConstant * leftMotorSpeed;
+    	}
+    	else {
     		rightMotorSpeed = speed;
+    		leftMotorSpeed = speedConstant * rightMotorSpeed;
     	}
     	
     	
@@ -81,7 +90,7 @@ public class DriveOnCurveCommand extends TSafeCommand {
 
         // Check the driver controller buttons
         super.execute();
-        driveSubsystem.setSpeed(-speed, -speed);
+        driveSubsystem.setSpeed(rightMotorSpeed, leftMotorSpeed);
 
         
         
@@ -89,6 +98,7 @@ public class DriveOnCurveCommand extends TSafeCommand {
 
     @Override
     protected boolean isFinished() {
+    	
         
     	if(Math.abs(Robot.driveSubsystem.getDistanceInches()) > distance) {
     		return true;

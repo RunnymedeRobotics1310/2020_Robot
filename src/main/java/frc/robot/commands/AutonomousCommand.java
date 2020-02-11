@@ -78,11 +78,11 @@ public class AutonomousCommand extends CommandGroup {
         	//Start intake motor
         	
         	this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(95, 180 , 1, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(90, 180 , 1, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	
         	this.addSequential(
-        			new DriveBackwardsCommand(12, 1));
+        			new DriveBackwardsCommand(8, 1));
         	
         	this.addSequential(
         			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
@@ -91,14 +91,16 @@ public class AutonomousCommand extends CommandGroup {
                     new TDriveOnHeadingDistanceCommand(12, 200, 1, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         	
+        	//this.addSequential(
+        			//new TRotateToHeadingCommand(255, Robot.oi, Robot.driveSubsystem));
         	this.addSequential(
-        			new TRotateToHeadingCommand(255, Robot.oi, Robot.driveSubsystem));
+        			new DriveOnCurveCommand(75, -1, 30, true));
         	
         	this.addSequential(
-        			new DriveBackwardsCommand(188, 1));
+        			new DriveOnCurveCommand(100, -1, 70, false));
         	
         	this.addSequential(
-        			new TRotateToHeadingCommand(190, Robot.oi, Robot.driveSubsystem));
+        			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
         	
         	//Start shooter midway through last drive
                 
@@ -111,18 +113,21 @@ public class AutonomousCommand extends CommandGroup {
         	//Shoot
 
         	this.addSequential(
-        			new TDriveOnHeadingDistanceCommand(112, 220, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        			new TDriveOnHeadingDistanceCommand(85, 220, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));
+        	
+        	this.addSequential(
+        			new DriveOnCurveCommand(85, 1, 15, true));
         	//drive backwards to the rendezvous point
-        	this.addSequential(
-        			new TRotateToHeadingCommand(120, Robot.oi, Robot.driveSubsystem));
+        	//this.addSequential(
+        			//new TRotateToHeadingCommand(120, Robot.oi, Robot.driveSubsystem));
         	//turn to get better angle to line up for balls			
-        	this.addSequential(
-        			new TDriveOnHeadingDistanceCommand(12, 120, 1, 15, TConst.BRAKE_WHEN_FINISHED,
-        					Robot.oi, Robot.driveSubsystem));		
+        	//this.addSequential(
+        			//new TDriveOnHeadingDistanceCommand(12, 120, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        				//	Robot.oi, Robot.driveSubsystem));		
         	//drive backwards to line up for balls
-        	this.addSequential(
-        			new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
+        	//this.addSequential(
+        			//new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
         	//rotate in line with balls
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(40, 70, 1, 15, TConst.BRAKE_WHEN_FINISHED,
@@ -146,7 +151,7 @@ public class AutonomousCommand extends CommandGroup {
         
         
         if (pattern.equals(AutoSelector.SHOOT_3_PICK_UP_3_TRENCH)) {
-        	Robot.driveSubsystem.setGyroAngle(150);
+        	Robot.driveSubsystem.setGyroAngle(160);
         	//shoot 3 balls
         	this.addSequential(
         			new TRotateToHeadingCommand(180, Robot.oi, Robot.driveSubsystem));
@@ -161,7 +166,7 @@ public class AutonomousCommand extends CommandGroup {
         
         if (pattern.equals(AutoSelector.DRIVE_ON_CURVE)) {
         	this.addSequential(
-        			new DriveOnCurveCommand(15, .5, 12, true));
+        			new DriveOnCurveCommand(188, -.75, 100, false));
       	
       }
         
