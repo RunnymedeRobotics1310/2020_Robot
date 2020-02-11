@@ -43,8 +43,9 @@ public class ShooterSubsystem extends TSubsystem {
      * @param speed value 0 (stopped) to 1.0 (full speed)
      **/
     
-    public void setShooterMotorSpeed(double speed) {
+    public boolean setShooterMotorSpeed(double speed) {
     	shooterMotor.set(speed);
+    	return true;
     }
     
     public void stopShooterMotor() {
