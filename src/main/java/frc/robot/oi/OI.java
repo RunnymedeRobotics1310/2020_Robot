@@ -130,21 +130,20 @@ public class OI extends TOi {
 
     }
 
-    /**public double getShooterSpeed() {
+    public double getShooterSpeed() {
 
-
-		if (driverController.getButton(TButton.LEFT_BUMPER)) {
-			shooterSpeed = shooterSpeed - 0.005;
-			if (shooterSpeed<0)
-				shooterSpeed = 0;
-		}
-		if(driverController.getButton(TButton.RIGHT_BUMPER)) {
-			shooterSpeed = shooterSpeed + 0.005;
-			if (shooterSpeed>1)
-				shooterSpeed = 1;
-		}
-		return shooterSpeed;
-	}**/
+        if (driverController.getButton(TButton.LEFT_BUMPER)) {
+            shooterSpeed = shooterSpeed - 0.005;
+            if (shooterSpeed<0)
+                shooterSpeed = 0;
+        }
+        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+            shooterSpeed = shooterSpeed + 0.005;
+            if (shooterSpeed>1)
+                shooterSpeed = 1;
+        }
+        return shooterSpeed;
+    }
 
     public boolean runShooterBB() {
         if (driverController.getButton(TButton.A)) {
