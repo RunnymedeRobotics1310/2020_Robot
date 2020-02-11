@@ -11,7 +11,6 @@ import com.torontocodingcollective.oi.TToggle;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
-import frc.robot.RobotConst;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -116,18 +115,16 @@ public class OI extends TOi {
 
     public HoodPosition getHoodPosition() {
 
-        //	        if (driverController.getButton(TButton.A)) {
-        //	            previousHoodPosition = HoodPosition.CLOSE;
-        //	        }
-        //	        if(driverController.getButton(TButton.B)) {
-        //	            previousHoodPosition = HoodPosition.MEDIUM;
-        //	        }
-        //	        if(driverController.getButton(TButton.Y)) {
-        //	            previousHoodPosition = HoodPosition.FAR;
-        //	        }
+        if (driverController.getPOV() == 180) {
+            previousHoodPosition = HoodPosition.CLOSE;
+        }
+        if(driverController.getPOV() == 90 || driverController.getPOV() == 270) {
+            previousHoodPosition = HoodPosition.MEDIUM;
+        }
+        if(driverController.getPOV() == 0) {
+            previousHoodPosition = HoodPosition.FAR;
+        }
         return previousHoodPosition;
-
-
     }
     
     public boolean stopShooter() {
@@ -149,14 +146,6 @@ public class OI extends TOi {
                 shooterSpeed = 1;
         }
         return shooterSpeed;
-    }
-
-    public boolean runShooterBB() {
-        if (driverController.getButton(TButton.A)) {
-            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
-            return true;
-        }
-        return false;
     }
 
     public boolean runGroundIntake() {
