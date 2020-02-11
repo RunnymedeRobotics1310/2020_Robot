@@ -52,9 +52,9 @@ public class DefaultShooterCommand extends TSafeCommand {
             Scheduler.getInstance().add(new StopShooterCommand());
         }
         
-        /**if (Robot.oi.getShooterSpeed()) {
-            Scheduler.getInstance().add(new setShooterMotorSpeedCommand());
-        }**/
+        if (Robot.oi.getShooterSpeed() != 0) {
+            Scheduler.getInstance().add(new SetShooterSpeedCommand(Robot.oi.getShooterSpeed()));
+        }
        // HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         //Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
         
