@@ -12,11 +12,11 @@ public class SetShooterSpeedCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
 			DefaultShooterCommand.class.getSimpleName();
-
-	public SetShooterSpeedCommand() {
+	private double speed = 0;
+	public SetShooterSpeedCommand(double speed) {
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
-
+		this.speed = speed;
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.shooterSubsystem);
 	}
@@ -38,7 +38,7 @@ public class SetShooterSpeedCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.shooterSubsystem.setShooterMotorSpeed(Robot.oi.getShooterSpeed());
+		Robot.shooterSubsystem.setShooterMotorSpeed(speed);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
