@@ -8,6 +8,7 @@ import com.torontocodingcollective.oi.TRumbleManager;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
@@ -126,20 +127,30 @@ public class OI extends TOi {
         }
         return previousHoodPosition;
     }
-    
+
     public boolean stopShooter() {
         if(driverController.getButton(TButton.B)) {
             return true;
         }
         return false;
     }
+
     public double getShooterSpeed() {
+
+        if (driverController.getButton(TTrigger.LEFT)) {
+            shooterSpeed = 0;
+        }
+
+        if (driverController.getButton(TTrigger.RIGHT)) {
+            shooterSpeed = 0.5;
+        }
 
         if (driverController.getButton(TButton.LEFT_BUMPER)) {
             shooterSpeed = shooterSpeed - 0.005;
             if (shooterSpeed<0)
                 shooterSpeed = 0;
         }
+
         if(driverController.getButton(TButton.RIGHT_BUMPER)) {
             shooterSpeed = shooterSpeed + 0.005;
             if (shooterSpeed>1)
