@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.commands.intake.FeederIntakeCommand;
+import frc.robot.commands.tower.StopTowerCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -47,6 +48,9 @@ public class DefaultShooterCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
+        if (Robot.oi.stopShooter()) {
+            Scheduler.getInstance().add(new StopShooterCommand());
+        }
        // HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         //Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
         
