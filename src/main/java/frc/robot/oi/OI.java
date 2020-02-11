@@ -129,7 +129,13 @@ public class OI extends TOi {
 
 
     }
-
+    
+    public boolean stopShooter() {
+        if(driverController.getButton(TButton.B)) {
+            return true;
+        }
+        return false;
+    }
     public double getShooterSpeed() {
 
         if (driverController.getButton(TButton.LEFT_BUMPER)) {
