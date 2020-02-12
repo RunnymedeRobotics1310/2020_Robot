@@ -80,27 +80,34 @@ public class AutonomousCommand extends CommandGroup {
         	this.addSequential(
                     new TDriveOnHeadingDistanceCommand(90, 180 , 1, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
+        	// drive to pick up first ball
         	
         	this.addSequential(
         			new DriveBackwardsCommand(8, 1));
+        	// drive back to reposition for second ball
         	
         	this.addSequential(
         			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+        	// rotate to position at other ball
         	
         	this.addSequential(
                     new TDriveOnHeadingDistanceCommand(12, 200, 1, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
+        	//drive into ball
         	
         	//this.addSequential(
         			//new TRotateToHeadingCommand(255, Robot.oi, Robot.driveSubsystem));
         	this.addSequential(
         			new DriveOnCurveCommand(75, -1, 30, true));
+        	//rotate away from trench
         	
         	this.addSequential(
         			new DriveOnCurveCommand(100, -1, 70, false));
+        	// curve towards shooter
         	
         	this.addSequential(
         			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+        	// position right at goal
         	
         	//Start shooter midway through last drive
                 
@@ -115,9 +122,12 @@ public class AutonomousCommand extends CommandGroup {
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(85, 220, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));
+        	//drive backwards on angle to get closer to 3 balls
         	
         	this.addSequential(
         			new DriveOnCurveCommand(85, 1, 15, true));
+        	//rotate to align with balls 
+        	
         	//drive backwards to the rendezvous point
         	//this.addSequential(
         			//new TRotateToHeadingCommand(120, Robot.oi, Robot.driveSubsystem));
@@ -155,16 +165,21 @@ public class AutonomousCommand extends CommandGroup {
         	//shoot 3 balls
         	this.addSequential(
         			new TRotateToHeadingCommand(180, Robot.oi, Robot.driveSubsystem));
+        	//square up to trench
         	
         	this.addSequential(
         			new TDriveOnHeadingDistanceCommand(156, 180, 1, 15, TConst.BRAKE_WHEN_FINISHED,
         					Robot.oi, Robot.driveSubsystem));
+        	//drive intake side to get balls
+        	
         	this.addSequential(
         			new TRotateToHeadingCommand(155, Robot.oi, Robot.driveSubsystem));
+        	//rotate to face shooter and shoot
         	
         }
         
         if (pattern.equals(AutoSelector.DRIVE_ON_CURVE)) {
+        	// test drive on curve command
         	this.addSequential(
         			new DriveOnCurveCommand(188, -.75, 100, false));
       	
