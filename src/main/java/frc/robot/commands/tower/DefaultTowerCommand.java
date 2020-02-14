@@ -44,25 +44,22 @@ public class DefaultTowerCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
-        // TODO: If the tower is full, stop the tower
+        if (Robot.towerSubsystem.isTowerFull()) {
+            Robot.towerSubsystem.stopTowerMotor();
+            return;
+        }
 
-        // else look for buttons
-        if (Robot.oi.runIntakeTower()) {
-            Scheduler.getInstance().add(new IntakeTowerCommand());
-        }
-        if (Robot.oi.runShooterTower()) {
-            Scheduler.getInstance().add(new ShooterTowerCommand());
-        }
         if (Robot.oi.stopRunTower()) {
             Scheduler.getInstance().add(new StopTowerCommand());
         }
-        /**double userSelectedTowerSpeed = Robot.oi.setTowerSpeed();
-        if(userSelectedTowerSpeed != 0) {
-        Robot.towerSubsystem.setTowerMotorSpeed(userSelectedTowerSpeed);
+        
+        if (Robot.oi.runIntakeTower()) {
+            Scheduler.getInstance().add(new IntakeTowerCommand());
         }
-        else {
-        Robot.towerSubsystem.stopTowerMotor();
-        }**/
+        
+        if (Robot.oi.runShooterTower()) {
+            Scheduler.getInstance().add(new ShooterTowerCommand());
+        }
 
     }
 

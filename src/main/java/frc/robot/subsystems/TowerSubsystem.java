@@ -32,8 +32,7 @@ public class TowerSubsystem extends TSubsystem {
 		if (ballDetector.atLimit()) {
 			return true;
 		}
-		else
-			return false;
+		return false;
 	}
 
 	public void stopTowerMotor () {
@@ -49,7 +48,7 @@ public class TowerSubsystem extends TSubsystem {
 	@Override
 	public void updatePeriodic() {
 		SmartDashboard.putNumber("Tower Speed", towerMotor.get());
-		SmartDashboard.putBoolean("Tower Filled", ballDetector.atLimit());
+		SmartDashboard.putBoolean("Tower Filled", isTowerFull());
 
 
 	}

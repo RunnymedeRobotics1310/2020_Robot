@@ -187,91 +187,54 @@ public class OI extends TOi {
 		return false;
 	}
 
+    /*
+     * Carousel Subsystem commands
+     */
+    public boolean runIntakeCarousel() {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
 
-	/*
-	 * Carousel Subsystem commands
-	 */
+    public boolean runShooterCarousel() {
+        if(driverController.getPOV() == 180) {
+            return true;
+        }
+        return false;
+    }
+    public boolean stopRunCarousel() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
 
-	//public double setCarouselSpeed() {
+    /*
+     * Tower Subsystem commands
+     */
+    public boolean runIntakeTower() {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
 
+    public boolean runShooterTower() {
+        if(driverController.getButton(TButton.B)) {
+            return true;
+        }
+        return false;
+    }
 
-	/**if (driverController.getPOV() == 0) {
-			carouselSpeed =  0.25;
-
-		}
-		if(driverController.getPOV() == 180) {
-			carouselSpeed = 0.5;
-		}
-
-		if(driverController.getPOV() == -1) {
-			carouselSpeed = 0;
-		}
-
-		return carouselSpeed;
-	}**/
-	public boolean runIntakeCarousel() {
-		if(driverController.getPOV() == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean runShooterCarousel() {
-		if(driverController.getPOV() == 180) {
-			return true;
-		}
-		return false;
-	}
-	public boolean stopRunCarousel() {
-		if(driverController.getPOV() == 270) {
-			return true;
-		}
-		return false;
-	}
-
-
-
-	/*
-	 * Tower Subsystem commands
-	 */
-
-	/**public double setTowerSpeed() {
-
-
-		if (driverController.getPOV() == 270) {
-			towerSpeed =  0.25;
-		}
-		if(driverController.getPOV() == -1) {
-			towerSpeed = 0;
-		}
-
-		return towerSpeed;
-	}
-
-
-	public boolean runIntakeTower() {
-		return true;
-	 **/
-	public boolean runIntakeTower() {
-		/** if(driverController.getButton(TButton.A)) {
-	   return true;
-	    }**/
-		return false;
-	}
-
-	public boolean runShooterTower() {
-		if(driverController.getButton(TButton.B)) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean stopRunTower() {
-		if(driverController.getButton(TButton.X)) {
-			return true;
-		}
-		return false;
-	}
+    public boolean stopRunTower() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
 
 	@Override
 	public void updatePeriodic() {

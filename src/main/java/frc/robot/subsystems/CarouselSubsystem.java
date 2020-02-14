@@ -32,11 +32,9 @@ public class CarouselSubsystem extends TSubsystem {
 
     public boolean isRobotFull() {
 
-        if (isCarouselFull() == true && Robot.towerSubsystem.isTowerFull() == true)
-        {
+        if (isCarouselFull() == true && Robot.towerSubsystem.isTowerFull() == true){
             return true;
         }
-        
         return false;
     }
 
@@ -45,7 +43,6 @@ public class CarouselSubsystem extends TSubsystem {
         if (carouselFilled.atLimit()) {
             return true;
         }
-
         return false;
     }
 
@@ -58,7 +55,8 @@ public class CarouselSubsystem extends TSubsystem {
     @Override
     public void updatePeriodic() {
         SmartDashboard.putNumber("Carousel Speed", carouselMotor.get());
-        SmartDashboard.putBoolean("Carousel Filled", carouselFilled.atLimit());
+        SmartDashboard.putBoolean("Carousel Filled", isCarouselFull());
+        SmartDashboard.putBoolean("Robot Filled", isRobotFull());
 
     }
 
