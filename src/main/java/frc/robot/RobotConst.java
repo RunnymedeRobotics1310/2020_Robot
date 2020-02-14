@@ -81,7 +81,7 @@ public class RobotConst {
 			DRIVE_SPEED_PID_KP = 0.4;
 			DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
 
-			ENCODER_COUNTS_PER_INCH = 55.6;
+			ENCODER_COUNTS_PER_INCH = 55.6/2;
 
 			break;
 		}
