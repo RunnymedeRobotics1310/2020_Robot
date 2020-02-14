@@ -5,8 +5,6 @@ import com.torontocodingcollective.sensors.gyro.TAnalogGyro;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.subsystem.TGyroDriveSubsystem;
 
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.DefaultDriveCommand;
@@ -18,12 +16,6 @@ import frc.robot.commands.drive.DefaultDriveCommand;
  * drive subsystem.
  */
 public class DriveSubsystem extends TGyroDriveSubsystem {
-
-    private static final boolean LOW_GEAR     = false;
-    private static final boolean HIGH_GEAR    = true;
-
-    private Solenoid             shifter      = new Solenoid(RobotMap.SHIFTER_PNEUMATIC_PORT);
-    private boolean              turboEnabled = false;
 
     public DriveSubsystem() {
 
@@ -67,7 +59,6 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
 
     @Override
     public void init() {
-        shifter.set(LOW_GEAR);
     }
 
     // Initialize the default command for the Chassis subsystem.
@@ -75,31 +66,4 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultDriveCommand());
     }
-
-    // ********************************************************************************************************************
-    // Turbo routines
-    // ********************************************************************************************************************
-    public void enableTurbo() {
-        turboEnabled = true;
-        setMaxEncoderSpeed(RobotConst.MAX_HIGH_GEAR_SPEED);
-        shifter.set(HIGH_GEAR);
-    }
-
-    public void disableTurbo() {
-        turboEnabled = false;
-        setMaxEncoderSpeed(RobotConst.MAX_LOW_GEAR_SPEED);
-        shifter.set(LOW_GEAR);
-    }
-
-    public boolean isTurboEnabled() {
-        return turboEnabled;
-    }
-
-    @Override
-    public void updatePeriodic() {
-        super.updatePeriodic();
-
-        SmartDashboard.putBoolean("Turbo Enabled", isTurboEnabled());
-    }
-
 }
