@@ -44,7 +44,6 @@ public class OI extends TOi {
 
     private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
     private double		    shooterSpeed = 0;
-
     private double          carouselSpeed = 0;
     private double          towerSpeed = 0;
 
@@ -141,6 +140,22 @@ public class OI extends TOi {
     }
 
     public double getShooterSpeed() {
+        return shooterSpeed;
+    }
+
+    /**
+     * This command is used to override the shooter speed to a preset value;
+     * @param shooterSpeed
+     */
+    public void setShooterSpeed(double shooterSpeed) {
+        this.shooterSpeed = shooterSpeed;
+    }
+
+    /**
+     * This routine is called by the update periodic to set the
+     * shooter speed.
+     */
+    public double updateShooterSpeed() {
 
         if (driverController.getButton(TTrigger.LEFT)) {
             shooterSpeed = 0;
@@ -166,14 +181,6 @@ public class OI extends TOi {
         return shooterSpeed;
     }
 
-    /**
-     * This command is used to override the shooter speed to a preset value;
-     * @param shooterSpeed
-     */
-    public void setShooterSpeed(double shooterSpeed) {
-        this.shooterSpeed = shooterSpeed;
-    }
-
     public boolean runShooterBB() {
         //        if (driverController.getButton(TButton.A)) {
         //            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
@@ -181,6 +188,10 @@ public class OI extends TOi {
         //        }
         return false;
     }
+
+    /* *********************************************************************
+     * Intake Controls
+     * *********************************************************************/
 
     /**
      * Start the feeder station intake
@@ -215,9 +226,12 @@ public class OI extends TOi {
         return false;
     }
 
-    /*
-     * Carousel Subsystem commands
-     */
+    /* *********************************************************************
+     * Carousel Controls
+     *
+     * NOTE: Carousel is currently tied to the intake buttons
+     * *********************************************************************/
+
     public boolean runIntakeCarousel() {
         if (       driverController.getButton(TButton.A)
                 || driverController.getButton(TButton.Y)) {
@@ -227,11 +241,12 @@ public class OI extends TOi {
     }
 
     public boolean runShooterCarousel() {
-        if(driverController.getPOV() == 180) {
+        if(driverController.getButton(TButton.B)) {
             return true;
         }
         return false;
     }
+
     public boolean stopRunCarousel() {
         if(driverController.getButton(TButton.X)) {
             return true;
@@ -239,9 +254,12 @@ public class OI extends TOi {
         return false;
     }
 
-    /*
-     * Tower Subsystem commands
-     */
+    /* *********************************************************************
+     * Tower Controls
+     *
+     * NOTE: Tower is currently linked to the intake buttons
+     * *********************************************************************/
+
     public boolean runIntakeTower() {
         if (       driverController.getButton(TButton.A)
                 || driverController.getButton(TButton.Y)) {
@@ -271,6 +289,7 @@ public class OI extends TOi {
         compressorToggle.updatePeriodic();
         speedPidToggle.updatePeriodic();
         driverRumble.updatePeriodic();
+        updateShooterSpeed();
 
         // Update all SmartDashboard values
         SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());
