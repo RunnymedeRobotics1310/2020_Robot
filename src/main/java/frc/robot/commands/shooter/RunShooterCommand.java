@@ -3,11 +3,8 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
-import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  *

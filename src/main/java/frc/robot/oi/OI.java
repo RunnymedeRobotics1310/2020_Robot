@@ -11,7 +11,6 @@ import com.torontocodingcollective.oi.TToggle;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
-import frc.robot.RobotConst;
 
 /**
  * This class is the glue that binds the controls on the physical operator

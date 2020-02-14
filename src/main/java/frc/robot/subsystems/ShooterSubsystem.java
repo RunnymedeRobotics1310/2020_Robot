@@ -4,16 +4,12 @@ import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
-import com.torontocodingcollective.subsystem.TDriveSubsystem.TSide;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
-import frc.robot.Robot;
-import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter.DefaultShooterCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
