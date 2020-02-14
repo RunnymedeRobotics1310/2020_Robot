@@ -17,7 +17,9 @@ public class ShooterSubsystem extends TSubsystem {
 
 	Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
 	Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
-	TSpeedController shooterMotor = new TCanSpeedController(RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS); 
+	TSpeedController shooterMotor = new TCanSpeedController(
+			RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS,
+			RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_TYPE,  RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_ADDRESS, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ISINVERTED);
     private HoodPosition curHoodPosition;
     TEncoder shooterEncoder = shooterMotor.getEncoder();
     
@@ -77,9 +79,7 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
         SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
-
-   
-
+		SmartDashboard.putNumber( "Shooter Encoder Speed", shooterEncoder.getRate());
     }
 
 }

@@ -3,22 +3,26 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import frc.robot.HoodPosition;
 import frc.robot.Robot;
 
 /**
  *
  */
-public class StopShooterCommand extends TSafeCommand {
+public class SetHoodCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
 			DefaultShooterCommand.class.getSimpleName();
 
-	public StopShooterCommand() {
+	private HoodPosition hoodPosition;
+	public SetHoodCommand(HoodPosition hoodPosition) {
+
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
+		this.hoodPosition = hoodPosition;
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.shooterSubsystem);
+		requires(Robot.carouselSubsystem);
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class StopShooterCommand extends TSafeCommand {
 			logMessage(getParmDesc() + " starting");
 		}
 
-		Robot.shooterSubsystem.stopShooterMotor();
+		Robot.shooterSubsystem.setHoodPosition(hoodPosition);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
