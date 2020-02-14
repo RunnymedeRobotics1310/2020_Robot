@@ -147,32 +147,41 @@ public class OI extends TOi {
 	}**/
 
 	public boolean runShooterBB() {
-		if (driverController.getButton(TButton.A)) {
-			shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
+        //        if (driverController.getButton(TButton.A)) {
+        //            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
+        //            return true;
+        //        }
+        return false;
+    }
+
+    /**
+     * Start the feeder station intake
+     */
+    public boolean runFeederIntake() {
+
+        if(driverController.getButton(TButton.Y)) {
 			return true;
 		}
 		return false;
 	}
 
+    /**
+     * Start the ground intake
+     */
 	public boolean runGroundIntake() {
-		if(driverController.getButton(TButton.X)) {
-			return true;
-
-		}
-		return false;
-	}
-
-	public boolean runFeederIntake() {
-		if(driverController.getButton(TButton.A)) {
-
+	    
+        if(driverController.getButton(TButton.A)) {
 			return true;
 		}
 		return false;
 	}
 
+    /**
+     * Stop the intake
+     */
+    public boolean stopIntake() {
 
-	public boolean stopIntake() {
-		if (driverController.getButton(TButton.Y)) {
+        if (driverController.getButton(TButton.X)) {
 			return true;
 		}
 		return false;
