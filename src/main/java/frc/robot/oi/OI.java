@@ -8,6 +8,7 @@ import com.torontocodingcollective.oi.TRumbleManager;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
@@ -115,36 +116,51 @@ public class OI extends TOi {
 
 	public HoodPosition getHoodPosition() {
 
-		//	        if (driverController.getButton(TButton.A)) {
-		//	            previousHoodPosition = HoodPosition.CLOSE;
-		//	        }
-		//	        if(driverController.getButton(TButton.B)) {
-		//	            previousHoodPosition = HoodPosition.MEDIUM;
-		//	        }
-		//	        if(driverController.getButton(TButton.Y)) {
-		//	            previousHoodPosition = HoodPosition.FAR;
-		//	        }
+        if (driverController.getPOV() == 180) {
+            previousHoodPosition = HoodPosition.CLOSE;
+        }
+        if(driverController.getPOV() == 90 || driverController.getPOV() == 270) {
+            previousHoodPosition = HoodPosition.MEDIUM;
+        }
+        if(driverController.getPOV() == 0) {
+            previousHoodPosition = HoodPosition.FAR;
+        }
 		return previousHoodPosition;
+    }
 
+    public boolean stopShooter() {
+        if(driverController.getButton(TTrigger.LEFT)) {
+            return true;
+        }
+        return false;
+    }
 
-	}
+    public double getShooterSpeed() {
 
-	/**public double getShooterSpeed() {
+        if (driverController.getButton(TTrigger.LEFT)) {
+            shooterSpeed = 0;
+        }
 
+        if (driverController.getButton(TTrigger.RIGHT)) {
+            shooterSpeed = 0.5;
+        }
 
 		if (driverController.getButton(TButton.LEFT_BUMPER)) {
 			shooterSpeed = shooterSpeed - 0.005;
-			if (shooterSpeed<0)
+			if (shooterSpeed < 0) {
 				shooterSpeed = 0;
+			}
 		}
+		
 		if(driverController.getButton(TButton.RIGHT_BUMPER)) {
 			shooterSpeed = shooterSpeed + 0.005;
-			if (shooterSpeed>1)
+			if (shooterSpeed > 1) {
 				shooterSpeed = 1;
+			}
 		}
 		return shooterSpeed;
-	}**/
-
+	}
+    
 	public boolean runShooterBB() {
         //        if (driverController.getButton(TButton.A)) {
         //            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
