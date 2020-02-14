@@ -49,7 +49,7 @@ public class DefaultTowerCommand extends TSafeCommand {
             return;
         }
 
-        if (Robot.oi.stopRunTower()) {
+        if (Robot.oi.stopTower()) {
             Scheduler.getInstance().add(new StopTowerCommand());
         }
         

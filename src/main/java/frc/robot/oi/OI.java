@@ -101,7 +101,8 @@ public class OI extends TOi {
 
     @Override
     public int getRotateToHeading() {
-        return driverController.getPOV();
+        // return driverController.getPOV();
+        return -1;
     }
 
     @Override
@@ -155,7 +156,7 @@ public class OI extends TOi {
      * This routine is called by the update periodic to set the
      * shooter speed.
      */
-    public double updateShooterSpeed() {
+    public void updateShooterSpeed() {
 
         if (driverController.getButton(TTrigger.LEFT)) {
             shooterSpeed = 0;
@@ -178,7 +179,6 @@ public class OI extends TOi {
                 shooterSpeed = 1;
             }
         }
-        return shooterSpeed;
     }
 
     public boolean runShooterBB() {
@@ -247,7 +247,7 @@ public class OI extends TOi {
         return false;
     }
 
-    public boolean stopRunCarousel() {
+    public boolean stopCarousel() {
         if(driverController.getButton(TButton.X)) {
             return true;
         }
@@ -275,7 +275,7 @@ public class OI extends TOi {
         return false;
     }
 
-    public boolean stopRunTower() {
+    public boolean stopTower() {
         if(driverController.getButton(TButton.X)) {
             return true;
         }
@@ -289,6 +289,8 @@ public class OI extends TOi {
         compressorToggle.updatePeriodic();
         speedPidToggle.updatePeriodic();
         driverRumble.updatePeriodic();
+
+        // Update the shooter from the buttons
         updateShooterSpeed();
 
         // Update all SmartDashboard values

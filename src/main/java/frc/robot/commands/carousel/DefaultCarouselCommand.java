@@ -48,7 +48,7 @@ public class DefaultCarouselCommand extends TSafeCommand {
             return;
         }
 
-        if (Robot.oi.stopRunCarousel()) {
+        if (Robot.oi.stopCarousel()) {
             Scheduler.getInstance().add(new StopCarouselCommand());
         }
 
