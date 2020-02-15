@@ -88,19 +88,19 @@ public class RobotMap {
             LEFT_DRIVE_SPEED_CONTROLLER_TYPE                  = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_CAN_ADDRESS  = 11;
             LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            LEFT_DRIVE_MOTOR_ISINVERTED                       = TConst.INVERTED;
-            LEFT_DRIVE_ENCODER_ISINVERTED                     = TConst.INVERTED;
+            LEFT_DRIVE_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
+            LEFT_DRIVE_ENCODER_ISINVERTED                     = TConst.NOT_INVERTED;
 
             RIGHT_DRIVE_SPEED_CONTROLLER_ADDRESS              = 20;
             RIGHT_DRIVE_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_ADDRESS     = 21;
             RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE        = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            RIGHT_DRIVE_MOTOR_ISINVERTED                      = TConst.NOT_INVERTED;
-            RIGHT_DRIVE_ENCODER_ISINVERTED                    = TConst.NOT_INVERTED;
+            RIGHT_DRIVE_MOTOR_ISINVERTED                      = TConst.INVERTED;
+            RIGHT_DRIVE_ENCODER_ISINVERTED                    = TConst.INVERTED;
 
             INTAKE_TOP_MOTOR_CAN_SPEED_CONTROLLER_CAN_ADDRESS = 30;
             INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
+            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.INVERTED;
 
             INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS  = 31;
             INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
@@ -113,14 +113,14 @@ public class RobotMap {
 
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
-            TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+            TOWER_MOTOR_ISINVERTED                            = TConst.INVERTED;
 
             SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS                = 51;
             SHOOTER_SPEED_FOLLOWER_TYPE                       = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            SHOOTER_MOTOR_ISINVERTED                          = TConst.NOT_INVERTED;
-            SHOOTER_ENCODER_ISINVERTED                        = TConst.NOT_INVERTED;
+            SHOOTER_MOTOR_ISINVERTED                          = TConst.INVERTED;
+            SHOOTER_ENCODER_ISINVERTED                        = TConst.INVERTED;
 
             GYRO_ANALOG_PORT                                  = 0; // Not used
             GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;

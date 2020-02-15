@@ -111,10 +111,9 @@ public class OI extends TOi {
 
             if (testMode == TestMode.NONE) {
                 testSpeed = 0;
-                return;
             }
 
-            if (!DriverStation.getInstance().isDisabled()) {
+            if (DriverStation.getInstance().isDisabled()) {
                 testSpeed = 0;
                 testMode = TestMode.NONE;
                 return;

@@ -20,8 +20,12 @@ public class ShooterSubsystem extends TSubsystem {
     private TSpeedController shooterMotor =
             new TCanSpeedController(
                     RobotMap.SHOOTER_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS,
-                    RobotMap.SHOOTER_SPEED_FOLLOWER_TYPE,   RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS,
                     RobotMap.SHOOTER_MOTOR_ISINVERTED);
+
+    private TSpeedController shooterFollowerMotor =
+            new TCanSpeedController(
+                    RobotMap.SHOOTER_SPEED_FOLLOWER_TYPE, RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS,
+                    !RobotMap.SHOOTER_MOTOR_ISINVERTED);
 
     private TEncoder shooterEncoder = shooterMotor.getEncoder(RobotMap.SHOOTER_ENCODER_ISINVERTED);
 
@@ -65,6 +69,7 @@ public class ShooterSubsystem extends TSubsystem {
         }
         else {
             shooterMotor.set(speed);
+            shooterFollowerMotor.set(speed);
         }
     }
 
@@ -77,6 +82,7 @@ public class ShooterSubsystem extends TSubsystem {
 
     public void stopShooterMotor() {
         shooterMotor.set(0);
+        shooterFollowerMotor.set(0);
     }
 
     public double getShooterEncoderSpeed() {
@@ -114,6 +120,7 @@ public class ShooterSubsystem extends TSubsystem {
                 shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
             }
             shooterMotor.set(shooterPid.get());
+            shooterFollowerMotor.set(shooterPid.get());
         }
 
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
