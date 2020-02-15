@@ -45,8 +45,6 @@ public class OI extends TOi {
 
     private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
     private double		    shooterSpeed = 0;
-    private double          carouselSpeed = 0;
-    private double          towerSpeed = 0;
 
     private TToggle         testModeToggle   = new TToggle();
 
