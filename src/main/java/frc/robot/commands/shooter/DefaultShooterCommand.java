@@ -3,9 +3,10 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.oi.OI.TestMode;
 
 /**
  *
@@ -45,12 +46,33 @@ public class DefaultShooterCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
+        if (Robot.oi.isTestModeEnabled()) {
+
+            if (Robot.oi.getTestMode() == TestMode.SHOOTER) {
+
+                // When testing the shooter, enable the hood position pistons
+                HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
+                Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
+
+                Robot.shooterSubsystem.setShooterMotorSpeed(Robot.oi.getTestMotorSpeed());
+            }
+            else {
+                Robot.shooterSubsystem.stopShooterMotor();
+            }
+            // If in test mode, then do not look for other buttons
+            return;
+        }
+
+        // Set the hood position even when in test mode
         HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
-        
-        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
-        Robot.shooterSubsystem.setShooterSpeed(userSelectedShooterSpeed);
 
+        if (Robot.oi.runShooterBB()) {
+            Scheduler.getInstance().add(new BangBangShooterCommand());
+        }
+
+        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
+        Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

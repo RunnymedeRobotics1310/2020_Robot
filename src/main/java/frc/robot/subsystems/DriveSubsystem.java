@@ -2,11 +2,10 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.sensors.gyro.TAnalogGyro;
+import com.torontocodingcollective.sensors.gyro.TNavXGyro;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.subsystem.TGyroDriveSubsystem;
 
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.DefaultDriveCommand;
@@ -19,33 +18,29 @@ import frc.robot.commands.drive.DefaultDriveCommand;
  */
 public class DriveSubsystem extends TGyroDriveSubsystem {
 
-    private static final boolean LOW_GEAR     = false;
-    private static final boolean HIGH_GEAR    = true;
-
-    private Solenoid             shifter      = new Solenoid(RobotMap.SHIFTER_PNEUMATIC_PORT);
-    private boolean              turboEnabled = false;
-
     public DriveSubsystem() {
 
         super(
                 // Left Speed Controller
                 new TCanSpeedController(
-                        RobotMap.LEFT_DRIVE_CAN_SPEED_CONTROLLER_TYPE,
-                        RobotMap.LEFT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS,
-                        RobotMap.LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE,
-                        RobotMap.LEFT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS,
-                        RobotMap.LEFT_DRIVE_CAN_MOTOR_ISINVERTED),
+                        RobotMap.LEFT_DRIVE_SPEED_CONTROLLER_TYPE,
+                        RobotMap.LEFT_DRIVE_SPEED_CONTROLLER_CAN_ADDRESS,
+                        RobotMap.LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE,
+                        RobotMap.LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_CAN_ADDRESS,
+                        RobotMap.LEFT_DRIVE_MOTOR_ISINVERTED),
 
                 // Right Speed Controller
                 new TCanSpeedController(
-                        RobotMap.RIGHT_DRIVE_CAN_SPEED_CONTROLLER_TYPE,
-                        RobotMap.RIGHT_DRIVE_CAN_SPEED_CONTROLLER_ADDRESS,
-                        RobotMap.RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_TYPE,
-                        RobotMap.RIGHT_DRIVE_CAN_FOLLOWER_SPEED_CONTROLLER_ADDRESS,
-                        RobotMap.RIGHT_DRIVE_CAN_MOTOR_ISINVERTED),
+                        RobotMap.RIGHT_DRIVE_SPEED_CONTROLLER_TYPE,
+                        RobotMap.RIGHT_DRIVE_SPEED_CONTROLLER_ADDRESS,
+                        RobotMap.RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE,
+                        RobotMap.RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_ADDRESS,
+                        RobotMap.RIGHT_DRIVE_MOTOR_ISINVERTED),
 
                 // Gyro used for this subsystem
-                new TAnalogGyro(RobotMap.GYRO_PORT, RobotMap.GYRO_ISINVERTED),
+                ((RobotConst.robot == RobotConst.TEST_ROBOT) ?
+                        new TAnalogGyro(RobotMap.GYRO_ANALOG_PORT, RobotMap.GYRO_ISINVERTED) :
+                            new TNavXGyro(RobotMap.GYRO_ISINVERTED) ) ,
 
                 // Gyro PID Constants
                 RobotConst.DRIVE_GYRO_PID_KP,
@@ -57,17 +52,16 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
         TEncoder rightEncoder = getSpeedController(TSide.RIGHT).getEncoder();
 
         super.setEncoders(
-                leftEncoder,  RobotMap.LEFT_DRIVE_CAN_MOTOR_ISINVERTED,
-                rightEncoder, RobotMap.RIGHT_DRIVE_CAN_MOTOR_ISINVERTED,
+                leftEncoder,  RobotMap.LEFT_DRIVE_MOTOR_ISINVERTED,
+                rightEncoder, RobotMap.RIGHT_DRIVE_MOTOR_ISINVERTED,
                 RobotConst.ENCODER_COUNTS_PER_INCH,
-                20,
+                RobotConst.DRIVE_SPEED_PID_KP,
                 RobotConst.DRIVE_SPEED_PID_KI,
-                10000);
+                RobotConst.MAX_DRIVE_ENCODER_SPEED);
     }
 
     @Override
     public void init() {
-        shifter.set(LOW_GEAR);
     }
 
     // Initialize the default command for the Chassis subsystem.
@@ -75,31 +69,4 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultDriveCommand());
     }
-
-    // ********************************************************************************************************************
-    // Turbo routines
-    // ********************************************************************************************************************
-    public void enableTurbo() {
-        turboEnabled = true;
-        setMaxEncoderSpeed(RobotConst.MAX_HIGH_GEAR_SPEED);
-        shifter.set(HIGH_GEAR);
-    }
-
-    public void disableTurbo() {
-        turboEnabled = false;
-        setMaxEncoderSpeed(RobotConst.MAX_LOW_GEAR_SPEED);
-        shifter.set(LOW_GEAR);
-    }
-
-    public boolean isTurboEnabled() {
-        return turboEnabled;
-    }
-
-    @Override
-    public void updatePeriodic() {
-        super.updatePeriodic();
-
-        SmartDashboard.putBoolean("Turbo Enabled", isTurboEnabled());
-    }
-
 }

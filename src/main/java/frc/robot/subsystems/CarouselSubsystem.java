@@ -1,54 +1,69 @@
 package frc.robot.subsystems;
 
+import com.torontocodingcollective.sensors.limitSwitch.TLimitSwitch;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import frc.robot.RobotConst;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.climb.DefaultClimbCommand;
+import frc.robot.commands.carousel.DefaultCarouselCommand;
 
 /**
  *
  */
 public class CarouselSubsystem extends TSubsystem {
 
-    TSpeedController carouselMotor = new TCanSpeedController(RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS);
-	
+    TSpeedController carouselMotor =
+            new TCanSpeedController(
+                    RobotMap.CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.CAROUSEL_MOTOR_ISINVERTED);
+
+    TLimitSwitch carouselFilled = new TLimitSwitch (RobotMap.CAROUSEL_BALL_DETECT_DIO_PORT);
+
     @Override
-	public void init() {
+    public void init() {
 
-	}
+    }
 
-	public void disableCompressor() {
+    public void setCarouselMotorSpeed (double speed) {
+        carouselMotor.set(speed);
+    }
 
-	}
+    public void stopCarouselMotor () {
+        carouselMotor.set(0);
+    }
 
-	public void enableCompressor() {
+    public boolean isRobotFull() {
 
-	}
-	
-	public void spinIntake () {
-	    carouselMotor.set(RobotConst.CAROUSEL_INTAKE_SPEED);
-	}
-	
-	public void spinShooter () {
-	    carouselMotor.set(RobotConst.CAROUSEL_SHOOTER_SPEED);
-	}
-	
-	public void spinStop () {
-	    carouselMotor.set(0);
-	}
+        if (isCarouselFull() == true && Robot.towerSubsystem.isTowerFull() == true){
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	protected void initDefaultCommand() {
-		//(new DefaultClimbCommand());
-	}
+    public boolean isCarouselFull() {
 
-	// Periodically update the dashboard and any PIDs or sensors
-	@Override
-	public void updatePeriodic() {
+        if (carouselFilled.atLimit()) {
+            return true;
+        }
+        return false;
+    }
 
-	}
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new DefaultCarouselCommand());
+    }
+
+    // Periodically update the dashboard and any PIDs or sensors
+    @Override
+    public void updatePeriodic() {
+        SmartDashboard.putNumber("Carousel Speed", carouselMotor.get());
+        SmartDashboard.putBoolean("Carousel Filled", isCarouselFull());
+        SmartDashboard.putBoolean("Robot Filled", isRobotFull());
+
+    }
 
 }

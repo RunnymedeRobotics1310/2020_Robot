@@ -5,7 +5,7 @@ import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.RobotConst;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.intake.DefaultIntakeCommand;
 
@@ -14,58 +14,72 @@ import frc.robot.commands.intake.DefaultIntakeCommand;
  */
 public class IntakeSubsystem extends TSubsystem {
 
-	TSpeedController firstMotor = new TCanSpeedController(RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS);
-	TSpeedController secondMotor = new TCanSpeedController(RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS);
+    TSpeedController topRollerMotor =
+            new TCanSpeedController(
+                    RobotMap.INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.INTAKE_TOP_MOTOR_CAN_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.INTAKE_TOP_MOTOR_ISINVERTED);
 
-	Solenoid intakePiston = new Solenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT);
+    TSpeedController bottomRollerMotor =
+            new TCanSpeedController(
+                    RobotMap.INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.INTAKE_BOTTOM_MOTOR_ISINVERTED);
 
-	@Override
-	public void init() {
+    Solenoid intakePiston = new Solenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT);
 
-	}
+    @Override
+    public void init() {
 
-	public void disableCompressor() {
+    }
 
-	}
+    public void setIntakeSpeed (double topSpeed, double bottomSpeed) {
+        topRollerMotor.set(topSpeed);
+        bottomRollerMotor.set(bottomSpeed);
+    }
 
-	public void enableCompressor() {
+    public void stopIntake() {
 
-	}
+        topRollerMotor.set(0);
+        bottomRollerMotor.set(0);
 
-	public void startGroundIntake() {
-		firstMotor.set(RobotConst.INTAKE_SPEED);
-		secondMotor.set(RobotConst.INTAKE_SPEED);
-	}
+        retractIntake();
+    }
 
-	public void startFeederIntake() {
-		firstMotor.set(-RobotConst.INTAKE_SPEED);
-		secondMotor.set(RobotConst.INTAKE_SPEED);
-	}
+    public boolean intakeRunning() {
 
-	public void stopIntake() {
-		firstMotor.set(0);
-		secondMotor.set(0);
+        if (topRollerMotor.get() > 0) {
+            return true;
+        }
 
-		retractInake();
-	}
+        if (bottomRollerMotor.get() > 0) {
+            return true;
+        }
+        return false;
 
-	public void extendIntake() {
-		intakePiston.set(true);;
-	}
+    }
 
-	public void retractInake() {
-		intakePiston.set(false);
-	}
 
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new DefaultIntakeCommand());
-	}
+    public void extendIntake() {
+        intakePiston.set(true);;
+    }
 
-	// Periodically update the dashboard and any PIDs or sensors
-	@Override
-	public void updatePeriodic() {
+    public void retractIntake() {
+        intakePiston.set(false);
+    }
 
-	}
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new DefaultIntakeCommand());
+    }
+
+    // Periodically update the dashboard and any PIDs or sensors
+    @Override
+    public void updatePeriodic() {
+        SmartDashboard.putBoolean("Intake Piston Extend", intakePiston.get());
+        SmartDashboard.putNumber("Intake Top Roller Speed", topRollerMotor.get());
+        SmartDashboard.putNumber("Intake Bottom Roller Speed", bottomRollerMotor.get());
+        SmartDashboard.putData("Intake Subsystem", this);
+    }
 
 }

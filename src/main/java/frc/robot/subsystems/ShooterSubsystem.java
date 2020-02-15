@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.torontocodingcollective.pid.TSpeedPID;
+import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
@@ -7,23 +9,46 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
+import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter.DefaultShooterCommand;
-
 /**
  *
  */
 public class ShooterSubsystem extends TSubsystem {
 
-	Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
-	Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
-	TSpeedController shooter = new TCanSpeedController(RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS); 
+    private TSpeedController shooterMotor =
+            new TCanSpeedController(
+                    RobotMap.SHOOTER_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.SHOOTER_MOTOR_ISINVERTED);
+
+    private TSpeedController shooterFollowerMotor =
+            new TCanSpeedController(
+                    RobotMap.SHOOTER_SPEED_FOLLOWER_TYPE, RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS,
+                    !RobotMap.SHOOTER_MOTOR_ISINVERTED);
+
+    private TEncoder shooterEncoder = shooterMotor.getEncoder(RobotMap.SHOOTER_ENCODER_ISINVERTED);
+
+    private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
+    private Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
+
     private HoodPosition curHoodPosition;
+
+    private TSpeedPID shooterPid = new TSpeedPID(RobotConst.SHOOTER_SPEED_PID_KP, RobotConst.SHOOTER_SPEED_PID_KI);
+
+    private boolean shooterPidEnabled = true;
 
     @Override
     public void init() {
         // FIXME: Set the initial position to the value at robot setup.
         curHoodPosition = HoodPosition.CLOSE;
+
+        if (shooterPidEnabled) {
+            shooterPid.enable();
+        }
+        else {
+            shooterPid.disable();
+        }
     };
 
 
@@ -36,13 +61,36 @@ public class ShooterSubsystem extends TSubsystem {
      * Set the speed on the shooter
      *
      * @param speed value 0 (stopped) to 1.0 (full speed)
-     */
-    public void setShooterSpeed(double speed) {
-    	
-    	shooter.set(speed);
+     **/
 
+    public void setShooterMotorSpeed(double speed) {
+        if (shooterPid.isEnabled()) {
+            shooterPid.setSetpoint(speed);
+        }
+        else {
+            shooterMotor.set(speed);
+            shooterFollowerMotor.set(speed);
+        }
     }
 
+    public boolean isShooterRunning() {
+        if(shooterMotor.get() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void stopShooterMotor() {
+        shooterMotor.set(0);
+        shooterFollowerMotor.set(0);
+    }
+
+    public double getShooterEncoderSpeed() {
+        if (shooterEncoder == null) {
+            return 0;
+        }
+        return shooterEncoder.getRate();
+    }
     public void setHoodPosition(HoodPosition hoodPosition) {
 
         switch (hoodPosition) {
@@ -66,10 +114,22 @@ public class ShooterSubsystem extends TSubsystem {
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
+
+        if (shooterPid.isEnabled()) {
+            if (shooterEncoder != null) {
+                shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
+            }
+            shooterMotor.set(shooterPid.get());
+            shooterFollowerMotor.set(shooterPid.get());
+        }
+
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
-        SmartDashboard.putNumber( "Shooter Speed", shooter.get());
+        SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
+        SmartDashboard.putNumber( "Shooter Encoder Speed", getShooterEncoderSpeed());
+        SmartDashboard.putData("Shooter PID", shooterPid);
+        SmartDashboard.putNumber("Shooter PID Output", shooterPid.get());
     }
 
 }

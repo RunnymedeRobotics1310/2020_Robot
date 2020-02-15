@@ -1,4 +1,4 @@
-package frc.robot.commands.tower;
+package frc.robot.commands.carousel;
 
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
@@ -10,17 +10,17 @@ import frc.robot.oi.OI.TestMode;
 /**
  *
  */
-public class DefaultTowerCommand extends TSafeCommand {
+public class DefaultCarouselCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultTowerCommand.class.getSimpleName();
+            DefaultCarouselCommand.class.getSimpleName();
 
-    public DefaultTowerCommand() {
+    public DefaultCarouselCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.towerSubsystem);
+        requires(Robot.carouselSubsystem);
     }
 
     @Override
@@ -46,37 +46,32 @@ public class DefaultTowerCommand extends TSafeCommand {
     protected void execute() {
 
         if (Robot.oi.isTestModeEnabled()) {
-            if (Robot.oi.getTestMode() == TestMode.TOWER) {
-                Robot.towerSubsystem.setTowerMotorSpeed(Robot.oi.getTestMotorSpeed());
+            if (Robot.oi.getTestMode() == TestMode.CAROUSEL) {
+                Robot.carouselSubsystem.setCarouselMotorSpeed(Robot.oi.getTestMotorSpeed());
             }
             else {
-                Robot.towerSubsystem.stopTowerMotor();
+                Robot.carouselSubsystem.stopCarouselMotor();
             }
             // If in test mode, then do not look for other buttons
             return;
         }
 
-        // Always shoot before stopping at the sensor
-        if (Robot.oi.runShooterTower()) {
-            if (Robot.shooterSubsystem.isShooterRunning()) {
-                Scheduler.getInstance().add(new ShooterTowerCommand());
-            }
-        }
-
-        // Always check for shooting first ^^^
-        if (Robot.towerSubsystem.isTowerFull()) {
-            Robot.towerSubsystem.stopTowerMotor();
+        if (Robot.carouselSubsystem.isRobotFull()) {
+            Robot.carouselSubsystem.stopCarouselMotor();
             return;
         }
 
-        if (Robot.oi.stopTower()) {
-            Scheduler.getInstance().add(new StopTowerCommand());
+        if (Robot.oi.stopCarousel()) {
+            Scheduler.getInstance().add(new StopCarouselCommand());
         }
 
-        if (Robot.oi.runIntakeTower()) {
-            Scheduler.getInstance().add(new IntakeTowerCommand());
+        if (Robot.oi.runIntakeCarousel()) {
+            Scheduler.getInstance().add(new IntakeCarouselCommand());
         }
 
+        if (Robot.oi.runShooterCarousel()) {
+            Scheduler.getInstance().add(new ShooterCarouselCommand());
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

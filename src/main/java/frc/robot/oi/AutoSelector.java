@@ -31,7 +31,6 @@ public class AutoSelector {
         pattern.addOption(PICK_UP_2_SHOOT_5_PICK_UP_3_SHOOT_3, PICK_UP_2_SHOOT_5_PICK_UP_3_SHOOT_3);
 
 
-
         SmartDashboard.putData("Auto Pattern", pattern);
     }
 

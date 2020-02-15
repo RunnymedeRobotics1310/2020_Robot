@@ -17,33 +17,24 @@
             ],
             "content": {
               "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Robot Start",
-              "_title": "Robot Start"
+              "_source0": "network_table:///SmartDashboard/Auto Pattern",
+              "_title": "Auto Pattern"
             }
           },
           "1,0": {
             "size": [
               2,
-              3
+              2
             ],
             "content": {
-              "_type": "PID Controller",
-              "_source0": "network_table:///SmartDashboard/RightPid",
-              "_title": "RightPid"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Compressor Toggle",
+              "_title": "Compressor Toggle",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
           "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto Pattern",
-              "_title": "Auto Pattern"
-            }
-          },
-          "4,0": {
             "size": [
               1,
               1
@@ -54,40 +45,7 @@
               "_title": "Single Stick Side"
             }
           },
-          "5,0": {
-            "size": [
-              2,
-              3
-            ],
-            "content": {
-              "_type": "PID Controller",
-              "_source0": "network_table:///SmartDashboard/Gyro PID",
-              "_title": "Gyro PID"
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/LimelightArea",
-              "_title": "LimelightArea"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Color",
-              "_title": "Color"
-            }
-          },
-          "9,0": {
+          "4,0": {
             "size": [
               1,
               1
@@ -98,7 +56,189 @@
               "_title": "Drive Type"
             }
           },
+          "5,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Speed PID Toggle",
+              "_title": "Speed PID Toggle",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Driver Controller",
+              "_title": "Driver Controller"
+            }
+          },
+          "8,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Test Mode Enabled",
+              "_title": "Test Mode Enabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
           "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Test Mode",
+              "_title": "Test Mode"
+            }
+          },
+          "11,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Test Motor Speed",
+              "_title": "Test Motor Speed"
+            }
+          },
+          "12,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro Steering",
+              "_title": "Gyro Steering"
+            }
+          },
+          "13,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L Enc Dist",
+              "_title": "L Enc Dist"
+            }
+          },
+          "14,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L Enc Speed",
+              "_title": "L Enc Speed"
+            }
+          },
+          "15,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R Enc Dist",
+              "_title": "R Enc Dist"
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R Enc Speed",
+              "_title": "R Enc Speed"
+            }
+          },
+          "3,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AvgEnc Dist",
+              "_title": "AvgEnc Dist"
+            }
+          },
+          "4,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AvgEnc Speed",
+              "_title": "AvgEnc Speed"
+            }
+          },
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Dist Inches",
+              "_title": "Dist Inches"
+            }
+          },
+          "10,1": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Speed PIDs Active",
+              "_title": "Speed PIDs Active",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "12,1": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/LeftPid",
+              "_title": "LeftPid"
+            }
+          },
+          "14,1": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/RightPid",
+              "_title": "RightPid"
+            }
+          },
+          "0,2": {
             "size": [
               1,
               1
@@ -109,19 +249,18 @@
               "_title": "Left Output"
             }
           },
-          "11,0": {
+          "1,2": {
             "size": [
-              4,
-              3
+              1,
+              1
             ],
             "content": {
-              "_type": "PDP",
-              "_source0": "network_table:///SmartDashboard/PDP",
-              "_title": "PDP",
-              "Visuals/Show voltage and current values": true
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Output",
+              "_title": "Right Output"
             }
           },
-          "3,1": {
+          "2,2": {
             "size": [
               2,
               2
@@ -136,77 +275,7 @@
               "Visuals/Counter clockwise": false
             }
           },
-          "15,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Driver Controller",
-              "_title": "Driver Controller"
-            }
-          },
-          "7,1": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Driver rumble",
-              "_title": "Driver rumble",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro Steering",
-              "_title": "Gyro Steering"
-            }
-          },
-          "9,1": {
-            "size": [
-              2,
-              3
-            ],
-            "content": {
-              "_type": "PID Controller",
-              "_source0": "network_table:///SmartDashboard/LeftPid",
-              "_title": "LeftPid"
-            }
-          },
-          "0,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Speed PID Toggle",
-              "_title": "Speed PID Toggle",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "15,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/R Enc Dist",
-              "_title": "R Enc Dist"
-            }
-          },
-          "0,2": {
+          "4,2": {
             "size": [
               1,
               1
@@ -217,108 +286,18 @@
               "_title": "Gyro Angle"
             }
           },
-          "2,3": {
+          "5,2": {
             "size": [
               2,
-              2
+              3
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Compressor Toggle",
-              "_title": "Compressor Toggle",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/Gyro PID",
+              "_title": "Gyro PID"
             }
           },
-          "15,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/R Enc Speed",
-              "_title": "R Enc Speed"
-            }
-          },
-          "4,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/LimelightX",
-              "_title": "LimelightX"
-            }
-          },
-          "5,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/LimelightY",
-              "_title": "LimelightY"
-            }
-          },
-          "6,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Color Sensor(R, G, B)",
-              "_title": "Color Sensor(R, G, B)"
-            }
-          },
-          "7,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/L Enc Speed",
-              "_title": "L Enc Speed"
-            }
-          },
-          "8,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/AvgEnc Speed",
-              "_title": "AvgEnc Speed"
-            }
-          },
-          "11,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right Output",
-              "_title": "Right Output"
-            }
-          },
-          "12,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/AvgEnc Dist",
-              "_title": "AvgEnc Dist"
-            }
-          },
-          "13,3": {
+          "7,2": {
             "size": [
               2,
               2
@@ -331,31 +310,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,4": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Speed PIDs Active",
-              "_title": "Speed PIDs Active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "15,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/L Enc Dist",
-              "_title": "L Enc Dist"
-            }
-          },
-          "6,4": {
+          "0,3": {
             "size": [
               2,
               2
@@ -368,31 +323,133 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,4": {
+          "7,4": {
+            "size": [
+              4,
+              3
+            ],
+            "content": {
+              "_type": "PDP",
+              "_source0": "network_table:///SmartDashboard/PDP",
+              "_title": "PDP",
+              "Visuals/Show voltage and current values": true
+            }
+          },
+          "9,2": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Dist Inches",
-              "_title": "Dist Inches"
+              "_source0": "network_table:///SmartDashboard/LimelightX",
+              "_title": "LimelightX"
             }
           },
-          "9,4": {
+          "4,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/LimelightY",
+              "_title": "LimelightY"
+            }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/LimelightArea",
+              "_title": "LimelightArea"
+            }
+          },
+          "10,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hood Position",
+              "_title": "Hood Position"
+            }
+          },
+          "2,4": {
             "size": [
               2,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turbo Enabled",
-              "_title": "Turbo Enabled",
+              "_source0": "network_table:///SmartDashboard/Stopper",
+              "_title": "Stopper",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
           "11,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Deployer",
+              "_title": "Deployer",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Speed",
+              "_title": "Shooter Speed"
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Encoder Speed",
+              "_title": "Shooter Encoder Speed"
+            }
+          },
+          "13,4": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/Shooter PID",
+              "_title": "Shooter PID"
+            }
+          },
+          "15,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter PID Output",
+              "_title": "Shooter PID Output"
+            }
+          },
+          "0,5": {
             "size": [
               1,
               1
@@ -403,7 +460,7 @@
               "_title": "Color Sensor Color"
             }
           },
-          "12,4": {
+          "1,5": {
             "size": [
               1,
               1
@@ -414,15 +471,70 @@
               "_title": "Specified Target Color"
             }
           },
-          "15,4": {
+          "4,5": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Hood Position",
-              "_title": "Hood Position"
+              "_source0": "network_table:///SmartDashboard/Color Sensor(R, G, B)",
+              "_title": "Color Sensor(R, G, B)"
+            }
+          },
+          "5,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Tower Speed",
+              "_title": "Tower Speed"
+            }
+          },
+          "6,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake Top Roller Speed",
+              "_title": "Intake Top Roller Speed"
+            }
+          },
+          "15,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake Bottom Roller Speed",
+              "_title": "Intake Bottom Roller Speed"
+            }
+          },
+          "0,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Basic Subsystem",
+              "_source0": "network_table:///SmartDashboard/Intake Subsystem",
+              "_title": "Intake Subsystem"
+            }
+          },
+          "2,6": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Carousel Speed",
+              "_title": "Carousel Speed"
             }
           }
         }
@@ -445,15 +557,36 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/CameraSubsystem",
+              "_title": "CameraSubsystem",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "3,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
               "_source0": "network_table:///LiveWindow/Ungrouped",
               "_title": "Ungrouped",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
-                  "_type": "PDP",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistributionPanel[0]",
-                  "_title": "PowerDistributionPanel[0]",
-                  "Visuals/Show voltage and current values": true
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Enabled",
+                  "_title": "Compressor[0]/Enabled",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
+                  "_title": "Compressor[0]/Pressure switch",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "PID Controller",
@@ -461,9 +594,28 @@
                   "_title": "PIDController[1]"
                 },
                 {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,0]/Value",
+                  "_title": "Solenoid[0,0]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
                   "_type": "PID Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
                   "_title": "PIDController[2]"
+                },
+                {
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
+                  "_title": "PIDController[3]"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,1]/Value",
+                  "_title": "Solenoid[0,1]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Gyro",
@@ -476,44 +628,37 @@
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,0]/Value",
-                  "_title": "Solenoid[0,0]/Value",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,2]/Value",
+                  "_title": "Solenoid[0,2]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[0]/Value",
+                  "_title": "DigitalInput[0]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
+                  "_title": "DigitalInput[1]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "PDP",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistributionPanel[0]",
+                  "_title": "PowerDistributionPanel[0]",
+                  "Visuals/Show voltage and current values": true
                 },
                 {
                   "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
-                  "_title": "PIDController[3]"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
-                  "_title": "Compressor[0]/Pressure switch",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Enabled",
-                  "_title": "Compressor[0]/Enabled",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[4]",
+                  "_title": "PIDController[4]"
                 }
               ]
-            }
-          },
-          "3,0": {
-            "size": [
-              3,
-              5
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/PneumaticsSubsystem",
-              "_title": "PneumaticsSubsystem",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
             }
           },
           "6,0": {
@@ -523,8 +668,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/CanDriveSubsystem",
-              "_title": "CanDriveSubsystem",
+              "_source0": "network_table:///LiveWindow/TowerSubsystem",
+              "_title": "TowerSubsystem",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -536,8 +681,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/ColorSubsystem",
-              "_title": "ColorSubsystem",
+              "_source0": "network_table:///LiveWindow/IntakeSubsystem",
+              "_title": "IntakeSubsystem",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -549,8 +694,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/PowerSubsystem",
-              "_title": "PowerSubsystem",
+              "_source0": "network_table:///LiveWindow/ClimbSubsystem",
+              "_title": "ClimbSubsystem",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -559,7 +704,7 @@
       }
     },
     {
-      "title": "Shooter",
+      "title": "Drivers",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -568,15 +713,535 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "4,0": {
+          "3,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Gyro",
+              "_source0": "network_table:///SmartDashboard/Gyro",
+              "_title": "/SmartDashboard/Gyro",
+              "Visuals/Major tick spacing": 45.0,
+              "Visuals/Starting angle": 180.0,
+              "Visuals/Show tick mark ring": true,
+              "Visuals/Counter clockwise": false
+            }
+          },
+          "0,0": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Auto Pattern",
+              "_title": "/SmartDashboard/Auto Pattern"
+            }
+          },
+          "0,1": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Drive Type",
+              "_title": "/SmartDashboard/Drive Type"
+            }
+          },
+          "0,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Single Stick Side",
+              "_title": "/SmartDashboard/Single Stick Side"
+            }
+          },
+          "6,0": {
+            "size": [
+              6,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Driver Controller",
+              "_title": "/SmartDashboard/Driver Controller"
+            }
+          },
+          "12,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Driver rumble",
+              "_title": "/SmartDashboard/Driver rumble",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Robot Filled",
+              "_title": "/SmartDashboard/Robot Filled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Tower Filled",
+              "_title": "/SmartDashboard/Tower Filled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Chassis",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 100.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "6,5": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Dist Inches",
+              "_title": "/SmartDashboard/Dist Inches"
+            }
+          },
+          "4,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AvgEnc Dist",
+              "_title": "/SmartDashboard/AvgEnc Dist"
+            }
+          },
+          "4,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AvgEnc Speed",
+              "_title": "/SmartDashboard/AvgEnc Speed"
+            }
+          },
+          "0,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L Enc Dist",
+              "_title": "/SmartDashboard/L Enc Dist"
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L Enc Speed",
+              "_title": "/SmartDashboard/L Enc Speed"
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Output",
+              "_title": "/SmartDashboard/Left Output"
+            }
+          },
+          "2,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R Enc Dist",
+              "_title": "/SmartDashboard/R Enc Dist"
+            }
+          },
+          "2,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R Enc Speed",
+              "_title": "/SmartDashboard/R Enc Speed"
+            }
+          },
+          "2,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Output",
+              "_title": "/SmartDashboard/Right Output"
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Speed PIDs Active",
+              "_title": "/SmartDashboard/Speed PIDs Active",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/RightPid",
+              "_title": "/SmartDashboard/RightPid"
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/Gyro PID",
+              "_title": "/SmartDashboard/Gyro PID"
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/LeftPid",
+              "_title": "/SmartDashboard/LeftPid"
+            }
+          },
+          "6,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro Steering",
+              "_title": "/SmartDashboard/Gyro Steering"
+            }
+          },
+          "8,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Gyro",
+              "_source0": "network_table:///SmartDashboard/Gyro",
+              "_title": "/SmartDashboard/Gyro",
+              "Visuals/Major tick spacing": 45.0,
+              "Visuals/Starting angle": 180.0,
+              "Visuals/Show tick mark ring": true,
+              "Visuals/Counter clockwise": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Intake-Carousel-Shooter",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 100.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "7,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "PID Controller",
+              "_source0": "network_table:///SmartDashboard/Shooter PID",
+              "_title": "/SmartDashboard/Shooter PID"
+            }
+          },
+          "0,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Carousel Filled",
+              "_title": "/SmartDashboard/Carousel Filled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Carousel Speed",
+              "_title": "/SmartDashboard/Carousel Speed"
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Deployer",
+              "_title": "/SmartDashboard/Deployer",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,2": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Hood Position",
-              "_title": "SmartDashboard/Hood Position"
+              "_title": "/SmartDashboard/Hood Position"
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake Bottom Roller Speed",
+              "_title": "/SmartDashboard/Intake Bottom Roller Speed"
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake Piston Extend",
+              "_title": "/SmartDashboard/Intake Piston Extend",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake Top Roller Speed",
+              "_title": "/SmartDashboard/Intake Top Roller Speed"
+            }
+          },
+          "4,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Robot Filled",
+              "_title": "/SmartDashboard/Robot Filled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Encoder Speed",
+              "_title": "/SmartDashboard/Shooter Encoder Speed"
+            }
+          },
+          "7,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter PID Output",
+              "_title": "/SmartDashboard/Shooter PID Output"
+            }
+          },
+          "7,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Speed",
+              "_title": "/SmartDashboard/Shooter Speed"
+            }
+          },
+          "9,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Specified Target Color",
+              "_title": "/SmartDashboard/Specified Target Color"
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Stopper",
+              "_title": "/SmartDashboard/Stopper",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Tower Filled",
+              "_title": "/SmartDashboard/Tower Filled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Tower Speed",
+              "_title": "/SmartDashboard/Tower Speed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Test",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 100.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Test Mode",
+              "_title": "/SmartDashboard/Test Mode"
+            }
+          },
+          "1,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Test Mode Enabled",
+              "_title": "/SmartDashboard/Test Mode Enabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Test Motor Speed",
+              "_title": "/SmartDashboard/Test Motor Speed"
             }
           }
         }
