@@ -10,10 +10,7 @@ public class RobotConst {
     // *********************************************************
     // Drive Constants
     // *********************************************************
-    // Forward for the elevator is counter-clockwise when looking
-    // from the back of the robot towards the front
-    public static final double  MAX_LOW_GEAR_SPEED;
-    public static final double  MAX_HIGH_GEAR_SPEED;
+    public static final double  MAX_DRIVE_ENCODER_SPEED;
 
     public static final double  DRIVE_GYRO_PID_KP;
     public static final double  DRIVE_GYRO_PID_KI;
@@ -23,6 +20,8 @@ public class RobotConst {
     public static final double  DRIVE_SPEED_PID_KI;
 
     public static final double  ENCODER_COUNTS_PER_INCH;
+
+    public static final double  ROBOT_WIDTH;
 
     // *********************************************************
     // INTAKE
@@ -69,10 +68,11 @@ public class RobotConst {
 
         case PRACTICE_ROBOT:
 
-            // The low gear speed should be set just below the
+            // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
-            MAX_LOW_GEAR_SPEED = 320.0; // Encoder counts/sec
-            MAX_HIGH_GEAR_SPEED = 900.0;
+            MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+
+            ROBOT_WIDTH = 30;
 
             // Typically set the integral gain at 1/20 of the
             // proportional gain.  The gain can often be increased
@@ -80,6 +80,7 @@ public class RobotConst {
             // stability and acceptable performance
             DRIVE_GYRO_PID_KP = .07;
             DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
@@ -95,10 +96,11 @@ public class RobotConst {
 
         case Y2019_ROBOT:
 
-            // The low gear speed should be set just below the
+            // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
-            MAX_LOW_GEAR_SPEED = 320.0; // Encoder counts/sec
-            MAX_HIGH_GEAR_SPEED = 900.0;
+            MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+
+            ROBOT_WIDTH = 30;
 
             // Typically set the integral gain at 1/20 of the
             // proportional gain.  The gain can often be increased
@@ -122,10 +124,11 @@ public class RobotConst {
         case TEST_ROBOT:
         default:
 
-            // The low gear speed should be set just below the
+            // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
-            MAX_LOW_GEAR_SPEED = 320.0; // Encoder counts/sec
-            MAX_HIGH_GEAR_SPEED = 900.0;
+            MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+
+            ROBOT_WIDTH = 30;
 
             // Typically set the integral gain at 1/20 of the
             // proportional gain.  The gain can often be increased

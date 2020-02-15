@@ -57,7 +57,7 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
                 RobotConst.ENCODER_COUNTS_PER_INCH,
                 RobotConst.DRIVE_SPEED_PID_KP,
                 RobotConst.DRIVE_SPEED_PID_KI,
-                RobotConst.MAX_LOW_GEAR_SPEED);
+                RobotConst.MAX_DRIVE_ENCODER_SPEED);
     }
 
     @Override
