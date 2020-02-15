@@ -52,13 +52,15 @@ public class DefaultTowerCommand extends TSafeCommand {
         if (Robot.oi.stopTower()) {
             Scheduler.getInstance().add(new StopTowerCommand());
         }
-        
+
         if (Robot.oi.runIntakeTower()) {
             Scheduler.getInstance().add(new IntakeTowerCommand());
         }
-        
+
         if (Robot.oi.runShooterTower()) {
-            Scheduler.getInstance().add(new ShooterTowerCommand());
+            if (Robot.shooterSubsystem.isShooterRunning()) {
+                Scheduler.getInstance().add(new ShooterTowerCommand());
+            }
         }
 
     }

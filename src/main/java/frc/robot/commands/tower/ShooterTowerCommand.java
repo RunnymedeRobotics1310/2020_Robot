@@ -39,7 +39,7 @@ public class ShooterTowerCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
-        Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED );
+        Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,7 +52,13 @@ public class ShooterTowerCommand extends TSafeCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return true;
+        if (Robot.oi.runShooterTower()==false) {
+            return true;
+        }
+        return false;
     }
-
+    @Override
+    protected void end() {
+        Robot.towerSubsystem.stopTowerMotor();
+    }
 }

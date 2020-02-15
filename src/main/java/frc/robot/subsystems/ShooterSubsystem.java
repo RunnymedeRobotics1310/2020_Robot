@@ -64,6 +64,13 @@ public class ShooterSubsystem extends TSubsystem {
         }
     }
 
+    public boolean isShooterRunning() {
+        if(shooterMotor.get()>0) {
+            return true;
+        }
+        return false;
+    }
+
     public void stopShooterMotor() {
         shooterMotor.set(0);
     }

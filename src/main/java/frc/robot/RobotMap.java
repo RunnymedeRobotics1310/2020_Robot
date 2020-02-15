@@ -68,8 +68,8 @@ public class RobotMap {
     // ******************************************
     // DIO Ports
     // ******************************************
-    public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 4;
-    public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 5;
+    public static final int                      TOWER_BALL_DETECT_LIMIT_SWITCH = 0;
+    public static final int                      CAROUSEL_BALL_DETECT_LIMIT_SWITCH = 1;
 
 
     // Initializers if this code will be deployed to more than one
@@ -105,15 +105,15 @@ public class RobotMap {
             SHOOTER_CAN_SPEED_FOLLOWER_TYPE = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             SHOOTER_CAN_SPEED_CONTROLLER_ISINVERTED = TConst.NOT_INVERTED;
 
-            INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 15;
+            INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_ADDRESS = 25;
             INTAKE_FIRSTMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
-            INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 16;
+            INTAKE_SECONDMOTOR_SPEED_CONTROLLER_ADDRESS = 26;
             INTAKE_SECONDMOTOR_SPEED_CONTROLLER_TYPE_ISINVERTED	= TCanSpeedControllerType.VICTOR_SPX;
 
-            TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 25;
+            TOWER_MOTOR_SPEED_CONTROLLER_ADDRESS = 15;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE	= TCanSpeedControllerType.VICTOR_SPX;
 
-            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 26;
+            CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS = 16;
             CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE    = TCanSpeedControllerType.VICTOR_SPX;
 
             break;
