@@ -3,25 +3,24 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
-import frc.robot.RobotConst;
-import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  *
  */
-public class RunShooterCommand extends TSafeCommand {
+public class SetHoodCommand extends TSafeCommand {
 
-    private boolean up;
     private static final String COMMAND_NAME =
-            RunShooterCommand.class.getSimpleName();
+            SetHoodCommand.class.getSimpleName();
 
-    public RunShooterCommand() {
+    private HoodPosition hoodPosition;
+    public SetHoodCommand(HoodPosition hoodPosition) {
+
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
+        this.hoodPosition = hoodPosition;
         // Use requires() here to declare subsystem dependencies
         requires(Robot.shooterSubsystem);
     }
@@ -42,20 +41,19 @@ public class RunShooterCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
-        Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED);
+
+        Robot.shooterSubsystem.setHoodPosition(hoodPosition);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        
-     
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
 }

@@ -43,30 +43,23 @@ public class DefaultCarouselCommand extends TSafeCommand {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+        if (Robot.carouselSubsystem.isRobotFull()) {
+            Robot.carouselSubsystem.stopCarouselMotor();
+            return;
+        }
 
-		if (Robot.oi.runIntakeCarousel()) {
-			Scheduler.getInstance().add(new IntakeCarouselCommand());
-		}
-		if (Robot.oi.runShooterCarousel()) {
-			Scheduler.getInstance().add(new ShooterCarouselCommand());
+        if (Robot.oi.stopCarousel()) {
+            Scheduler.getInstance().add(new StopCarouselCommand());
+        }
 
-			if (Robot.oi.stopRunCarousel()) {
-				Scheduler.getInstance().add(new StopCarouselCommand());
-			}
-		}
-		//if (Robot.oi.runGroundIntake()) {
-		//    Scheduler.getInstance().add(new GroundIntakeCommand());
-		//}
+        if (Robot.oi.runIntakeCarousel()) {
+            Scheduler.getInstance().add(new IntakeCarouselCommand());
+        }
 
-		/*double userSelectedCarouselSpeed = Robot.oi.setCarouselSpeed();
-		 *if(userSelectedCarouselSpeed != 0) {
-		 *Robot.carouselSubsystem.setCarouselMotorSpeed(userSelectedCarouselSpeed);
-		 *}
-		 *else {
-		 *Robot.carouselSubsystem.stopCarouselMotor();
-		 *}
-		 */
-	}
+        if (Robot.oi.runShooterCarousel()) {
+            Scheduler.getInstance().add(new ShooterCarouselCommand());
+        }
+    }
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override

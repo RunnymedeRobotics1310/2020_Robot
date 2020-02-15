@@ -8,6 +8,7 @@ import com.torontocodingcollective.oi.TRumbleManager;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
@@ -43,9 +44,17 @@ public class OI extends TOi {
 
     private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
     private double		    shooterSpeed = 0;
-
     private double          carouselSpeed = 0;
     private double          towerSpeed = 0;
+
+    /* *********************************************************************
+     * General Controls
+     * *********************************************************************/
+
+    public void init() {
+        compressorToggle.set(false);
+        speedPidToggle.set(false);
+    }
 
     @Override
     public boolean getCancelCommand() {
@@ -57,19 +66,13 @@ public class OI extends TOi {
     }
 
     @Override
-    public TStickPosition getDriveStickPosition(TStick stick) {
-        return driverController.getStickPosition(stick);
-    }
-
-    @Override
     public boolean getReset() {
         return driverController.getButton(TButton.START);
     }
 
-    @Override
-    public int getRotateToHeading() {
-        return driverController.getPOV();
-    }
+    /* *********************************************************************
+     * Drive Controls
+     * *********************************************************************/
 
     /**
      * Get the selected drive type
@@ -92,58 +95,91 @@ public class OI extends TOi {
     }
 
     @Override
+    public TStickPosition getDriveStickPosition(TStick stick) {
+        return driverController.getStickPosition(stick);
+    }
+
+    @Override
+    public int getRotateToHeading() {
+        // return driverController.getPOV();
+        return -1;
+    }
+
+    @Override
     public boolean getSpeedPidEnabled() {
         return speedPidToggle.get();
-    }
-
-    public boolean getTurboOn() {
-        return driverController.getButton(TButton.LEFT_BUMPER);
-    }
-
-    public void init() {
-        compressorToggle.set(true);
-        speedPidToggle.set(false);
     }
 
     public void setSpeedPidEnabled(boolean state) {
         speedPidToggle.set(state);
     }
 
-    /*
-     * Shooter Subsystem commands
-     */
+    /* *********************************************************************
+     * Shooter Controls
+     * *********************************************************************/
 
     public HoodPosition getHoodPosition() {
 
-        //	        if (driverController.getButton(TButton.A)) {
-        //	            previousHoodPosition = HoodPosition.CLOSE;
-        //	        }
-        //	        if(driverController.getButton(TButton.B)) {
-        //	            previousHoodPosition = HoodPosition.MEDIUM;
-        //	        }
-        //	        if(driverController.getButton(TButton.Y)) {
-        //	            previousHoodPosition = HoodPosition.FAR;
-        //	        }
+        if (driverController.getPOV() == 180) {
+            previousHoodPosition = HoodPosition.CLOSE;
+        }
+        if(driverController.getPOV() == 90 || driverController.getPOV() == 270) {
+            previousHoodPosition = HoodPosition.MEDIUM;
+        }
+        if(driverController.getPOV() == 0) {
+            previousHoodPosition = HoodPosition.FAR;
+        }
         return previousHoodPosition;
-
-
     }
 
-    /**public double getShooterSpeed() {
+    public boolean stopShooter() {
 
+        if (driverController.getButton(TTrigger.LEFT)) {
+            return true;
+        }
+        return false;
+    }
 
-		if (driverController.getButton(TButton.LEFT_BUMPER)) {
-			shooterSpeed = shooterSpeed - 0.005;
-			if (shooterSpeed<0)
-				shooterSpeed = 0;
-		}
-		if(driverController.getButton(TButton.RIGHT_BUMPER)) {
-			shooterSpeed = shooterSpeed + 0.005;
-			if (shooterSpeed>1)
-				shooterSpeed = 1;
-		}
-		return shooterSpeed;
-	}**/
+    public double getShooterSpeed() {
+        return shooterSpeed;
+    }
+
+    /**
+     * This command is used to override the shooter speed to a preset value;
+     * @param shooterSpeed
+     */
+    public void setShooterSpeed(double shooterSpeed) {
+        this.shooterSpeed = shooterSpeed;
+    }
+
+    /**
+     * This routine is called by the update periodic to set the
+     * shooter speed.
+     */
+    public void updateShooterSpeed() {
+
+        if (driverController.getButton(TTrigger.LEFT)) {
+            shooterSpeed = 0;
+        }
+
+        if (driverController.getButton(TTrigger.RIGHT)) {
+            shooterSpeed = 0.5;
+        }
+
+        if (driverController.getButton(TButton.LEFT_BUMPER)) {
+            shooterSpeed = shooterSpeed - 0.005;
+            if (shooterSpeed < 0) {
+                shooterSpeed = 0;
+            }
+        }
+
+        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+            shooterSpeed = shooterSpeed + 0.005;
+            if (shooterSpeed > 1) {
+                shooterSpeed = 1;
+            }
+        }
+    }
 
     public boolean runShooterBB() {
         //        if (driverController.getButton(TButton.A)) {
@@ -153,6 +189,10 @@ public class OI extends TOi {
         return false;
     }
 
+    /* *********************************************************************
+     * Intake Controls
+     * *********************************************************************/
+
     /**
      * Start the feeder station intake
      */
@@ -161,7 +201,6 @@ public class OI extends TOi {
         if(driverController.getButton(TButton.Y)) {
             return true;
         }
-
         return false;
     }
 
@@ -173,7 +212,6 @@ public class OI extends TOi {
         if(driverController.getButton(TButton.A)) {
             return true;
         }
-
         return false;
     }
 
@@ -185,79 +223,48 @@ public class OI extends TOi {
         if (driverController.getButton(TButton.X)) {
             return true;
         }
-
         return false;
     }
 
+    /* *********************************************************************
+     * Carousel Controls
+     *
+     * NOTE: Carousel is currently tied to the intake buttons
+     * *********************************************************************/
 
-    /*
-     * Carousel Subsystem commands
-     */
-
-    //public double setCarouselSpeed() {
-
-
-    /**if (driverController.getPOV() == 0) {
-			carouselSpeed =  0.25;
-
-		}
-		if(driverController.getPOV() == 180) {
-			carouselSpeed = 0.5;
-		}
-
-		if(driverController.getPOV() == -1) {
-			carouselSpeed = 0;
-		}
-
-		return carouselSpeed;
-	}**/
     public boolean runIntakeCarousel() {
-        if(driverController.getPOV() == 0) {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
             return true;
         }
         return false;
     }
 
     public boolean runShooterCarousel() {
-        if(driverController.getPOV() == 180) {
-            return true;
-        }
-        return false;
-    }
-    public boolean stopRunCarousel() {
-        if(driverController.getPOV() == 270) {
+        if(driverController.getButton(TButton.B)) {
             return true;
         }
         return false;
     }
 
+    public boolean stopCarousel() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
 
+    /* *********************************************************************
+     * Tower Controls
+     *
+     * NOTE: Tower is currently linked to the intake buttons
+     * *********************************************************************/
 
-    /*
-     * Tower Subsystem commands
-     */
-
-    /**public double setTowerSpeed() {
-
-
-		if (driverController.getPOV() == 270) {
-			towerSpeed =  0.25;
-		}
-		if(driverController.getPOV() == -1) {
-			towerSpeed = 0;
-		}
-
-		return towerSpeed;
-	}
-
-
-	public boolean runIntakeTower() {
-		return true;
-     **/
     public boolean runIntakeTower() {
-        /** if(driverController.getButton(TButton.A)) {
-	   return true;
-	    }**/
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
+            return true;
+        }
         return false;
     }
 
@@ -268,10 +275,10 @@ public class OI extends TOi {
         return false;
     }
 
-    public boolean stopRunTower() {
-        //        if(driverController.getButton(TButton.X)) {
-        //            return true;
-        //        }
+    public boolean stopTower() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
         return false;
     }
 
@@ -282,6 +289,9 @@ public class OI extends TOi {
         compressorToggle.updatePeriodic();
         speedPidToggle.updatePeriodic();
         driverRumble.updatePeriodic();
+
+        // Update the shooter from the buttons
+        updateShooterSpeed();
 
         // Update all SmartDashboard values
         SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());

@@ -2,9 +2,6 @@ package frc.robot.commands.drive;
 
 import com.torontocodingcollective.commands.TDefaultDriveCommand;
 import com.torontocodingcollective.commands.TDifferentialDrive;
-import com.torontocodingcollective.oi.TStick;
-import com.torontocodingcollective.oi.TStickPosition;
-import com.torontocodingcollective.speedcontroller.TSpeeds;
 
 import frc.robot.Robot;
 import frc.robot.oi.OI;
@@ -13,20 +10,27 @@ import frc.robot.subsystems.DriveSubsystem;
 /**
  * Default drive command for a drive base
  */
-public class DefaultDriveCommand extends TDefaultDriveCommand {
+public class DriveBackwardsCommand extends TDefaultDriveCommand {
 
     private static final String COMMAND_NAME =
-            DefaultDriveCommand.class.getSimpleName();
+            DriveBackwardsCommand.class.getSimpleName();
 
     OI                oi                = Robot.oi;
     DriveSubsystem driveSubsystem    = Robot.driveSubsystem;
 
     TDifferentialDrive differentialDrive = new TDifferentialDrive();
 
-    public DefaultDriveCommand() {
+    double speed = 0;
+    double distance = 0;
+    
+    public DriveBackwardsCommand(double distance, double speed) {
+    	
+        super(Robot.oi, Robot.driveSubsystem);
+        this.speed = Math.abs(speed);
+    	this.distance = Math.abs(distance);
+    	
         // The drive logic will be handled by the TDefaultDriveCommand
         // which also contains the requires(driveSubsystem) statement
-        super(Robot.oi, Robot.driveSubsystem);
     }
 
     @Override
@@ -50,6 +54,9 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         }
 
         super.initialize();
+    	Robot.driveSubsystem.resetEncoders();
+    	
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -58,42 +65,23 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
 
         // Check the driver controller buttons
         super.execute();
+        driveSubsystem.setSpeed(-speed, -speed);
 
-        // Drive according to the type of drive selected in the
-        // operator input.
-        TStickPosition leftStickPosition = oi.getDriveStickPosition(TStick.LEFT);
-        TStickPosition rightStickPosition = oi.getDriveStickPosition(TStick.RIGHT);
-
-        TStick singleStickSide = oi.getSelectedSingleStickSide();
-
-        TSpeeds motorSpeeds;
-
-        switch (oi.getSelectedDriveType()) {
-
-        case SINGLE_STICK:
-            TStickPosition singleStickPosition = rightStickPosition;
-            if (singleStickSide == TStick.LEFT) {
-                singleStickPosition = leftStickPosition;
-            }
-            motorSpeeds = differentialDrive.arcadeDrive(singleStickPosition);
-            break;
-
-        case TANK:
-            motorSpeeds = differentialDrive.tankDrive(leftStickPosition, rightStickPosition);
-            break;
-
-        case ARCADE:
-        default:
-            motorSpeeds = differentialDrive.arcadeDrive(leftStickPosition, rightStickPosition);
-            break;
-        }
-
-        driveSubsystem.setSpeed(motorSpeeds);
+        
+        
     }
 
     @Override
     protected boolean isFinished() {
-        // The default command does not end
+        
+    	if(Math.abs(Robot.driveSubsystem.getDistanceInches()) > distance) {
+    		return true;
+    	}
+    	// The default command does not end
         return false;
+    }
+    protected void end() {
+        driveSubsystem.setSpeed(0,0);
+
     }
 }

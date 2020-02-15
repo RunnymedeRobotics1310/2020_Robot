@@ -6,8 +6,6 @@ import com.torontocodingcollective.commands.TSafeCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
-import frc.robot.commands.shooter.BangBangShooterCommand;
-import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  *
@@ -47,16 +45,15 @@ public class DefaultShooterCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
-       // HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
-        //Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
-        
-       
-       // double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
-        //Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
+        HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
+        Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
 
         if (Robot.oi.runShooterBB()) {
             Scheduler.getInstance().add(new BangBangShooterCommand());
         }
+
+        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
+        Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
