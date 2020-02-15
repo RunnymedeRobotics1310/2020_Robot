@@ -61,8 +61,8 @@ public class OI extends TOi {
     private TestMode        testMode = TestMode.SHOOTER;
     private int             testModeOrdinal = 0;
     private double          testSpeed       = 0;
-    private TButtonPressDetector rightBumperDetector = new TButtonPressDetector(driverController, TButton.RIGHT_BUMPER);
-    private TButtonPressDetector leftBumperDetector  = new TButtonPressDetector(driverController, TButton.LEFT_BUMPER);
+    private TButtonPressDetector nextModeDetector  = new TButtonPressDetector(driverController, TTrigger.RIGHT);
+    private TButtonPressDetector prevModeDetector  = new TButtonPressDetector(driverController, TTrigger.LEFT);
 
     /* *********************************************************************
      * General Controls
@@ -111,10 +111,10 @@ public class OI extends TOi {
         else {
             int nextTestModeOrdinal = testModeOrdinal;
 
-            if (rightBumperDetector.get()) {
+            if (nextModeDetector.get()) {
                 nextTestModeOrdinal++;
             }
-            if (leftBumperDetector.get()) {
+            if (prevModeDetector.get()) {
                 nextTestModeOrdinal--;
             }
 
@@ -132,14 +132,6 @@ public class OI extends TOi {
             }
 
             // Update the testMotorSpeed
-            if (driverController.getButton(TTrigger.LEFT)) {
-                testSpeed = 0;
-            }
-
-            if (driverController.getButton(TTrigger.RIGHT)) {
-                testSpeed = 0.5;
-            }
-
             if (driverController.getButton(TButton.LEFT_BUMPER)) {
                 testSpeed = testSpeed - 0.005;
                 if (testSpeed < 0) {
@@ -348,7 +340,7 @@ public class OI extends TOi {
     /* *********************************************************************
      * Tower Controls
      *
-     * NOTE: Tower is currently linked to the intake buttons
+     * NOTE: Tower is currently linked to the intake and shooter buttons
      * *********************************************************************/
 
     public boolean runIntakeTower() {
