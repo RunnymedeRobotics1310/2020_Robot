@@ -11,14 +11,11 @@ import frc.robot.Robot;
 public class StopShooterCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultShooterCommand.class.getSimpleName();
+            StopShooterCommand.class.getSimpleName();
 
     public StopShooterCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
-
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
     }
 
     @Override

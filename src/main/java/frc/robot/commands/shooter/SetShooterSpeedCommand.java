@@ -11,7 +11,7 @@ import frc.robot.Robot;
 public class SetShooterSpeedCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultShooterCommand.class.getSimpleName();
+            SetShooterSpeedCommand.class.getSimpleName();
 
     private double shooterSpeed = 0;
 
@@ -20,9 +20,6 @@ public class SetShooterSpeedCommand extends TSafeCommand {
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         this.shooterSpeed = shooterSpeed;
-
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
     }
 
     @Override
