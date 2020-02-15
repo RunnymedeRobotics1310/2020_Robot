@@ -10,46 +10,56 @@ import frc.robot.Robot;
  */
 public class SetShooterSpeedCommand extends TSafeCommand {
 
-	private static final String COMMAND_NAME =
-			DefaultShooterCommand.class.getSimpleName();
-	private double speed = 0;
-	public SetShooterSpeedCommand(double speed) {
+    private static final String COMMAND_NAME =
+            SetShooterSpeedCommand.class.getSimpleName();
 
-		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
-		this.speed = speed;
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.shooterSubsystem);
-	}
+    private double shooterSpeed = 0;
 
-	@Override
-	protected String getCommandName() { return COMMAND_NAME; }
+    public SetShooterSpeedCommand(double shooterSpeed) {
 
-	@Override
-	protected String getParmDesc() {
-		return super.getParmDesc();
-	}
+        super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-		// Print the command parameters if this is the current
-		// called command (it was not sub-classed)
-		if (getCommandName().equals(COMMAND_NAME)) {
-			logMessage(getParmDesc() + " starting");
-		}
+        this.shooterSpeed = shooterSpeed;
+    }
 
-		Robot.shooterSubsystem.setShooterMotorSpeed(speed);
-	}
+    @Override
+    protected String getCommandName() { return COMMAND_NAME; }
 
-	// Called repeatedly when this Command is scheduled to run
-	@Override
-	protected void execute() {
-	}
+    @Override
+    protected String getParmDesc() {
+        return super.getParmDesc();
+    }
 
-	// Make this return true when this Command no longer needs to run execute()
-	@Override
-	protected boolean isFinished() {
-		return true;
-	}
+    // Called just before this Command runs the first time
+    @Override
+    protected void initialize() {
+        // Print the command parameters if this is the current
+        // called command (it was not sub-classed)
+        if (getCommandName().equals(COMMAND_NAME)) {
+            logMessage(getParmDesc() + " starting");
+        }
+
+        // Use the default command to set the shooter speed.
+        // This command should only set the value in the OI
+        // which can then be tweaked by the user
+        Robot.oi.setShooterSpeed(shooterSpeed);
+
+        // NOTE: This code is not necessary because the
+        //       default shooter command will do this once the
+        //       oi value is set
+        Robot.shooterSubsystem.setShooterMotorSpeed(shooterSpeed);
+
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    protected void execute() {
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    protected boolean isFinished() {
+        return true;
+    }
 
 }

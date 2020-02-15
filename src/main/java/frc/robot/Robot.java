@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 
 		// Turn on the drive pids for auto
-		Robot.oi.setSpeedPidEnabled(true);
+		Robot.oi.setSpeedPidEnabled(false);
 		driveSubsystem.enableSpeedPids();
 
 		// Reset the gyro and the encoders

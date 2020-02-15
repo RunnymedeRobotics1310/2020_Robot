@@ -15,8 +15,14 @@ import frc.robot.commands.carousel.DefaultCarouselCommand;
  */
 public class CarouselSubsystem extends TSubsystem {
 
-    TSpeedController carouselMotor = new TCanSpeedController(RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_TYPE, RobotMap.CAROUSEL_ROTATORMOTOR_SPEED_CONTROLLER_ADDRESS);
-    TLimitSwitch carouselFilled = new TLimitSwitch (RobotMap.CAROUSEL_BALL_DETECT_LIMIT_SWITCH);
+    TSpeedController carouselMotor =
+            new TCanSpeedController(
+                    RobotMap.CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.CAROUSEL_MOTOR_ISINVERTED);
+
+    TLimitSwitch carouselFilled = new TLimitSwitch (RobotMap.CAROUSEL_BALL_DETECT_DIO_PORT);
+
     @Override
     public void init() {
 

@@ -11,49 +11,49 @@ import frc.robot.Robot;
  */
 public class SetHoodCommand extends TSafeCommand {
 
-	private static final String COMMAND_NAME =
-			DefaultShooterCommand.class.getSimpleName();
+    private static final String COMMAND_NAME =
+            SetHoodCommand.class.getSimpleName();
 
-	private HoodPosition hoodPosition;
-	public SetHoodCommand(HoodPosition hoodPosition) {
+    private HoodPosition hoodPosition;
+    public SetHoodCommand(HoodPosition hoodPosition) {
 
 
-		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
+        super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
-		this.hoodPosition = hoodPosition;
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.carouselSubsystem);
-	}
+        this.hoodPosition = hoodPosition;
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.shooterSubsystem);
+    }
 
-	@Override
-	protected String getCommandName() { return COMMAND_NAME; }
+    @Override
+    protected String getCommandName() { return COMMAND_NAME; }
 
-	@Override
-	protected String getParmDesc() {
-		return super.getParmDesc();
-	}
+    @Override
+    protected String getParmDesc() {
+        return super.getParmDesc();
+    }
 
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-		// Print the command parameters if this is the current
-		// called command (it was not sub-classed)
-		if (getCommandName().equals(COMMAND_NAME)) {
-			logMessage(getParmDesc() + " starting");
-		}
+    // Called just before this Command runs the first time
+    @Override
+    protected void initialize() {
+        // Print the command parameters if this is the current
+        // called command (it was not sub-classed)
+        if (getCommandName().equals(COMMAND_NAME)) {
+            logMessage(getParmDesc() + " starting");
+        }
 
-		Robot.shooterSubsystem.setHoodPosition(hoodPosition);
-	}
+        Robot.shooterSubsystem.setHoodPosition(hoodPosition);
+    }
 
-	// Called repeatedly when this Command is scheduled to run
-	@Override
-	protected void execute() {
-	}
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    protected void execute() {
+    }
 
-	// Make this return true when this Command no longer needs to run execute()
-	@Override
-	protected boolean isFinished() {
-		return true;
-	}
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    protected boolean isFinished() {
+        return true;
+    }
 
 }
