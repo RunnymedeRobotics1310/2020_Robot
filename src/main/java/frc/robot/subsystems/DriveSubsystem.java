@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.sensors.gyro.TAnalogGyro;
+import com.torontocodingcollective.sensors.gyro.TNavXGyro;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.subsystem.TGyroDriveSubsystem;
 
@@ -37,7 +38,9 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
                         RobotMap.RIGHT_DRIVE_MOTOR_ISINVERTED),
 
                 // Gyro used for this subsystem
-                new TAnalogGyro(RobotMap.GYRO_ANALOG_PORT, RobotMap.GYRO_ISINVERTED),
+                ((RobotConst.robot == RobotConst.TEST_ROBOT) ?
+                        new TAnalogGyro(RobotMap.GYRO_ANALOG_PORT, RobotMap.GYRO_ISINVERTED) :
+                            new TNavXGyro(RobotMap.GYRO_ISINVERTED) ) ,
 
                 // Gyro PID Constants
                 RobotConst.DRIVE_GYRO_PID_KP,
