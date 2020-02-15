@@ -8,6 +8,7 @@ import com.torontocodingcollective.speedcontroller.TSpeeds;
 
 import frc.robot.Robot;
 import frc.robot.oi.OI;
+import frc.robot.oi.OI.TestMode;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -55,6 +56,19 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+
+        if (Robot.oi.isTestModeEnabled()) {
+            if (Robot.oi.getTestMode() == TestMode.LEFT_DRIVE) {
+                Robot.driveSubsystem.setSpeed(Robot.oi.getTestMotorSpeed(), 0);
+            }
+            else if (Robot.oi.getTestMode() == TestMode.RIGHT_DRIVE) {
+                Robot.driveSubsystem.setSpeed(0, Robot.oi.getTestMotorSpeed());
+            }
+            else {
+                Robot.driveSubsystem.setSpeed(0, 0);
+            }
+            return;
+        }
 
         // Check the driver controller buttons
         super.execute();

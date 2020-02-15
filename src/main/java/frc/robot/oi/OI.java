@@ -1,6 +1,7 @@
 package frc.robot.oi;
 
 import com.torontocodingcollective.oi.TButton;
+import com.torontocodingcollective.oi.TButtonPressDetector;
 import com.torontocodingcollective.oi.TGameController;
 import com.torontocodingcollective.oi.TGameController_Logitech;
 import com.torontocodingcollective.oi.TOi;
@@ -47,6 +48,22 @@ public class OI extends TOi {
     private double          carouselSpeed = 0;
     private double          towerSpeed = 0;
 
+    private TToggle         testModeToggle   = new TToggle();
+
+    public enum TestMode {
+        NONE,
+        SHOOTER,
+        TOP_INTAKE, BOTTOM_INTAKE,
+        CAROUSEL, TOWER,
+        LEFT_DRIVE, RIGHT_DRIVE
+    }
+
+    private TestMode        testMode = TestMode.SHOOTER;
+    private int             testModeOrdinal = 0;
+    private double          testSpeed       = 0;
+    private TButtonPressDetector rightBumperDetector = new TButtonPressDetector(driverController, TButton.RIGHT_BUMPER);
+    private TButtonPressDetector leftBumperDetector  = new TButtonPressDetector(driverController, TButton.LEFT_BUMPER);
+
     /* *********************************************************************
      * General Controls
      * *********************************************************************/
@@ -54,6 +71,7 @@ public class OI extends TOi {
     public void init() {
         compressorToggle.set(false);
         speedPidToggle.set(false);
+        testModeToggle.set(false);
     }
 
     @Override
@@ -68,6 +86,74 @@ public class OI extends TOi {
     @Override
     public boolean getReset() {
         return driverController.getButton(TButton.START);
+    }
+
+    public boolean isTestModeEnabled() {
+        return testModeToggle.get();
+    }
+
+    public TestMode getTestMode() {
+        return testMode;
+    }
+
+    public double getTestMotorSpeed() {
+        return testSpeed;
+    }
+
+    private void updateTestMode() {
+
+        if (!isTestModeEnabled()) {
+            testMode = TestMode.NONE;
+            testModeOrdinal = 0;
+            testSpeed = 0;
+            return;
+        }
+        else {
+            int nextTestModeOrdinal = testModeOrdinal;
+
+            if (rightBumperDetector.get()) {
+                nextTestModeOrdinal++;
+            }
+            if (leftBumperDetector.get()) {
+                nextTestModeOrdinal--;
+            }
+
+            // Update the testMode
+            if (nextTestModeOrdinal != testModeOrdinal) {
+                testModeOrdinal = nextTestModeOrdinal;
+                testSpeed = 0;
+                if (testModeOrdinal < 0) {
+                    testModeOrdinal += TestMode.values().length;
+                }
+                if (testModeOrdinal >= TestMode.values().length) {
+                    testModeOrdinal = 0;
+                }
+                testMode = TestMode.values()[testModeOrdinal];
+            }
+
+            // Update the testMotorSpeed
+            if (driverController.getButton(TTrigger.LEFT)) {
+                testSpeed = 0;
+            }
+
+            if (driverController.getButton(TTrigger.RIGHT)) {
+                testSpeed = 0.5;
+            }
+
+            if (driverController.getButton(TButton.LEFT_BUMPER)) {
+                testSpeed = testSpeed - 0.005;
+                if (testSpeed < 0) {
+                    testSpeed = 0;
+                }
+            }
+
+            if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+                testSpeed = testSpeed + 0.005;
+                if (testSpeed > 1) {
+                    testSpeed = 1;
+                }
+            }
+        }
     }
 
     /* *********************************************************************
@@ -157,6 +243,11 @@ public class OI extends TOi {
      * shooter speed.
      */
     public void updateShooterSpeed() {
+
+        if (isTestModeEnabled()) {
+            shooterSpeed = 0;
+            return;
+        }
 
         if (driverController.getButton(TTrigger.LEFT)) {
             shooterSpeed = 0;
@@ -290,6 +381,11 @@ public class OI extends TOi {
         speedPidToggle.updatePeriodic();
         driverRumble.updatePeriodic();
 
+        // Press both the start and back buttons to toggle in and out of test mode.
+        testModeToggle.updatePeriodic(
+                driverController.getButton(TButton.START) && driverController.getButton(TButton.BACK));
+        updateTestMode();
+
         // Update the shooter from the buttons
         updateShooterSpeed();
 
@@ -297,8 +393,9 @@ public class OI extends TOi {
         SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());
         SmartDashboard.putBoolean("Compressor Toggle", getCompressorEnabled());
         SmartDashboard.putString("Driver Controller", driverController.toString());
+        SmartDashboard.putBoolean("Test Mode Enabled", isTestModeEnabled());
+        SmartDashboard.putString("Test Mode", getTestMode().toString());
+        SmartDashboard.putNumber("Test Motor Speed", getTestMotorSpeed());
     }
-
-
 
 }

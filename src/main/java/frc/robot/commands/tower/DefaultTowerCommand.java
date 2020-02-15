@@ -5,6 +5,7 @@ import com.torontocodingcollective.commands.TSafeCommand;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.oi.OI.TestMode;
 
 /**
  *
@@ -44,6 +45,25 @@ public class DefaultTowerCommand extends TSafeCommand {
     @Override
     protected void execute() {
 
+        if (Robot.oi.isTestModeEnabled()) {
+            if (Robot.oi.getTestMode() == TestMode.TOWER) {
+                Robot.towerSubsystem.setTowerMotorSpeed(Robot.oi.getTestMotorSpeed());
+            }
+            else {
+                Robot.towerSubsystem.stopTowerMotor();
+            }
+            // If in test mode, then do not look for other buttons
+            return;
+        }
+
+        // Always shoot before stopping at the sensor
+        if (Robot.oi.runShooterTower()) {
+            if (Robot.shooterSubsystem.isShooterRunning()) {
+                Scheduler.getInstance().add(new ShooterTowerCommand());
+            }
+        }
+
+        // Always check for shooting first ^^^
         if (Robot.towerSubsystem.isTowerFull()) {
             Robot.towerSubsystem.stopTowerMotor();
             return;
@@ -55,12 +75,6 @@ public class DefaultTowerCommand extends TSafeCommand {
 
         if (Robot.oi.runIntakeTower()) {
             Scheduler.getInstance().add(new IntakeTowerCommand());
-        }
-
-        if (Robot.oi.runShooterTower()) {
-            if (Robot.shooterSubsystem.isShooterRunning()) {
-                Scheduler.getInstance().add(new ShooterTowerCommand());
-            }
         }
 
     }
