@@ -69,7 +69,7 @@ public class ShooterSubsystem extends TSubsystem {
     }
 
     public boolean isShooterRunning() {
-        if(shooterMotor.get()>0) {
+        if(shooterMotor.get() > 0) {
             return true;
         }
         return false;
@@ -79,7 +79,10 @@ public class ShooterSubsystem extends TSubsystem {
         shooterMotor.set(0);
     }
 
-    public double getShooterEncoder() {
+    public double getShooterEncoderSpeed() {
+        if (shooterEncoder == null) {
+            return 0;
+        }
         return shooterEncoder.getRate();
     }
     public void setHoodPosition(HoodPosition hoodPosition) {
@@ -107,7 +110,9 @@ public class ShooterSubsystem extends TSubsystem {
     public void updatePeriodic() {
 
         if (shooterPid.isEnabled()) {
-            shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
+            if (shooterEncoder != null) {
+                shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
+            }
             shooterMotor.set(shooterPid.get());
         }
 
@@ -115,7 +120,7 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putBoolean("Stopper", stopper.get());
         SmartDashboard.putBoolean("Deployer", deployer.get());
         SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
-        SmartDashboard.putNumber( "Shooter Encoder Speed", shooterEncoder.getRate());
+        SmartDashboard.putNumber( "Shooter Encoder Speed", getShooterEncoderSpeed());
         SmartDashboard.putData("Shooter PID", shooterPid);
         SmartDashboard.putNumber("Shooter PID Output", shooterPid.get());
     }
