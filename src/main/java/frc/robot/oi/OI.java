@@ -11,6 +11,7 @@ import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
 import com.torontocodingcollective.oi.TTrigger;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 
@@ -107,6 +108,18 @@ public class OI extends TOi {
             return;
         }
         else {
+
+            if (testMode == TestMode.NONE) {
+                testSpeed = 0;
+                return;
+            }
+
+            if (!DriverStation.getInstance().isDisabled()) {
+                testSpeed = 0;
+                testMode = TestMode.NONE;
+                return;
+            }
+
             int nextTestModeOrdinal = testModeOrdinal;
 
             if (nextModeDetector.get()) {
