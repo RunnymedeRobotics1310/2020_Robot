@@ -185,5 +185,58 @@ public class AutonomousCommand extends CommandGroup {
       	
       }
         
+        if (pattern.equals(AutoSelector.PICK_UP_2_SHOOT_5_PICK_UP_3_SHOOT_3)) {
+        	Robot.driveSubsystem.setGyroAngle(180);
+
+        	//8 ball auto
+        	//drive to opponents trench, pick up 2 balls, shoot 5, drive to pick up 3 more balls, shoot 3
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(90, 180 , 1, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+        	//drive to pick up first ball
+        	
+        	this.addSequential(
+        			new DriveBackwardsCommand(8, 1));
+        	//drive back to reposition for second ball
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+        	//rotate to position at other ball
+        	
+        	this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(12, 200, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+        	//drive into ball
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(155, Robot.oi, Robot.driveSubsystem));
+        	//rotate to shoot 5 balls
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(155, Robot.oi, Robot.driveSubsystem));
+        	//turn so intake side is facing 3 other balls
+        	//fix angle to turn to
+        	
+        	this.addSequential(
+        			new DriveOnCurveCommand(80, 1, 15, true));
+        	//curve to get in line with balls
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(155, Robot.oi, Robot.driveSubsystem));
+        	//turn to be in line of the balls
+        	
+        	this.addSequential(
+        			new TDriveOnHeadingDistanceCommand(50, 70, 1, 15, TConst.BRAKE_WHEN_FINISHED,
+        					Robot.oi, Robot.driveSubsystem));
+        	//fix distance and heading
+        	//drive into balls with intake side
+        	
+        	this.addSequential(
+        			new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+        	//rotate to face the goal
+        	
+        	
+        } 
+        
     }
 }

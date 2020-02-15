@@ -103,8 +103,8 @@ public class DriveOnCurveCommand extends TSafeCommand {
     	if(Math.abs(Robot.driveSubsystem.getDistanceInches()) > distance) {
     		return true;
     	}
-    	// The default command does not end
-        return false;
+
+    	return false;
     }
     protected void end() {
         driveSubsystem.setSpeed(0,0);
