@@ -145,8 +145,8 @@ public class OI extends TOi {
             // Update the testMotorSpeed
             if (driverController.getButton(TButton.LEFT_BUMPER)) {
                 testSpeed = testSpeed - 0.005;
-                if (testSpeed < 0) {
-                    testSpeed = 0;
+                if (testSpeed < -1) {
+                    testSpeed = -1;
                 }
             }
 
