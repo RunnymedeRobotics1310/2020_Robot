@@ -111,7 +111,7 @@ public class RobotMap {
             CAROUSEL_MOTOR_ISINVERTED                         = TConst.NOT_INVERTED;
             CAROUSEL_ENCODER_ISINVERTED                       = TConst.NOT_INVERTED;
 
-            TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 41;
+            TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
             TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
 
