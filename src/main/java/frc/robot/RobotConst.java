@@ -56,6 +56,7 @@ public class RobotConst {
     // *********************************************************
     public static final double SHOOTER_BANGBANG_SPEED  = 1;
     public static final double SHOOTER_SPEED_PID_KP;
+    public static final double SHOOTER_SPEED_PID_KI;
     public static final double MAX_SHOOTER_SPEED;
 
     // The TorontoCodingCollective framework was developed to run on different
@@ -83,7 +84,9 @@ public class RobotConst {
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
 
-            SHOOTER_SPEED_PID_KP = 0;
+            SHOOTER_SPEED_PID_KP = 0.5;
+            SHOOTER_SPEED_PID_KI = 0.05;
+
             MAX_SHOOTER_SPEED = 5600;
 
             ENCODER_COUNTS_PER_INCH = 55.6/2;
@@ -109,6 +112,8 @@ public class RobotConst {
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
 
             SHOOTER_SPEED_PID_KP = 0;
+            SHOOTER_SPEED_PID_KI = 0;
+
             MAX_SHOOTER_SPEED = 5800;
 
             ENCODER_COUNTS_PER_INCH = 55.6/2;

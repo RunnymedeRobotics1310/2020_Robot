@@ -17,20 +17,30 @@ import frc.robot.commands.shooter.DefaultShooterCommand;
  */
 public class ShooterSubsystem extends TSubsystem {
 
-    Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
-    Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
-    TSpeedController shooterMotor = new TCanSpeedController(
+    private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
+    private Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
+    private TSpeedController shooterMotor = new TCanSpeedController(
             RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS,
-            RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_TYPE,  RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_ADDRESS, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ISINVERTED);
+            RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_TYPE,  RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_ADDRESS,
+            RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ISINVERTED);
     private HoodPosition curHoodPosition;
-    TEncoder shooterEncoder = shooterMotor.getEncoder();
+    private TEncoder shooterEncoder = shooterMotor.getEncoder();
 
-    TSpeedPID shooterPid = new TSpeedPID(RobotConst.SHOOTER_SPEED_PID_KP);
+    private TSpeedPID shooterPid = new TSpeedPID(RobotConst.SHOOTER_SPEED_PID_KP, RobotConst.SHOOTER_SPEED_PID_KI);
+
+    private boolean shooterPidEnabled = true;
 
     @Override
     public void init() {
         // FIXME: Set the initial position to the value at robot setup.
         curHoodPosition = HoodPosition.CLOSE;
+
+        if (shooterPidEnabled) {
+            shooterPid.enable();
+        }
+        else {
+            shooterPid.disable();
+        }
     };
 
 
@@ -46,8 +56,12 @@ public class ShooterSubsystem extends TSubsystem {
      **/
 
     public void setShooterMotorSpeed(double speed) {
-        shooterPid.enable();
-        shooterPid.setSetpoint(speed);
+        if (shooterPidEnabled) {
+            shooterPid.setSetpoint(speed);
+        }
+        else {
+            shooterMotor.set(speed);
+        }
     }
 
     public void stopShooterMotor() {
@@ -81,8 +95,10 @@ public class ShooterSubsystem extends TSubsystem {
     @Override
     public void updatePeriodic() {
 
-        shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
-        shooterMotor.set(shooterPid.get());
+        if (shooterPidEnabled) {
+            shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
+            shooterMotor.set(shooterPid.get());
+        }
 
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
         SmartDashboard.putBoolean("Stopper", stopper.get());
@@ -91,9 +107,6 @@ public class ShooterSubsystem extends TSubsystem {
         SmartDashboard.putNumber( "Shooter Encoder Speed", shooterEncoder.getRate());
         SmartDashboard.putData("Shooter PID", shooterPid);
         SmartDashboard.putNumber("Shooter PID Output", shooterPid.get());
-        SmartDashboard.putNumber("Shooter PID Error", shooterPid.getError());
-        SmartDashboard.putNumber("Shooter PID Total Error", shooterPid.getTotalError());
-
     }
 
 }
