@@ -17,14 +17,18 @@ import frc.robot.commands.shooter.DefaultShooterCommand;
  */
 public class ShooterSubsystem extends TSubsystem {
 
+    private TSpeedController shooterMotor =
+            new TCanSpeedController(
+                    RobotMap.SHOOTER_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.SHOOTER_SPEED_FOLLOWER_TYPE,   RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS,
+                    RobotMap.SHOOTER_MOTOR_ISINVERTED);
+
+    private TEncoder shooterEncoder = shooterMotor.getEncoder(RobotMap.SHOOTER_ENCODER_ISINVERTED);
+
     private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
     private Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
-    private TSpeedController shooterMotor = new TCanSpeedController(
-            RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_TYPE, RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ADDRESS,
-            RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_TYPE,  RobotMap.SHOOTER_CAN_SPEED_FOLLOWER_ADDRESS,
-            RobotMap.SHOOTER_CAN_SPEED_CONTROLLER_ISINVERTED);
+
     private HoodPosition curHoodPosition;
-    private TEncoder shooterEncoder = shooterMotor.getEncoder();
 
     private TSpeedPID shooterPid = new TSpeedPID(RobotConst.SHOOTER_SPEED_PID_KP, RobotConst.SHOOTER_SPEED_PID_KI);
 
@@ -56,7 +60,7 @@ public class ShooterSubsystem extends TSubsystem {
      **/
 
     public void setShooterMotorSpeed(double speed) {
-        if (shooterPidEnabled) {
+        if (shooterPid.isEnabled()) {
             shooterPid.setSetpoint(speed);
         }
         else {
@@ -102,7 +106,7 @@ public class ShooterSubsystem extends TSubsystem {
     @Override
     public void updatePeriodic() {
 
-        if (shooterPidEnabled) {
+        if (shooterPid.isEnabled()) {
             shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
             shooterMotor.set(shooterPid.get());
         }

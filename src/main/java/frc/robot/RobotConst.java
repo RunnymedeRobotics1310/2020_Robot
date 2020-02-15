@@ -2,7 +2,7 @@ package frc.robot;
 
 public class RobotConst {
 
-    public static final String  PRACTICE_ROBOT                = "TestRobot";
+    public static final String  PRACTICE_ROBOT                = "PracticeRobot";
     public static final String  TEST_ROBOT                    = "TestRobot";
     public static final String  Y2019_ROBOT                   = "2019Robot";
     public static final String  PROD_ROBOT                    = "ProdRobot";
