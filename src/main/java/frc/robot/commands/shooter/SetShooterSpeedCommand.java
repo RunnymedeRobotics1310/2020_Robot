@@ -3,24 +3,23 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.HoodPosition;
 import frc.robot.Robot;
 
 /**
  *
  */
-public class DefaultShooterCommand extends TSafeCommand {
+public class SetShooterSpeedCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultShooterCommand.class.getSimpleName();
+            SetShooterSpeedCommand.class.getSimpleName();
 
-    public DefaultShooterCommand() {
+    private double shooterSpeed = 0;
+
+    public SetShooterSpeedCommand(double shooterSpeed) {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
+        this.shooterSpeed = shooterSpeed;
     }
 
     @Override
@@ -39,27 +38,28 @@ public class DefaultShooterCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
+
+        // Use the default command to set the shooter speed.
+        // This command should only set the value in the OI
+        // which can then be tweaked by the user
+        Robot.oi.setShooterSpeed(shooterSpeed);
+
+        // NOTE: This code is not necessary because the
+        //       default shooter command will do this once the
+        //       oi value is set
+        Robot.shooterSubsystem.setShooterMotorSpeed(shooterSpeed);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-
-        HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
-        Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
-
-        if (Robot.oi.runShooterBB()) {
-            Scheduler.getInstance().add(new BangBangShooterCommand());
-        }
-
-        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
-        Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
 }

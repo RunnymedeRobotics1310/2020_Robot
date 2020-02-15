@@ -8,6 +8,7 @@ import com.torontocodingcollective.oi.TRumbleManager;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
@@ -33,138 +34,270 @@ import frc.robot.HoodPosition;
  */
 public class OI extends TOi {
 
-	private TGameController driverController = new TGameController_Logitech(0);
-	private TRumbleManager  driverRumble     = new TRumbleManager("Driver", driverController);
+    private TGameController driverController = new TGameController_Logitech(0);
+    private TRumbleManager  driverRumble     = new TRumbleManager("Driver", driverController);
 
-	private TToggle         compressorToggle = new TToggle(driverController, TStick.LEFT);
-	private TToggle         speedPidToggle   = new TToggle(driverController, TStick.RIGHT);
+    private TToggle         compressorToggle = new TToggle(driverController, TStick.LEFT);
+    private TToggle         speedPidToggle   = new TToggle(driverController, TStick.RIGHT);
 
-	private DriveSelector   driveSelector    = new DriveSelector();
+    private DriveSelector   driveSelector    = new DriveSelector();
 
-	private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
-	private double		    shooterSpeed = 0;
+    private HoodPosition	previousHoodPosition = HoodPosition.CLOSE;
+    private double		    shooterSpeed = 0;
+    private double          carouselSpeed = 0;
+    private double          towerSpeed = 0;
 
-	@Override
-	public boolean getCancelCommand() {
-		return driverController.getButton(TButton.BACK);
-	}
+    /* *********************************************************************
+     * General Controls
+     * *********************************************************************/
 
-	public boolean getCompressorEnabled() {
-		return compressorToggle.get();
-	}
+    public void init() {
+        compressorToggle.set(false);
+        speedPidToggle.set(false);
+    }
 
-	@Override
-	public TStickPosition getDriveStickPosition(TStick stick) {
-		return driverController.getStickPosition(stick);
-	}
+    @Override
+    public boolean getCancelCommand() {
+        return driverController.getButton(TButton.BACK);
+    }
 
-	@Override
-	public boolean getReset() {
-		return driverController.getButton(TButton.START);
-	}
+    public boolean getCompressorEnabled() {
+        return compressorToggle.get();
+    }
 
-	@Override
-	public int getRotateToHeading() {
-		return driverController.getPOV();
-	}
+    @Override
+    public boolean getReset() {
+        return driverController.getButton(TButton.START);
+    }
 
-	/**
-	 * Get the selected drive type
-	 *
-	 * @return {@link DriveControlType} selected on the SmartDashboard. The default
-	 *         drive type is {@link DriveControlType#ARCADE}
-	 */
-	public DriveControlType getSelectedDriveType() {
-		return driveSelector.getDriveControlType();
-	}
+    /* *********************************************************************
+     * Drive Controls
+     * *********************************************************************/
 
-	/**
-	 * Get the selected single stick side
-	 *
-	 * @return {@link TStick} selected on the SmartDashboard. The default single
-	 *         stick drive is {@link TStick#RIGHT}
-	 */
-	public TStick getSelectedSingleStickSide() {
-		return driveSelector.getSingleStickSide();
-	}
+    /**
+     * Get the selected drive type
+     *
+     * @return {@link DriveControlType} selected on the SmartDashboard. The default
+     *         drive type is {@link DriveControlType#ARCADE}
+     */
+    public DriveControlType getSelectedDriveType() {
+        return driveSelector.getDriveControlType();
+    }
 
-	@Override
-	public boolean getSpeedPidEnabled() {
-		return speedPidToggle.get();
-	}
+    /**
+     * Get the selected single stick side
+     *
+     * @return {@link TStick} selected on the SmartDashboard. The default single
+     *         stick drive is {@link TStick#RIGHT}
+     */
+    public TStick getSelectedSingleStickSide() {
+        return driveSelector.getSingleStickSide();
+    }
 
-	public boolean getTurboOn() {
-		return driverController.getButton(TButton.LEFT_BUMPER);
-	}
+    @Override
+    public TStickPosition getDriveStickPosition(TStick stick) {
+        return driverController.getStickPosition(stick);
+    }
 
-	public void init() {
-		compressorToggle.set(true);
-		speedPidToggle.set(false);
-	}
+    @Override
+    public int getRotateToHeading() {
+        // return driverController.getPOV();
+        return -1;
+    }
 
-	public void setSpeedPidEnabled(boolean state) {
-		speedPidToggle.set(state);
-	}
+    @Override
+    public boolean getSpeedPidEnabled() {
+        return speedPidToggle.get();
+    }
 
-	/*
-	 * Shooter Subsystem commands
-	 */
+    public void setSpeedPidEnabled(boolean state) {
+        speedPidToggle.set(state);
+    }
 
-	public HoodPosition getHoodPosition() {
+    /* *********************************************************************
+     * Shooter Controls
+     * *********************************************************************/
 
-		if (driverController.getButton(TButton.A)) {
-			previousHoodPosition = HoodPosition.CLOSE;
-		}
-		if(driverController.getButton(TButton.B)) {
-			previousHoodPosition = HoodPosition.MEDIUM;
-		}
-		if(driverController.getButton(TButton.Y)) {
-			previousHoodPosition = HoodPosition.FAR;
-		}
-		return previousHoodPosition;
+    public HoodPosition getHoodPosition() {
 
+        if (driverController.getPOV() == 180) {
+            previousHoodPosition = HoodPosition.CLOSE;
+        }
+        if(driverController.getPOV() == 90 || driverController.getPOV() == 270) {
+            previousHoodPosition = HoodPosition.MEDIUM;
+        }
+        if(driverController.getPOV() == 0) {
+            previousHoodPosition = HoodPosition.FAR;
+        }
+        return previousHoodPosition;
+    }
 
-	}
+    public boolean stopShooter() {
 
-	public double getShooterSpeed() {
+        if (driverController.getButton(TTrigger.LEFT)) {
+            return true;
+        }
+        return false;
+    }
 
+    public double getShooterSpeed() {
+        return shooterSpeed;
+    }
 
-		if (driverController.getButton(TButton.LEFT_BUMPER)) {
-			shooterSpeed = shooterSpeed - 0.005;
-			if (shooterSpeed<0)
-				shooterSpeed = 0;
-		}
-		if(driverController.getButton(TButton.RIGHT_BUMPER)) {
-			shooterSpeed = shooterSpeed + 0.005;
-			if (shooterSpeed>1)
-				shooterSpeed = 1;
-		}
-		return shooterSpeed;
-	}
+    /**
+     * This command is used to override the shooter speed to a preset value;
+     * @param shooterSpeed
+     */
+    public void setShooterSpeed(double shooterSpeed) {
+        this.shooterSpeed = shooterSpeed;
+    }
 
-	public boolean runIntake() {
-		if(driverController.getButton(TButton.X)) {
-			return true;
-		}
-		if(runIntake()) {
-			return false;
-		}
-		return false;
-	}
+    /**
+     * This routine is called by the update periodic to set the
+     * shooter speed.
+     */
+    public void updateShooterSpeed() {
 
-	@Override
-	public void updatePeriodic() {
+        if (driverController.getButton(TTrigger.LEFT)) {
+            shooterSpeed = 0;
+        }
 
-		// Update all Toggles
-		compressorToggle.updatePeriodic();
-		speedPidToggle.updatePeriodic();
-		driverRumble.updatePeriodic();
+        if (driverController.getButton(TTrigger.RIGHT)) {
+            shooterSpeed = 0.5;
+        }
 
-		// Update all SmartDashboard values
-		SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());
-		SmartDashboard.putBoolean("Compressor Toggle", getCompressorEnabled());
-		SmartDashboard.putString("Driver Controller", driverController.toString());
-	}
+        if (driverController.getButton(TButton.LEFT_BUMPER)) {
+            shooterSpeed = shooterSpeed - 0.005;
+            if (shooterSpeed < 0) {
+                shooterSpeed = 0;
+            }
+        }
+
+        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+            shooterSpeed = shooterSpeed + 0.005;
+            if (shooterSpeed > 1) {
+                shooterSpeed = 1;
+            }
+        }
+    }
+
+    public boolean runShooterBB() {
+        //        if (driverController.getButton(TButton.A)) {
+        //            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
+        //            return true;
+        //        }
+        return false;
+    }
+
+    /* *********************************************************************
+     * Intake Controls
+     * *********************************************************************/
+
+    /**
+     * Start the feeder station intake
+     */
+    public boolean runFeederIntake() {
+
+        if(driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Start the ground intake
+     */
+    public boolean runGroundIntake() {
+
+        if(driverController.getButton(TButton.A)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Stop the intake
+     */
+    public boolean stopIntake() {
+
+        if (driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* *********************************************************************
+     * Carousel Controls
+     *
+     * NOTE: Carousel is currently tied to the intake buttons
+     * *********************************************************************/
+
+    public boolean runIntakeCarousel() {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean runShooterCarousel() {
+        if(driverController.getButton(TButton.B)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean stopCarousel() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* *********************************************************************
+     * Tower Controls
+     *
+     * NOTE: Tower is currently linked to the intake buttons
+     * *********************************************************************/
+
+    public boolean runIntakeTower() {
+        if (       driverController.getButton(TButton.A)
+                || driverController.getButton(TButton.Y)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean runShooterTower() {
+        if(driverController.getButton(TButton.B)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean stopTower() {
+        if(driverController.getButton(TButton.X)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updatePeriodic() {
+
+        // Update all Toggles
+        compressorToggle.updatePeriodic();
+        speedPidToggle.updatePeriodic();
+        driverRumble.updatePeriodic();
+
+        // Update the shooter from the buttons
+        updateShooterSpeed();
+
+        // Update all SmartDashboard values
+        SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());
+        SmartDashboard.putBoolean("Compressor Toggle", getCompressorEnabled());
+        SmartDashboard.putString("Driver Controller", driverController.toString());
+    }
 
 
 

@@ -27,7 +27,6 @@ public class AutoSelector {
         pattern.addOption(SHOOT_3_PICK_UP_3_TRENCH, SHOOT_3_PICK_UP_3_TRENCH);
         pattern.addOption(DRIVE_ON_CURVE, DRIVE_ON_CURVE);
 
-
         SmartDashboard.putData("Auto Pattern", pattern);
     }
 

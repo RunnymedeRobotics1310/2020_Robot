@@ -1,4 +1,4 @@
-package frc.robot.commands.intake;
+package frc.robot.commands.carousel;
 
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
@@ -9,17 +9,17 @@ import frc.robot.Robot;
 /**
  *
  */
-public class DefaultIntakeCommand extends TSafeCommand {
+public class DefaultCarouselCommand extends TSafeCommand {
 
 	private static final String COMMAND_NAME =
-			DefaultIntakeCommand.class.getSimpleName();
+			DefaultCarouselCommand.class.getSimpleName();
 
-	public DefaultIntakeCommand() {
+	public DefaultCarouselCommand() {
 
 		super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.intakeSubsystem);
+		requires(Robot.carouselSubsystem);
 	}
 
 	@Override
@@ -43,25 +43,23 @@ public class DefaultIntakeCommand extends TSafeCommand {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+        if (Robot.carouselSubsystem.isRobotFull()) {
+            Robot.carouselSubsystem.stopCarouselMotor();
+            return;
+        }
 
+        if (Robot.oi.stopCarousel()) {
+            Scheduler.getInstance().add(new StopCarouselCommand());
+        }
 
-		if (Robot.carouselSubsystem.isRobotFull()) {
-			Robot.intakeSubsystem.stopIntake();
-			return;
-		}
+        if (Robot.oi.runIntakeCarousel()) {
+            Scheduler.getInstance().add(new IntakeCarouselCommand());
+        }
 
-		if (Robot.oi.stopIntake()) {
-			Robot.intakeSubsystem.stopIntake();
-			return;
-		}
-
-		if (Robot.oi.runFeederIntake()) {
-			Scheduler.getInstance().add(new FeederIntakeCommand());
-		}
-		if (Robot.oi.runGroundIntake()) {
-			Scheduler.getInstance().add(new GroundIntakeCommand());
-		}
-	}
+        if (Robot.oi.runShooterCarousel()) {
+            Scheduler.getInstance().add(new ShooterCarouselCommand());
+        }
+    }
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
