@@ -6,6 +6,8 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
@@ -29,8 +31,8 @@ public class ShooterSubsystem extends TSubsystem {
 
     private TEncoder shooterEncoder = shooterMotor.getEncoder(RobotMap.SHOOTER_ENCODER_ISINVERTED);
 
-    private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
-    private Solenoid deployer = new Solenoid(RobotMap.SHOOTER_DEPLOYER_PNEUMATIC_PORT);
+    //private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
+    private DoubleSolenoid hood = new DoubleSolenoid(RobotMap.HOOD_RETRACT_PNEUMATIC_PORT,RobotMap.HOOD_EXTEND_PNEUMATIC_PORT);
 
     private HoodPosition curHoodPosition;
 
@@ -95,16 +97,16 @@ public class ShooterSubsystem extends TSubsystem {
 
         switch (hoodPosition) {
         case CLOSE:
-            stopper.set(false);// Do close code
-            deployer.set(false);
+            //stopper.set(false);// Do close code
+            hood.set(Value.kForward);
             break;
         case MEDIUM:
-            stopper.set(true);// Do med code
-            deployer.set(true);
+            //stopper.set(true);// Do med code
+            hood.set(Value.kForward);
             break;
         case FAR:
-            stopper.set(true);// Do far code
-            deployer.set(false);
+            //stopper.set(true);// Do far code
+            hood.set(Value.kReverse);
             break;
         }
 
@@ -117,15 +119,16 @@ public class ShooterSubsystem extends TSubsystem {
 
         if (shooterPid.isEnabled()) {
             if (shooterEncoder != null) {
-                shooterPid.calculate(shooterEncoder.getRate() / RobotConst.MAX_SHOOTER_SPEED);
+            	double rpm = (shooterEncoder.getRate()/42)*60;
+                shooterPid.calculate(rpm / RobotConst.MAX_SHOOTER_SPEED);
             }
             shooterMotor.set(shooterPid.get());
             shooterFollowerMotor.set(shooterPid.get());
         }
 
         SmartDashboard.putString("Hood Position", curHoodPosition.toString());
-        SmartDashboard.putBoolean("Stopper", stopper.get());
-        SmartDashboard.putBoolean("Deployer", deployer.get());
+        //SmartDashboard.putBoolean("Stopper", stopper.get());
+        //SmartDashboard.putBoolean("Deployer", deployer.get());
         SmartDashboard.putNumber( "Shooter Speed", shooterMotor.get());
         SmartDashboard.putNumber( "Shooter Encoder Speed", getShooterEncoderSpeed());
         SmartDashboard.putData("Shooter PID", shooterPid);

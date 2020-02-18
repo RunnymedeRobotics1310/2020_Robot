@@ -58,7 +58,7 @@ public class DefaultTowerCommand extends TSafeCommand {
 
         // Always shoot before stopping at the sensor
         if (Robot.oi.runShooterTower()) {
-            if (Robot.shooterSubsystem.isShooterRunning()) {
+            if (Robot.shooterPIDSubsystem.isShooterRunning()) {
                 Scheduler.getInstance().add(new ShooterTowerCommand());
             }
         }

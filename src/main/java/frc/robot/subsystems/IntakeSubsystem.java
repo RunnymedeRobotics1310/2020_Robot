@@ -4,6 +4,8 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
@@ -26,7 +28,7 @@ public class IntakeSubsystem extends TSubsystem {
                     RobotMap.INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
                     RobotMap.INTAKE_BOTTOM_MOTOR_ISINVERTED);
 
-    Solenoid intakePiston = new Solenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT);
+    DoubleSolenoid intakePiston = new DoubleSolenoid(RobotMap.INTAKE_EXTEND_PNEUMATIC_PORT, RobotMap.INTAKE_RETRACT_PNEUMATIC_PORT);
 
     @Override
     public void init() {
@@ -42,8 +44,6 @@ public class IntakeSubsystem extends TSubsystem {
 
         topRollerMotor.set(0);
         bottomRollerMotor.set(0);
-
-        retractIntake();
     }
 
     public boolean intakeRunning() {
@@ -61,11 +61,11 @@ public class IntakeSubsystem extends TSubsystem {
 
 
     public void extendIntake() {
-        intakePiston.set(true);;
+        intakePiston.set(Value.kForward);
     }
 
     public void retractIntake() {
-        intakePiston.set(false);
+        intakePiston.set(Value.kReverse);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class IntakeSubsystem extends TSubsystem {
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
-        SmartDashboard.putBoolean("Intake Piston Extend", intakePiston.get());
+        SmartDashboard.putString("Intake Piston Extend", intakePiston.get().toString());
         SmartDashboard.putNumber("Intake Top Roller Speed", topRollerMotor.get());
         SmartDashboard.putNumber("Intake Bottom Roller Speed", bottomRollerMotor.get());
         SmartDashboard.putData("Intake Subsystem", this);

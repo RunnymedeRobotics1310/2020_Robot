@@ -35,12 +35,12 @@ public class StopShooterCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
-        Robot.oi.setShooterSpeed(0);
+        Robot.oi.setShooterSetpoint(0);
 
         // NOTE: This code is not necessary because the
         //       default shooter command will do this once the
         //       oi value is set to zero
-        Robot.shooterSubsystem.stopShooterMotor();
+        Robot.shooterPIDSubsystem.stopShooterMotor();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -3,6 +3,7 @@ package frc.robot.commands.pneumatics;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import frc.robot.HoodPosition;
 import frc.robot.Robot;
 
 /**
@@ -48,6 +49,26 @@ public class DefaultPneumaticsCommand extends TSafeCommand {
         } else {
             Robot.pneumaticsSubsystem.disableCompressor();
         }
+        if (Robot.oi.intakeUp()) {
+        	Robot.intakeSubsystem.extendIntake();
+        }
+        
+        if (Robot.oi.intakeDown()) {
+        	Robot.intakeSubsystem.retractIntake();
+        }
+        
+        if (Robot.oi.shooterExtend()) {
+        	Robot.shooterPIDSubsystem.setHoodPosition(HoodPosition.FAR);
+        }
+        
+        if (Robot.oi.shooterRetract()) {
+        	Robot.shooterPIDSubsystem.setHoodPosition(HoodPosition.CLOSE);
+        }
+        
+        if (Robot.oi.intakeDown()) {
+        	Robot.intakeSubsystem.retractIntake();
+        }
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

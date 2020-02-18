@@ -48,6 +48,10 @@ public class RobotMap {
     public static final int						TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS;
     public static final TCanSpeedControllerType	TOWER_MOTOR_SPEED_CONTROLLER_TYPE;
     public static final boolean                 TOWER_MOTOR_ISINVERTED;
+    
+    public static final int						KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS;
+    public static final TCanSpeedControllerType	KICKER_MOTOR_SPEED_CONTROLLER_TYPE;
+    public static final boolean                 KICKER_MOTOR_ISINVERTED;
 
     public static final int                     SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS;
     public static final TCanSpeedControllerType SHOOTER_SPEED_CONTROLLER_TYPE;
@@ -55,7 +59,14 @@ public class RobotMap {
     public static final TCanSpeedControllerType SHOOTER_SPEED_FOLLOWER_TYPE;
     public static final boolean                 SHOOTER_MOTOR_ISINVERTED;
     public static final boolean                 SHOOTER_ENCODER_ISINVERTED;
-
+    
+    public static final int                     LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS;
+    public static final TCanSpeedControllerType LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE;
+    public static final int                     RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS;
+    public static final TCanSpeedControllerType RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE;
+  
+ 
+    // ******************************************
     // ******************************************
     // Gyro Ports
     // ******************************************
@@ -65,16 +76,29 @@ public class RobotMap {
     // ******************************************
     // Pneumatics Ports
     // ******************************************
-    public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT = 0;
+    public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT = 4;
+    public static final int                     INTAKE_RETRACT_PNEUMATIC_PORT = 5;
 
-    public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 1;
-    public static final int						SHOOTER_DEPLOYER_PNEUMATIC_PORT = 2;
+    //public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 0;
+    //public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 0;
+
+    
+    public static final int						HOOD_RETRACT_PNEUMATIC_PORT = 0;
+    public static final int						HOOD_EXTEND_PNEUMATIC_PORT = 1;
+
 
     // ******************************************
     // DIO Ports
     // ******************************************
     public static final int                      TOWER_BALL_DETECT_DIO_PORT = 0;
     public static final int                      CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+    
+    //FIND REAL ADDRESSES
+    public static final int 					 LEFT_CLIMB_TOP_DETECT_DIO_PORT = 2;
+    public static final int 					LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
+    public static final int 					 RIGHT_CLIMB_TOP_DETECT_DIO_PORT = 4;
+    public static final int 					RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
+
 
     // Initializers if this code will be deployed to more than one
     // robot with different mappings
@@ -84,16 +108,16 @@ public class RobotMap {
 
         case RobotConst.PRACTICE_ROBOT:
 
-            LEFT_DRIVE_SPEED_CONTROLLER_CAN_ADDRESS           = 10;
+            LEFT_DRIVE_SPEED_CONTROLLER_CAN_ADDRESS           = 20;
             LEFT_DRIVE_SPEED_CONTROLLER_TYPE                  = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_CAN_ADDRESS  = 11;
+            LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_CAN_ADDRESS  = 21;
             LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             LEFT_DRIVE_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
             LEFT_DRIVE_ENCODER_ISINVERTED                     = TConst.NOT_INVERTED;
 
-            RIGHT_DRIVE_SPEED_CONTROLLER_ADDRESS              = 20;
+            RIGHT_DRIVE_SPEED_CONTROLLER_ADDRESS              = 10;
             RIGHT_DRIVE_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_ADDRESS     = 21;
+            RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_ADDRESS     = 11;
             RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE        = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             RIGHT_DRIVE_MOTOR_ISINVERTED                      = TConst.INVERTED;
             RIGHT_DRIVE_ENCODER_ISINVERTED                    = TConst.INVERTED;
@@ -108,12 +132,16 @@ public class RobotMap {
 
             CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS       = 40;
             CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.VICTOR_SPX;
-            CAROUSEL_MOTOR_ISINVERTED                         = TConst.NOT_INVERTED;
-            CAROUSEL_ENCODER_ISINVERTED                       = TConst.NOT_INVERTED;
+            CAROUSEL_MOTOR_ISINVERTED                         = TConst.INVERTED;
+            CAROUSEL_ENCODER_ISINVERTED                       = TConst.INVERTED;
 
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
-            TOWER_MOTOR_ISINVERTED                            = TConst.INVERTED;
+            TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+            
+            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 46;
+            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
+            KICKER_MOTOR_ISINVERTED                            = TConst.INVERTED;
 
             SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
@@ -124,6 +152,13 @@ public class RobotMap {
 
             GYRO_ANALOG_PORT                                  = 0; // Not used
             GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;
+            
+            //FIND THE ACTUAL ADDRESS 
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 1;
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 		      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 2;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 
             break;
 
@@ -159,6 +194,10 @@ public class RobotMap {
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 26;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
             TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+            
+            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 36;
+            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
+            KICKER_MOTOR_ISINVERTED                            = TConst.INVERTED;
 
             SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 10;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
@@ -169,6 +208,13 @@ public class RobotMap {
 
             GYRO_ANALOG_PORT                                  = 0; // Not used
             GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;
+            
+            //FIND THE ACTUAL ADDRESS 
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 1;
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 		      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 2;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 
             break;
 
@@ -205,6 +251,10 @@ public class RobotMap {
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 26;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
             TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+            
+            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 36;
+            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
+            KICKER_MOTOR_ISINVERTED                            = TConst.INVERTED;
 
             SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.VICTOR_SPX;
@@ -215,6 +265,13 @@ public class RobotMap {
 
             GYRO_ANALOG_PORT                                  = 0;
             GYRO_ISINVERTED                                   = TConst.INVERTED;
+            
+            //FIND THE ACTUAL ADDRESS 
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 1;
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 		      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 2;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
 
         }
     }

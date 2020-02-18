@@ -21,7 +21,7 @@ public class BangBangShooterCommand extends TSafeCommand {
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
+        requires(Robot.shooterPIDSubsystem);
     }
 
     @Override
@@ -47,18 +47,18 @@ public class BangBangShooterCommand extends TSafeCommand {
     @Override
     protected void execute() {
         
-        SmartDashboard.putNumber( "Encoder Count", Robot.shooterSubsystem.getShooterEncoderSpeed());
+        SmartDashboard.putNumber( "Encoder Count", Robot.shooterPIDSubsystem.getShooterEncoderSpeed());
         
-            if (up && Robot.shooterSubsystem.getShooterEncoderSpeed() < 2450.00) {
-                up = false;
-                Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
-            }
-            else if (up && Robot.shooterSubsystem.getShooterEncoderSpeed() < 2250.00) {
-                up = true;
-            }
-            else {
-                Robot.shooterSubsystem.setShooterMotorSpeed(0);  
-            }
+//            if (up && Robot.shooterSubsystem.getShooterEncoderSpeed() < 2450.00) {
+//                up = false;
+//                Robot.shooterSubsystem.setShooterMotorSpeed(RobotConst.SHOOTER_BANGBANG_SPEED); 
+//            }
+//            else if (up && Robot.shooterSubsystem.getShooterEncoderSpeed() < 2250.00) {
+//                up = true;
+//            }
+//            else {
+//                Robot.shooterSubsystem.setShooterMotorSpeed(0);  
+//            }
         
      
     }

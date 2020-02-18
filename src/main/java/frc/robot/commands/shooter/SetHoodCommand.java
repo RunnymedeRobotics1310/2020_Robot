@@ -22,7 +22,7 @@ public class SetHoodCommand extends TSafeCommand {
 
         this.hoodPosition = hoodPosition;
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
+        requires(Robot.shooterPIDSubsystem);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SetHoodCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
-        Robot.shooterSubsystem.setHoodPosition(hoodPosition);
+        Robot.shooterPIDSubsystem.setHoodPosition(hoodPosition);
     }
 
     // Called repeatedly when this Command is scheduled to run

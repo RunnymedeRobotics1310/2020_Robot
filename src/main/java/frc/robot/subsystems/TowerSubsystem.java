@@ -19,6 +19,12 @@ public class TowerSubsystem extends TSubsystem {
                     RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_TYPE,
                     RobotMap.TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
                     RobotMap.TOWER_MOTOR_ISINVERTED);
+    
+    TSpeedController kickerMotor =
+            new TCanSpeedController(
+                    RobotMap.KICKER_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS,
+                    RobotMap.KICKER_MOTOR_ISINVERTED);
 
     TLimitSwitch ballDetector = new TLimitSwitch (RobotMap.TOWER_BALL_DETECT_DIO_PORT);
 
@@ -29,6 +35,10 @@ public class TowerSubsystem extends TSubsystem {
 
     public void setTowerMotorSpeed(double speed) {
         towerMotor.set(speed);
+    }
+    
+    public void setKickerMotorSpeed(double speed) {
+        kickerMotor.set(speed);
     }
 
     public boolean isTowerFull() {
@@ -41,6 +51,7 @@ public class TowerSubsystem extends TSubsystem {
 
     public void stopTowerMotor () {
         towerMotor.set(0);
+        kickerMotor.set(0);
     }
 
     @Override

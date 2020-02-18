@@ -12,6 +12,8 @@ import frc.robot.oi.OI.TestMode;
  *
  */
 public class DefaultShooterCommand extends TSafeCommand {
+	double setpoint = 0;
+	boolean set = false;
 
     private static final String COMMAND_NAME =
             DefaultShooterCommand.class.getSimpleName();
@@ -21,7 +23,7 @@ public class DefaultShooterCommand extends TSafeCommand {
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.shooterSubsystem);
+        requires(Robot.shooterPIDSubsystem);
     }
 
     @Override
@@ -40,6 +42,7 @@ public class DefaultShooterCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
+        set = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -52,12 +55,12 @@ public class DefaultShooterCommand extends TSafeCommand {
 
                 // When testing the shooter, enable the hood position pistons
                 HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
-                Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
+                Robot.shooterPIDSubsystem.setHoodPosition(userSelectedHoodPostion);
 
-                Robot.shooterSubsystem.setShooterMotorSpeed(Robot.oi.getTestMotorSpeed());
+                //Robot.shooterPIDSubsystem.setShooterMotorSpeed(Robot.oi.getTestMotorSpeed());
             }
             else {
-                Robot.shooterSubsystem.stopShooterMotor();
+                Robot.shooterPIDSubsystem.stopShooterMotor();
             }
             // If in test mode, then do not look for other buttons
             return;
@@ -65,14 +68,20 @@ public class DefaultShooterCommand extends TSafeCommand {
 
         // Set the hood position even when in test mode
         HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
-        Robot.shooterSubsystem.setHoodPosition(userSelectedHoodPostion);
-
-        if (Robot.oi.runShooterBB()) {
-            Scheduler.getInstance().add(new BangBangShooterCommand());
+        Robot.shooterPIDSubsystem.setHoodPosition(userSelectedHoodPostion);
+        if(setpoint!=Robot.oi.getShooterSetpoint()) {
+        	set = false;
         }
-
-        double userSelectedShooterSpeed = Robot.oi.getShooterSpeed();
-        Robot.shooterSubsystem.setShooterMotorSpeed(userSelectedShooterSpeed);
+        
+        setpoint = Robot.oi.getShooterSetpoint();
+        if(setpoint == 0) {
+        	Robot.shooterPIDSubsystem.stopShooterMotor();
+        	set = false;
+        }
+        else if(!set){
+        	Robot.shooterPIDSubsystem.setSetpoint(setpoint);
+        	set = true;
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

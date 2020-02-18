@@ -72,6 +72,10 @@ public class DefaultCarouselCommand extends TSafeCommand {
         if (Robot.oi.runShooterCarousel()) {
             Scheduler.getInstance().add(new ShooterCarouselCommand());
         }
+        if (Robot.oi.runReverse()) {
+            Scheduler.getInstance().add(new ReverseCarouselCommand());
+        }
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

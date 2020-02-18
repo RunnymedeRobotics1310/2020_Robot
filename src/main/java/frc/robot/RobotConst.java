@@ -26,12 +26,12 @@ public class RobotConst {
     // *********************************************************
     // INTAKE
     // *********************************************************
-    public static final double  INTAKE_SPEED				= 0.25;
+    public static final double  INTAKE_SPEED				= 0.5;
 
     // *********************************************************
     // Carousel Constants
     // *********************************************************
-    public static final double CAROUSEL_INTAKE_SPEED = 0.15;
+    public static final double CAROUSEL_INTAKE_SPEED = 0.35;
     public static final double CAROUSEL_SHOOTER_SPEED = 0.3;
 
     // *********************************************************
@@ -44,8 +44,10 @@ public class RobotConst {
     // *********************************************************
     // Tower Constants
     // *********************************************************
-    public static final double TOWER_INTAKE_SPEED  = 0.15;
-    public static final double TOWER_SHOOTER_SPEED = 0.3;
+    public static final double TOWER_INTAKE_SPEED  = .9;
+    public static final double TOWER_SHOOTER_SPEED = .9;
+    
+    public static final double KICKER_MOTOR_SPEED = 0.5;
 
     public static enum Direction {
         FORWARD, BACKWARD
@@ -56,8 +58,16 @@ public class RobotConst {
     public static final double SHOOTER_BANGBANG_SPEED  = 1;
     public static final double SHOOTER_SPEED_PID_KP;
     public static final double SHOOTER_SPEED_PID_KI;
-    public static final double MAX_SHOOTER_SPEED;
-
+    public static final double SHOOTER_KP = .00015;
+    public static final double SHOOTER_KI = .000000007;
+    public static final double SHOOTER_KD = .000;
+    public static final double SHOOTER_FF = 0.00019;
+public static final double MAX_SHOOTER_SPEED;
+    // *********************************************************
+    // Climb Constants
+    // *********************************************************
+    public static final double CLIMB_SPEED_UP       = 0.25;
+    public static final double CLIMB_SPEED_DOWN 	= -0.25;
     // The TorontoCodingCollective framework was developed to run on different
     // robots through the use of multiple mappings and constants.
     public static String robot = PRACTICE_ROBOT;

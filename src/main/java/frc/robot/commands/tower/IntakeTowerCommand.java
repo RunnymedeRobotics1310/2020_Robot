@@ -40,6 +40,8 @@ public class IntakeTowerCommand extends TSafeCommand {
         }
 
         Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_INTAKE_SPEED);
+        Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
+
     }
 
     // Called repeatedly when this Command is scheduled to run

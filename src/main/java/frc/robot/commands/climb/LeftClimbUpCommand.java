@@ -3,19 +3,18 @@ package frc.robot.commands.climb;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.carousel.StopCarouselCommand;
+import frc.robot.RobotConst;
 
 /**
  *
  */
-public class DefaultClimbCommand extends TSafeCommand {
+public class LeftClimbUpCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            DefaultClimbCommand.class.getSimpleName();
+            LeftClimbUpCommand.class.getSimpleName();
 
-    public DefaultClimbCommand() {
+    public LeftClimbUpCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -39,31 +38,14 @@ public class DefaultClimbCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
+        if (Robot.oi.runLeftClimbUp() == true) {
+        	Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_UP);
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	
-    	if (Robot.oi.runLeftClimbUp()) {
-            Scheduler.getInstance().add(new LeftClimbUpCommand());
-        }
-    	
-    	if (Robot.oi.runLeftClimbDown()) {
-            Scheduler.getInstance().add(new LeftClimbDownCommand());
-        }
-    	
-    	if (Robot.oi.runRightClimbUp()) {
-            Scheduler.getInstance().add(new RightClimbUpCommand());
-        }
-    	
-    	if (Robot.oi.runRightClimbDown()) {
-            Scheduler.getInstance().add(new RightClimbDownCommand());
-        }
-    	
-//    	if (Robot.oi.stopBothClimb()) {
-//    		Scheduler.getInstance().add(new StopClimbCommand());
-//    	}
 
        
     }
@@ -71,7 +53,14 @@ public class DefaultClimbCommand extends TSafeCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
+        if (Robot.oi.runLeftClimbUp()==false) {
+            return true;
+        }
         return false;
-    }
 
+}
+    @Override
+    protected void end() {
+        Robot.climbSubsystem.stopLeftClimbMotor();
+    }
 }

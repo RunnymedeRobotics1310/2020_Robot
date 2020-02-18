@@ -84,6 +84,14 @@ public class DefaultIntakeCommand extends TSafeCommand {
             Robot.intakeSubsystem.stopIntake();
             return;
         }
+         
+        if (Robot.oi.feederExtake()) {
+            Scheduler.getInstance().add(new FeederExtakeCommand());
+        }
+        
+        if (Robot.oi.groundExtake()) {
+            Scheduler.getInstance().add(new GroundExtakeCommand());
+        }
 
         if (Robot.oi.runFeederIntake()) {
             Scheduler.getInstance().add(new FeederIntakeCommand());

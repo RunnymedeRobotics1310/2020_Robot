@@ -63,6 +63,7 @@ public class CarouselSubsystem extends TSubsystem {
         SmartDashboard.putNumber("Carousel Speed", carouselMotor.get());
         SmartDashboard.putBoolean("Carousel Filled", isCarouselFull());
         SmartDashboard.putBoolean("Robot Filled", isRobotFull());
+        SmartDashboard.putNumber("Carousel Current", Robot.pdp.getCurrent(10));
 
     }
 

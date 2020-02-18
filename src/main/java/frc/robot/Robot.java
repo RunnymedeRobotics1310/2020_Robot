@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.PowerSubsystem;
+import frc.robot.subsystems.ShooterPIDSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
@@ -39,11 +41,13 @@ public class Robot extends TimedRobot {
 	public static final PowerSubsystem          powerSubsystem          = new PowerSubsystem();
 	public static final CameraSubsystem         cameraSubsystem         = new CameraSubsystem();
 	public static final ClimbSubsystem			climbSubsystem			= new ClimbSubsystem();
-	public static final ShooterSubsystem		shooterSubsystem		= new ShooterSubsystem();
+	public static final ShooterPIDSubsystem		shooterPIDSubsystem		= new ShooterPIDSubsystem();
 	public static final ColorWheelSubsystem		colorWheelSubsystem		= new ColorWheelSubsystem();
 	public static final TowerSubsystem			towerSubsystem			= new TowerSubsystem();
 	public static final IntakeSubsystem			intakeSubsystem 		= new IntakeSubsystem();
 	public static final CarouselSubsystem		carouselSubsystem		= new CarouselSubsystem();
+	public static final PowerDistributionPanel pdp = new PowerDistributionPanel(0);
+
 
 
 	public static OI                            oi;
@@ -56,7 +60,7 @@ public class Robot extends TimedRobot {
 		subsystemLs.add(pneumaticsSubsystem);
 		subsystemLs.add(powerSubsystem);
 		subsystemLs.add(cameraSubsystem);
-		subsystemLs.add(shooterSubsystem);
+		subsystemLs.add(shooterPIDSubsystem);
 		subsystemLs.add(climbSubsystem);
 		subsystemLs.add(colorWheelSubsystem);
 		subsystemLs.add(towerSubsystem);
