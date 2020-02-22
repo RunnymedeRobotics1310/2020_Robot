@@ -1,5 +1,6 @@
 package frc.robot.oi;
 
+import com.torontocodingcollective.oi.TAxis;
 import com.torontocodingcollective.oi.TButton;
 import com.torontocodingcollective.oi.TButtonPressDetector;
 import com.torontocodingcollective.oi.TGameController;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -268,43 +270,41 @@ public class OI extends TOi {
      * shooter speed.
      */
     public void updateShooterSpeed() {
-/*
- 	if (isTestModeEnabled()) {
-            shooterSpeed = 0;
-            return;
-        }
-
-        if (driverController.getButton(TTrigger.LEFT)) {
-            shooterSpeed = 0;
-        }
-       
-        if (driverController.getButton(TTrigger.RIGHT)) {
-            shooterSpeed = 0.5;
-        }
-
-        if (driverController.getButton(TButton.LEFT_BUMPER)) {
-            shooterSpeed = shooterSpeed - 0.005;
-            if (shooterSpeed < 0) {
-                shooterSpeed = 0;
-            }
-        }
-
-        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
-           shooterSpeed = shooterSpeed + 0.005;
-            if (shooterSpeed > 1) {
-               shooterSpeed = 1;
-            }
-        }
- */
+//
+// 	if (isTestModeEnabled()) {
+//            shooterSpeed = 0;
+//            return;
+//        }
+//
+//        if (driverController.getButton(TTrigger.LEFT)) {
+//            shooterSpeed = 0;
+//        }
+//       
+//        if (driverController.getButton(TTrigger.RIGHT)) {
+//            shooterSpeed = 0.5;
+//        }
+//
+//        if (driverController.getButton(TButton.LEFT_BUMPER)) {
+//            shooterSpeed = shooterSpeed - 0.005;
+//            if (shooterSpeed < 0) {
+//                shooterSpeed = 0;
+//            }
+//        }
+//
+//        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
+//           shooterSpeed = shooterSpeed + 0.005;
+//            if (shooterSpeed > 1) {
+//               shooterSpeed = 1;
+//            }
+//        }
+// 
        
     	rpm = SmartDashboard.getNumber("RPM", 0);
 
         SmartDashboard.putNumber("RPM", rpm);
 
         if (operatorController.getButton(TButton.Y)) {
-          
-
-        
+        	
         	shooterSetpoint = rpm;
         	
         	// Front Trench
@@ -324,7 +324,7 @@ public class OI extends TOi {
         	shooterSetpoint = 5000;
         	//Target zone
         }
-        else if(operatorController.getPOV() == 180) {
+        else if(operatorController.getPOV() == 0) {
         	shooterSetpoint = 3500;
         }
         else {
@@ -400,7 +400,7 @@ public class OI extends TOi {
      */
     public boolean stopIntake() {
     	
-    	if(!driverController.getButton(TTrigger.RIGHT) && !driverController.getButton(TTrigger.LEFT)) {
+    	if(!groundExtake() && !runGroundIntake() && !runFeederIntake() && !feederExtake()) {
             return true;
         }
         return false;
@@ -422,9 +422,9 @@ public class OI extends TOi {
     }
 
     public boolean runShooterCarousel() {
-        if(driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
+        if((driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
         		|| operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
-        		|| operatorController.getButton(TButton.B)) {
+        		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady == true) {
             return true;
         }
         return false;
@@ -443,6 +443,13 @@ public class OI extends TOi {
     	}
     	return false;
     }
+    
+    public double joystickCarousel(){
+    	if (Math.abs(operatorController.getAxis(TStick.LEFT, TAxis.Y)) > 0.2) {
+    		return operatorController.getAxis(TStick.LEFT, TAxis.Y);
+    	}
+    	return 0.0;
+    }
 
     /* *********************************************************************
      * Tower Controls
@@ -459,9 +466,9 @@ public class OI extends TOi {
     }
 
     public boolean runShooterTower() {
-        if(driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
+        if((driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
         		|| operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
-        		|| operatorController.getButton(TButton.B)) {
+        		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()){
             return true;
         }
         return false;

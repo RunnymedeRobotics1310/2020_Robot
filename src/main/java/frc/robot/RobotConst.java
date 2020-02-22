@@ -14,6 +14,8 @@ public class RobotConst {
 
     public static final double  DRIVE_GYRO_PID_KP;
     public static final double  DRIVE_GYRO_PID_KI;
+    public static final double  DRIVE_GYRO_PID_KD;
+
     public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.6;
 
     public static final double  DRIVE_SPEED_PID_KP;
@@ -90,10 +92,13 @@ public static final double MAX_SHOOTER_SPEED;
             // stability and acceptable performance
             DRIVE_GYRO_PID_KP = .07;
             DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KD = .07;
+
 
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
+            
 
             SHOOTER_SPEED_PID_KP = 0.5;
             SHOOTER_SPEED_PID_KI = 0.05;
@@ -118,6 +123,7 @@ public static final double MAX_SHOOTER_SPEED;
             // stability and acceptable performance
             DRIVE_GYRO_PID_KP = .07;
             DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
@@ -146,6 +152,7 @@ public static final double MAX_SHOOTER_SPEED;
             // stability and acceptable performance
             DRIVE_GYRO_PID_KP = .07;
             DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;

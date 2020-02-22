@@ -60,6 +60,9 @@ public class DefaultCarouselCommand extends TSafeCommand {
             Robot.carouselSubsystem.stopCarouselMotor();
             return;
         }
+        if (Robot.oi.joystickCarousel() !=0.0) {
+        	Scheduler.getInstance().add(new JoystickCarouselCommand());
+        }
 
         if (Robot.oi.stopCarousel()) {
             Scheduler.getInstance().add(new StopCarouselCommand());

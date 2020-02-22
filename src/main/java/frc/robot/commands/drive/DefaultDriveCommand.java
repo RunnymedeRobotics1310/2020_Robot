@@ -6,7 +6,9 @@ import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TStickPosition;
 import com.torontocodingcollective.speedcontroller.TSpeeds;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.carousel.IntakeCarouselCommand;
 import frc.robot.oi.OI;
 import frc.robot.oi.OI.TestMode;
 import frc.robot.subsystems.DriveSubsystem;
@@ -81,9 +83,8 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         TStick singleStickSide = oi.getSelectedSingleStickSide();
 
         TSpeeds motorSpeeds;
-
         switch (oi.getSelectedDriveType()) {
-
+        
         case SINGLE_STICK:
             TStickPosition singleStickPosition = rightStickPosition;
             if (singleStickSide == TStick.LEFT) {

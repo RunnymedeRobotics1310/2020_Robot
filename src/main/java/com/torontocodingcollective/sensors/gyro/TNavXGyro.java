@@ -35,7 +35,7 @@ public class TNavXGyro extends TGyro {
     public double getPitch() {
         // Not sure why pitch and roll are reversed on the NavX.
         // FIXME: Test the pitch every year.
-        return navXGyro.getRoll();
+        return navXGyro.getPitch();
     }
 
     @Override

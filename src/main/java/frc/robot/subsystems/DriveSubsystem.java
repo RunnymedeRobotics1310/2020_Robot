@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.sensors.gyro.TAnalogGyro;
 import com.torontocodingcollective.sensors.gyro.TNavXGyro;
@@ -17,6 +18,7 @@ import frc.robot.commands.drive.DefaultDriveCommand;
  * drive subsystem.
  */
 public class DriveSubsystem extends TGyroDriveSubsystem {
+	AHRS ahrs;
 
     public DriveSubsystem() {
 
@@ -62,6 +64,7 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
 
     @Override
     public void init() {
+    	ahrs = new AHRS();
     }
 
     // Initialize the default command for the Chassis subsystem.

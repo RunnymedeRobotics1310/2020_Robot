@@ -448,6 +448,7 @@ public abstract class TGyroDriveSubsystem extends TDriveSubsystem {
         // Update all SmartDashboard values
         SmartDashboard.putData("Gyro", gyro);
         SmartDashboard.putNumber("Gyro Angle", getGyroAngle());
+        SmartDashboard.putNumber("ANGLE Angle", gyro.getAngle());
 
         SmartDashboard.putData("Gyro PID", gyroPid);
 

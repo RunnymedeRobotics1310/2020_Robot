@@ -37,6 +37,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
     private HoodPosition curHoodPosition;
     private double setpoint;
     private boolean stop;
+    public boolean isShooterReady;
     
 
     private boolean shooterPidEnabled = true;
@@ -86,6 +87,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
     public void setSetpoint(double setpoint) {
     	this.setpoint = setpoint;
     	this.stop = false;
+    	this.isShooterReady = false;
     }
     
     
@@ -101,6 +103,8 @@ public class ShooterPIDSubsystem extends TSubsystem {
         motor.set(0);
         motor2.set(0);
         this.stop = true;
+    	this.isShooterReady = false;
+        
     }
 
     public double getShooterEncoderSpeed() {
@@ -126,9 +130,19 @@ public class ShooterPIDSubsystem extends TSubsystem {
         curHoodPosition = hoodPosition;
     }
 
+    
+    public boolean isShooterReady() {
+    	return isShooterReady;
+    }
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
+    	
+    	if (!isShooterReady) {
+    		if (encoder.getVelocity() > (setpoint - 20)) {
+    			isShooterReady = true;
+    		}
+    	}
     	
     	// read PID coefficients from SmartDashboard
 //        p = SmartDashboard.getNumber("P Gain", 0);
