@@ -79,8 +79,8 @@ public class RobotMap {
     public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT = 4;
     public static final int                     INTAKE_RETRACT_PNEUMATIC_PORT = 5;
 
-    //public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 0;
-    //public static final int						SHOOTER_STOPPER_PNEUMATIC_PORT = 0;
+    public static final int						STOPPER_RETRACT_PNEUMATIC_PORT = 2;
+    public static final int						STOPPER_EXTEND_PNEUMATIC_PORT = 3;
 
     
     public static final int						HOOD_RETRACT_PNEUMATIC_PORT = 0;
@@ -123,15 +123,15 @@ public class RobotMap {
             RIGHT_DRIVE_ENCODER_ISINVERTED                    = TConst.INVERTED;
 
             INTAKE_TOP_MOTOR_CAN_SPEED_CONTROLLER_CAN_ADDRESS = 30;
-            INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.INVERTED;
+            INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
 
             INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS  = 31;
-            INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            INTAKE_BOTTOM_MOTOR_ISINVERTED                    = TConst.NOT_INVERTED;
+            INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_BOTTOM_MOTOR_ISINVERTED                    = TConst.INVERTED;
 
-            CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS       = 40;
-            CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.VICTOR_SPX;
+            CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS       = 39;
+            CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             CAROUSEL_MOTOR_ISINVERTED                         = TConst.INVERTED;
             CAROUSEL_ENCODER_ISINVERTED                       = TConst.INVERTED;
 

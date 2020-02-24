@@ -40,7 +40,7 @@ public class GroundIntakeCommand extends TSafeCommand {
         }
 
         Robot.intakeSubsystem.extendIntake();
-        Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED*0.7, RobotConst.INTAKE_SPEED);
+        Robot.intakeSubsystem.setIntakeSpeed(RobotConst.INTAKE_SPEED, RobotConst.INTAKE_SPEED *0.8 );
     }
 
     // Called repeatedly when this Command is scheduled to run

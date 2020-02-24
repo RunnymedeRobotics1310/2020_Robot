@@ -9,6 +9,7 @@ import com.torontocodingcollective.speedcontroller.TSpeeds;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.commands.carousel.IntakeCarouselCommand;
+import frc.robot.commands.intake.FeederExtakeCommand;
 import frc.robot.oi.OI;
 import frc.robot.oi.OI.TestMode;
 import frc.robot.subsystems.DriveSubsystem;
@@ -83,6 +84,10 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         TStick singleStickSide = oi.getSelectedSingleStickSide();
 
         TSpeeds motorSpeeds;
+//        if(!Robot.oi.activated) {
+//        	Robot.oi.activated = true;
+//        	Scheduler.getInstance().add(new GyroTurnCommand(180));
+//        }
         switch (oi.getSelectedDriveType()) {
         
         case SINGLE_STICK:

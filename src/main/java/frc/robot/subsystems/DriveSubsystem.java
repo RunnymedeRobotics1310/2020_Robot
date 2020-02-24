@@ -52,7 +52,7 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
         // Get the encoders attached to the CAN bus speed controllers
         TEncoder leftEncoder = getSpeedController(TSide.LEFT).getEncoder();
         TEncoder rightEncoder = getSpeedController(TSide.RIGHT).getEncoder();
-
+        
         super.setEncoders(
                 leftEncoder,  RobotMap.LEFT_DRIVE_MOTOR_ISINVERTED,
                 rightEncoder, RobotMap.RIGHT_DRIVE_MOTOR_ISINVERTED,
@@ -65,6 +65,7 @@ public class DriveSubsystem extends TGyroDriveSubsystem {
     @Override
     public void init() {
     	ahrs = new AHRS();
+    	gyro.calibrate();
     }
 
     // Initialize the default command for the Chassis subsystem.

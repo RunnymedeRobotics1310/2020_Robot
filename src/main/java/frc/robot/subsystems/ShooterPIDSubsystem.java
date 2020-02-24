@@ -33,6 +33,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
 	
     //private Solenoid stopper = new Solenoid(RobotMap.SHOOTER_STOPPER_PNEUMATIC_PORT);
     private DoubleSolenoid hood = new DoubleSolenoid(RobotMap.HOOD_RETRACT_PNEUMATIC_PORT,RobotMap.HOOD_EXTEND_PNEUMATIC_PORT);
+    private DoubleSolenoid pancake = new DoubleSolenoid(RobotMap.STOPPER_EXTEND_PNEUMATIC_PORT,RobotMap.STOPPER_RETRACT_PNEUMATIC_PORT);
 
     private HoodPosition curHoodPosition;
     private double setpoint;
@@ -114,15 +115,16 @@ public class ShooterPIDSubsystem extends TSubsystem {
 
         switch (hoodPosition) {
         case CLOSE:
-            //stopper.set(false);// Do close code
+            pancake.set(Value.kReverse);// Do close code
             hood.set(Value.kForward);
             break;
         case MEDIUM:
             //stopper.set(true);// Do med code
+        	pancake.set(Value.kForward);
             hood.set(Value.kForward);
             break;
         case FAR:
-            //stopper.set(true);// Do far code
+        	pancake.set(Value.kForward);// Do far code
             hood.set(Value.kReverse);
             break;
         }
@@ -139,7 +141,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
     public void updatePeriodic() {
     	
     	if (!isShooterReady) {
-    		if (encoder.getVelocity() > (setpoint - 20)) {
+    		if (encoder.getVelocity() > (setpoint - 150)) {
     			isShooterReady = true;
     		}
     	}

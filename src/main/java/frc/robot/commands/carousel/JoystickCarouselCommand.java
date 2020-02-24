@@ -41,20 +41,19 @@ public class JoystickCarouselCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
+        Robot.carouselSubsystem.setCarouselMotorSpeed(Robot.oi.joystickCarousel());
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
 
-        Robot.carouselSubsystem.setCarouselMotorSpeed(Robot.oi.joystickCarousel());
-
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-    	return Robot.oi.joystickCarousel() == 0.0;
+    	return true;
 	}
 
 }

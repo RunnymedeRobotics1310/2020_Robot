@@ -58,6 +58,7 @@ public class OI extends TOi {
     private TToggle         testModeToggle   = new TToggle();
     
     private double rpm = 2000;
+    public boolean activated = false;
 
     public enum TestMode {
         NONE,
@@ -221,9 +222,9 @@ public class OI extends TOi {
         if (operatorController.getPOV() == 270) {
             previousHoodPosition = HoodPosition.CLOSE;
         }
-//        if(operatorController.getPOV() == 180) {
-//            previousHoodPosition = HoodPosition.MEDIUM;
-//        }
+        if(operatorController.getPOV() == 180) {
+            previousHoodPosition = HoodPosition.MEDIUM;
+        }
         if(operatorController.getPOV() == 90) {
             previousHoodPosition = HoodPosition.FAR;
         }
@@ -350,14 +351,14 @@ public class OI extends TOi {
      */
     public boolean runFeederIntake() {
 
-        if(driverController.getButton(TTrigger.LEFT)) {
+        if(driverController.getButton(TTrigger.LEFT) || operatorController.getButton(TTrigger.LEFT)) {
             return true;
         }
         return false;
     }
     
     public boolean feederExtake() {
-    	if (driverController.getButton(TButton.X)) {
+    	if (driverController.getButton(TButton.X) || operatorController.getButton(TButton.LEFT_BUMPER)) {
     		return true;
     	}
     	return false;
@@ -368,14 +369,14 @@ public class OI extends TOi {
      */
     public boolean runGroundIntake() {
 
-        if(driverController.getButton(TTrigger.RIGHT)) {
+        if(driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.RIGHT)) {
             return true;
         }
         return false;
     }
     
     public boolean groundExtake() {
-    	if (driverController.getButton(TButton.B)) {
+    	if (driverController.getButton(TButton.B) || operatorController.getButton(TButton.RIGHT_BUMPER)) {
     		return true;
     	}
     	return false;
@@ -415,7 +416,8 @@ public class OI extends TOi {
 
     public boolean runIntakeCarousel() {
         if (       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT)) {
+                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.RIGHT)
+                || operatorController.getButton(TTrigger.LEFT)) {
             return true;
         }
         return false;
@@ -431,7 +433,7 @@ public class OI extends TOi {
     }
 
     public boolean stopCarousel() {
-        if(!runIntakeCarousel() && !runShooterCarousel()) {
+        if(!runIntakeCarousel() && !runShooterCarousel() && joystickCarousel() == 0.0) {
             return true;
         }
         return false;
@@ -459,7 +461,8 @@ public class OI extends TOi {
 
     public boolean runIntakeTower() {
         if ((       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT)) && !Robot.towerSubsystem.isTowerFull()){
+                || driverController.getButton(TTrigger.RIGHT)) || operatorController.getButton(TTrigger.LEFT) 
+        		|| operatorController.getButton(TTrigger.RIGHT)&& !Robot.towerSubsystem.isTowerFull()){
             return true;
         }
         return false;
@@ -545,6 +548,7 @@ public class OI extends TOi {
         updateShooterSpeed();
 
         // Update all SmartDashboard values
+        SmartDashboard.putNumber("Joystick", joystickCarousel());
         SmartDashboard.putBoolean("Speed PID Toggle", getSpeedPidEnabled());
         SmartDashboard.putBoolean("Compressor Toggle", getCompressorEnabled());
         SmartDashboard.putString("Driver Controller", driverController.toString());

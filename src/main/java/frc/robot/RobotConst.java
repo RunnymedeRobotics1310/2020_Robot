@@ -28,13 +28,13 @@ public class RobotConst {
     // *********************************************************
     // INTAKE
     // *********************************************************
-    public static final double  INTAKE_SPEED				= 0.5;
+    public static final double  INTAKE_SPEED				= 1;
 
     // *********************************************************
     // Carousel Constants
     // *********************************************************
-    public static final double CAROUSEL_INTAKE_SPEED = 0.35;
-    public static final double CAROUSEL_SHOOTER_SPEED = 0.3;
+    public static final double CAROUSEL_INTAKE_SPEED = 0.25;
+    public static final double CAROUSEL_SHOOTER_SPEED = 0.25;
 
     // *********************************************************
     // For Ultrasonic Calibration
@@ -91,8 +91,8 @@ public static final double MAX_SHOOTER_SPEED;
             // above this value, but typically gives good
             // stability and acceptable performance
             DRIVE_GYRO_PID_KP = .07;
-            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
-            DRIVE_GYRO_PID_KD = .07;
+            DRIVE_GYRO_PID_KI = .00;
+            DRIVE_GYRO_PID_KD = .00;
 
 
 
