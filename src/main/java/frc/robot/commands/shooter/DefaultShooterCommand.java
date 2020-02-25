@@ -3,7 +3,7 @@ package frc.robot.commands.shooter;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.oi.OI.TestMode;
@@ -12,8 +12,8 @@ import frc.robot.oi.OI.TestMode;
  *
  */
 public class DefaultShooterCommand extends TSafeCommand {
-	double setpoint = 0;
-	boolean set = false;
+    double setpoint = 0;
+    boolean set = false;
 
     private static final String COMMAND_NAME =
             DefaultShooterCommand.class.getSimpleName();
@@ -66,21 +66,26 @@ public class DefaultShooterCommand extends TSafeCommand {
             return;
         }
 
+        // Do not look at the Joystick in auto.
+        if (DriverStation.getInstance().isAutonomous()) {
+            return;
+        }
+
         // Set the hood position even when in test mode
         HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         Robot.shooterPIDSubsystem.setHoodPosition(userSelectedHoodPostion);
         if(setpoint!=Robot.oi.getShooterSetpoint()) {
-        	set = false;
+            set = false;
         }
-        
+
         setpoint = Robot.oi.getShooterSetpoint();
         if(setpoint == 0) {
-        	Robot.shooterPIDSubsystem.stopShooterMotor();
-        	set = false;
+            Robot.shooterPIDSubsystem.stopShooterMotor();
+            set = false;
         }
         else if(!set){
-        	Robot.shooterPIDSubsystem.setSetpoint(setpoint);
-        	set = true;
+            Robot.shooterPIDSubsystem.setSetpoint(setpoint);
+            set = true;
         }
     }
 

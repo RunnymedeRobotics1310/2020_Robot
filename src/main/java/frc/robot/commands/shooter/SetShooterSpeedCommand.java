@@ -39,16 +39,7 @@ public class SetShooterSpeedCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
-//        // Use the default command to set the shooter speed.
-//        // This command should only set the value in the OI
-//        // which can then be tweaked by the user
-//        Robot.oi.setShooterSpeed(shooterSpeed);
-//
-//        // NOTE: This code is not necessary because the
-//        //       default shooter command will do this once the
-//        //       oi value is set
-//        Robot.shooterSubsystem.setShooterMotorSpeed(shooterSpeed);
-
+        Robot.shooterPIDSubsystem.setSetpoint(shooterSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
