@@ -47,10 +47,10 @@ public class ShooterPIDSubsystem extends TSubsystem {
     public void init() {
     	stop = true;
     	setpoint = 0;
-    	motor = new CANSparkMax(RobotMap.SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS, MotorType.kBrushless);
-    	motor2 = new CANSparkMax(RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS, MotorType.kBrushless);
-    	motor.setInverted(true);
-    	motor2.setInverted(false);
+    	motor = new CANSparkMax(RobotMap.SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS, MotorType.kBrushless);
+    	motor2 = new CANSparkMax(RobotMap.SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS, MotorType.kBrushless);
+    	motor.setInverted(false);
+    	motor2.setInverted(true);
     	pidController = motor.getPIDController();
     	encoder = motor.getEncoder();
     	

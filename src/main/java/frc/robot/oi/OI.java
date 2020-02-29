@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.drive.GyroTurnCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -312,7 +313,9 @@ public class OI extends TOi {
         }
        
         else if (operatorController.getButton(TButton.X) || driverController.getButton(TButton.Y)) {
+//        	new GyroTurnCommand();
         	shooterSetpoint = 3000;
+
         	//Limelight
         }
         
@@ -426,7 +429,7 @@ public class OI extends TOi {
     public boolean runShooterCarousel() {
         if((driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
         		|| operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
-        		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady == true) {
+        		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()) {
             return true;
         }
         return false;

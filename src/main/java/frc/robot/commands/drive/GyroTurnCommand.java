@@ -15,6 +15,9 @@ import frc.robot.RobotConst;
 import frc.robot.oi.OI;
 import frc.robot.oi.OI.TestMode;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * Default drive command for a drive base
@@ -23,7 +26,10 @@ public class GyroTurnCommand extends TSafeCommand {
 	private AHRS ahrs;
 	PIDController turnController;
 	double rotateToAngleRate;
-	double setpoint;  
+	NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
 	
     private static final String COMMAND_NAME =
             DefaultDriveCommand.class.getSimpleName();
@@ -33,12 +39,11 @@ public class GyroTurnCommand extends TSafeCommand {
 
     TDifferentialDrive differentialDrive = new TDifferentialDrive();
 
-    public GyroTurnCommand(double setpoint) {
+    public GyroTurnCommand() {
         // The drive logic will be handled by the TDefaultDriveCommand
         // which also contains the requires(driveSubsystem) statement
     	super(Robot.oi);
         requires(Robot.driveSubsystem);
-        this.setpoint = setpoint;
     }
 
     @Override
@@ -54,16 +59,18 @@ public class GyroTurnCommand extends TSafeCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+
+        
     	
     	turnController = new PIDController(RobotConst.DRIVE_GYRO_PID_KP, RobotConst.DRIVE_GYRO_PID_KI, RobotConst.DRIVE_GYRO_PID_KD);
-        turnController.enableContinuousInput(-180.0f,  180.0f);
 
         // Print the command parameters if this is the current
         // called command (it was not sub-classed)
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
-        turnController.setSetpoint(setpoint);
+        turnController.setSetpoint(0.0);
+        turnController.setTolerance(.1);
         ahrs = new AHRS();
         super.initialize();
     }
@@ -72,13 +79,22 @@ public class GyroTurnCommand extends TSafeCommand {
     @Override
     protected void execute() {
 //    	turnController.calculate(driveSubsystem.getGyroAngle());
-    	
-    	SmartDashboard.putNumber("Angle Angle", ahrs.getAngle());
-    	}
+    	//read values periodically
+        double x = tx.getDouble(0.0);
+        double y = ty.getDouble(0.0);
+        double area = ta.getDouble(0.0);
+      //post to smart dashboard periodically
+        SmartDashboard.putNumber("LimelightX", x);
+        SmartDashboard.putNumber("LimelightY", y);
+        SmartDashboard.putNumber("LimelightArea", area);
+        
+    	double turn = turnController.calculate(x);
+    	driveSubsystem.setSpeed(new TSpeeds(-turn,turn));
+	}
 
     @Override
     protected boolean isFinished() {
         // The default command does not end
-        return false;
+        return turnController.atSetpoint();
     }
 }

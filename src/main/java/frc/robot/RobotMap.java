@@ -132,8 +132,8 @@ public class RobotMap {
 
             CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS       = 39;
             CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            CAROUSEL_MOTOR_ISINVERTED                         = TConst.INVERTED;
-            CAROUSEL_ENCODER_ISINVERTED                       = TConst.INVERTED;
+            CAROUSEL_MOTOR_ISINVERTED                         = TConst.NOT_INVERTED;
+            CAROUSEL_ENCODER_ISINVERTED                       = TConst.NOT_INVERTED;
 
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
@@ -147,8 +147,8 @@ public class RobotMap {
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS                = 51;
             SHOOTER_SPEED_FOLLOWER_TYPE                       = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            SHOOTER_MOTOR_ISINVERTED                          = TConst.INVERTED;
-            SHOOTER_ENCODER_ISINVERTED                        = TConst.INVERTED;
+            SHOOTER_MOTOR_ISINVERTED                          = TConst.NOT_INVERTED;
+            SHOOTER_ENCODER_ISINVERTED                        = TConst.NOT_INVERTED;
 
             GYRO_ANALOG_PORT                                  = 0; // Not used
             GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;

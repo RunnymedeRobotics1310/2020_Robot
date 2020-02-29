@@ -13,6 +13,7 @@ public class AutoSelector {
     public static final String            SHOOT_3_PICK_UP_3_SHOOT_3       = "Shoot 3, Pick up 3, shoot 3";
     public static final String            SHOOT_3_PICK_UP_3_TRENCH       = "Shoot 3, Pick up 3 in the trench";
     public static final String            DRIVE_ON_CURVE       = "Test drive on curve command";
+    public static final String            SHOOT_5_BALLS       = "Shoot 5";
 
     
     static {
@@ -26,6 +27,8 @@ public class AutoSelector {
         pattern.addOption(SHOOT_3_PICK_UP_3_SHOOT_3, SHOOT_3_PICK_UP_3_SHOOT_3);
         pattern.addOption(SHOOT_3_PICK_UP_3_TRENCH, SHOOT_3_PICK_UP_3_TRENCH);
         pattern.addOption(DRIVE_ON_CURVE, DRIVE_ON_CURVE);
+        pattern.addOption(SHOOT_5_BALLS, SHOOT_5_BALLS);
+
 
         SmartDashboard.putData("Auto Pattern", pattern);
     }

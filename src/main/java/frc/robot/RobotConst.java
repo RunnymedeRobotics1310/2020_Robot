@@ -12,9 +12,9 @@ public class RobotConst {
     // *********************************************************
     public static final double  MAX_DRIVE_ENCODER_SPEED;
 
-    public static final double  DRIVE_GYRO_PID_KP;
-    public static final double  DRIVE_GYRO_PID_KI;
-    public static final double  DRIVE_GYRO_PID_KD;
+    public static final double  DRIVE_GYRO_PID_KP = 0.007;
+    public static final double  DRIVE_GYRO_PID_KI = 0.0001;
+    public static final double  DRIVE_GYRO_PID_KD = 0.000;
 
     public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.6;
 
@@ -49,7 +49,7 @@ public class RobotConst {
     public static final double TOWER_INTAKE_SPEED  = .9;
     public static final double TOWER_SHOOTER_SPEED = .9;
     
-    public static final double KICKER_MOTOR_SPEED = 0.5;
+    public static final double KICKER_MOTOR_SPEED = 0.4;
 
     public static enum Direction {
         FORWARD, BACKWARD
@@ -60,10 +60,10 @@ public class RobotConst {
     public static final double SHOOTER_BANGBANG_SPEED  = 1;
     public static final double SHOOTER_SPEED_PID_KP;
     public static final double SHOOTER_SPEED_PID_KI;
-    public static final double SHOOTER_KP = .00015;
+    public static final double SHOOTER_KP = .0001;
     public static final double SHOOTER_KI = .000000007;
     public static final double SHOOTER_KD = .000;
-    public static final double SHOOTER_FF = 0.00019;
+    public static final double SHOOTER_FF = 0.00016;
 public static final double MAX_SHOOTER_SPEED;
     // *********************************************************
     // Climb Constants
@@ -90,9 +90,9 @@ public static final double MAX_SHOOTER_SPEED;
             // proportional gain.  The gain can often be increased
             // above this value, but typically gives good
             // stability and acceptable performance
-            DRIVE_GYRO_PID_KP = .07;
-            DRIVE_GYRO_PID_KI = .00;
-            DRIVE_GYRO_PID_KD = .00;
+//            DRIVE_GYRO_PID_KP = .07;
+//            DRIVE_GYRO_PID_KI = .00;
+//            DRIVE_GYRO_PID_KD = .00;
 
 
 
@@ -121,9 +121,9 @@ public static final double MAX_SHOOTER_SPEED;
             // proportional gain.  The gain can often be increased
             // above this value, but typically gives good
             // stability and acceptable performance
-            DRIVE_GYRO_PID_KP = .07;
-            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
-            DRIVE_GYRO_PID_KD = .07;
+//            DRIVE_GYRO_PID_KP = .07;
+//            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+//            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
@@ -150,9 +150,9 @@ public static final double MAX_SHOOTER_SPEED;
             // proportional gain.  The gain can often be increased
             // above this value, but typically gives good
             // stability and acceptable performance
-            DRIVE_GYRO_PID_KP = .07;
-            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
-            DRIVE_GYRO_PID_KD = .07;
+//            DRIVE_GYRO_PID_KP = .07;
+//            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+//            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
