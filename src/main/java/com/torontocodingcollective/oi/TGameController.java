@@ -35,7 +35,7 @@ public abstract class TGameController extends Joystick {
      * For the default deadband of .07, values of .08 and higher will not be
      * filtered.
      */
-    public double axisDeadband = 0.07;
+    public double axisDeadband = 0.12;
 
     /**
      * Construct an instance of a GameController.

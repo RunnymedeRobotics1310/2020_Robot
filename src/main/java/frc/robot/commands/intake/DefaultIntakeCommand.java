@@ -3,6 +3,7 @@ package frc.robot.commands.intake;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.oi.OI.TestMode;
@@ -74,12 +75,18 @@ public class DefaultIntakeCommand extends TSafeCommand {
             // If in test mode, then do not look for other buttons
             return;
         }
+        
 
         if (Robot.carouselSubsystem.isRobotFull()) {
             Robot.intakeSubsystem.stopIntake();
             return;
         }
 
+     // Do not look at the Joystick in auto.
+        if (DriverStation.getInstance().isAutonomous()) {
+            return;
+        }
+        
         if (Robot.oi.stopIntake()) {
             Robot.intakeSubsystem.stopIntake();
             return;

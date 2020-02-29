@@ -9,16 +9,18 @@ import frc.robot.RobotConst;
 /**
  *
  */
-public class IsShooterReadyCommand extends TSafeCommand {
+public class ShootCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            IsShooterReadyCommand.class.getSimpleName();
+            ShootCommand.class.getSimpleName();
 
-    public IsShooterReadyCommand() {
+    public ShootCommand() {
 
-        super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
+        super(3, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
+        requires(Robot.towerSubsystem);
+        requires(Robot.carouselSubsystem);
         requires(Robot.shooterPIDSubsystem);
     }
 
@@ -39,30 +41,34 @@ public class IsShooterReadyCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
         
-        if (Robot.shooterPIDSubsystem.isShooterReady = true)
-        {
-        	
-        }
+        
         	
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-
+    	if (Robot.shooterPIDSubsystem.isShooterReady == false)
+        {
+        return;	
+        }
+    	Robot.towerSubsystem.setTowerMotorSpeed(0.5);
+    	Robot.carouselSubsystem.setCarouselMotorSpeed(0.3);
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        if (Robot.oi.runShooterTower()==false) {
-            return true;
-        }
+    	if (super.isFinished()) {
+    		return true;
+    	}
         return false;
     }
     @Override
     protected void end() {
         Robot.towerSubsystem.stopTowerMotor();
+        Robot.carouselSubsystem.stopCarouselMotor();
+        Robot.shooterPIDSubsystem.stopShooterMotor();
     }
 }
