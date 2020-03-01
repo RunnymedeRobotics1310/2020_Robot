@@ -331,10 +331,18 @@ public abstract class TGyroDriveSubsystem extends TDriveSubsystem {
 
             // If the error is negative, then drive the left motor
             // in reverse.
-            steering = 1.0;
-            if (angleError < 0) {
-                leftSpeed = -leftSpeed;
-                steering = -1.0;
+            if (speedSetpoint > 0) {
+                if (angleError < 0) {
+                    leftSpeed = -leftSpeed;
+                }
+            }
+            else {
+
+                // When driving backwards, the left motor will
+                // be positive when the error is positive
+                if (angleError > 0) {
+                    leftSpeed = -leftSpeed;
+                }
             }
 
             // Drive the motors in the opposite direction to get close
@@ -348,12 +356,23 @@ public abstract class TGyroDriveSubsystem extends TDriveSubsystem {
 
         // When steering with the gyroPid, one of the
         // wheels is slowed proportional to the steering
-        if (steering > 0) {
-            rightSpeed = leftSpeed * (1.0 - steering);
-        }
+        if (speedSetpoint > 0) {
+            if (steering > 0) {
+                rightSpeed = leftSpeed * (1.0 - steering);
+            }
 
-        if (steering < 0) {
-            leftSpeed = rightSpeed * (1.0 + steering);
+            if (steering < 0) {
+                leftSpeed = rightSpeed * (1.0 + steering);
+            }
+        }
+        else {
+            if (steering > 0) {
+                leftSpeed = rightSpeed * (1.0 - steering);
+            }
+
+            if (steering < 0) {
+                rightSpeed = leftSpeed * (1.0 + steering);
+            }
         }
 
         setSpeed(leftSpeed, rightSpeed);

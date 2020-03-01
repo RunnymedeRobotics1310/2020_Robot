@@ -27,7 +27,12 @@ public class TDriveBackwardsOnHeadingCommand extends TSafeCommand {
     private final TGyroDriveSubsystem driveSubsystem;
 
     /**
-     * Construct a new DriveOnHeadingCommand
+     * Construct a new DriveBackwardsOnHeadingCommand
+     * <p>
+     * The heading passed in should be the heading expected for the drive backwards
+     * not the drive forward.  For instance, if the robot is pointed to a heading
+     * of zero degrees and is expected to drive straight backwards, the heading
+     * would be 180 degrees.
      *
      * @param heading
      *            in the range 0 <= heading < 360. If the heading is not in this
@@ -53,6 +58,11 @@ public class TDriveBackwardsOnHeadingCommand extends TSafeCommand {
 
     /**
      * Construct a new DriveOnHeadingCommand
+     * <p>
+     * The heading passed in should be the heading expected for the drive backwards
+     * not the drive forward.  For instance, if the robot is pointed to a heading
+     * of zero degrees and is expected to drive straight backwards, the heading
+     * would be 180 degrees.
      *
      * @param heading
      *            in the range 0 <= heading < 360. If the heading is not in this

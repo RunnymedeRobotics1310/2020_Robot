@@ -16,8 +16,12 @@ public class TDriveBackwardsOnHeadingDistanceCommand extends TDriveBackwardsOnHe
     private final TGyroDriveSubsystem driveSubsystem;
 
     /**
-     * Construct a new DriveOnHeadingDistanceCommand
-     *
+     * Construct a new DriveBackwardsOnHeadingDistanceCommand
+     * <p>
+     * The heading passed in should be the heading expected for the drive backwards
+     * not the drive forward.  For instance, if the robot is pointed to a heading
+     * of zero degrees and is expected to drive straight backwards, the heading
+     * would be 180 degrees.
      * @param distanceInches
      * @param heading
      *            in the range 0 <= heading < 360. If the heading is not in this
