@@ -84,11 +84,11 @@ public class AutonomousCommand extends CommandGroup {
             // distance inches, degrees, speed, timeout
             Robot.driveSubsystem.setGyroAngle(0);
  
-//            this.addSequential (
-//            		new GroundIntakeCommand());
+            this.addSequential (
+            		new GroundIntakeCommand());
             // drive to pick up first ball
             this.addSequential(
-                    new TDriveBackwardsOnHeadingDistanceCommand(90, 180 , 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveBackwardsOnHeadingDistanceCommand(90, 180 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
             // drive back to reposition for second ball
             this.addSequential(
@@ -101,14 +101,18 @@ public class AutonomousCommand extends CommandGroup {
             this.addSequential(
                     new TDriveBackwardsOnHeadingDistanceCommand(15, 240, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
-//            this.addSequential(
-//            		new StopIntakeCommand());
+            
+            this.addSequential(
+                    new DelayCommand(0.5));
+            
+            this.addSequential(
+            		new StopIntakeCommand());
 //            
 //            this.addSequential(
 //                    new TRotateToHeadingCommand(5, Robot.oi, Robot.driveSubsystem));
 //            
             this.addSequential(
-            		new SetShooterSpeedCommand(3000));
+            		new SetShooterSpeedCommand(2500));
             //this.addSequential(
 //              //      new DriveOnCurveCommand(75, -1, 30, true));
 //            //rotate away from trench
@@ -118,11 +122,11 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(90, 60, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(78, 60, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
 //            
             this.addSequential(
-                    new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
+                    new TRotateToHeadingCommand(15, Robot.oi, Robot.driveSubsystem));
 //            // position right at goal
 //            
             this.addSequential(
