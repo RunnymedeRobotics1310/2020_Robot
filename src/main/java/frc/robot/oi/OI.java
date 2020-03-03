@@ -201,8 +201,8 @@ public class OI extends TOi {
 
     @Override
     public int getRotateToHeading() {
-        // return driverController.getPOV();
-        return -1;
+         return driverController.getPOV();
+        //return -1;
     }
 
     @Override

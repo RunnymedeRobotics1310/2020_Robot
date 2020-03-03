@@ -66,10 +66,13 @@ public class AutonomousCommand extends CommandGroup {
          *  Drive Straight using GyroPID control
          *  ***********************************************************/
         if (pattern.equals(AutoSelector.PATTERN_STRAIGHT)) {
+
+            Robot.driveSubsystem.setGyroAngle(180);
+            
             // Go forward 5 ft
         	// distance inches, degrees, speed, timeout
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(120, 0, .95, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveBackwardsOnHeadingDistanceCommand(120, 0, .3, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
         }
 
@@ -81,32 +84,32 @@ public class AutonomousCommand extends CommandGroup {
             // distance inches, degrees, speed, timeout
             Robot.driveSubsystem.setGyroAngle(0);
  
-            this.addSequential (
-            		new GroundIntakeCommand());
+//            this.addSequential (
+//            		new GroundIntakeCommand());
             // drive to pick up first ball
             this.addSequential(
                     new TDriveBackwardsOnHeadingDistanceCommand(90, 180 , 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
             // drive back to reposition for second ball
-//            this.addSequential(
-//                    new TDriveOnHeadingDistanceCommand(8, 0, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
-//                            Robot.oi, Robot.driveSubsystem ));
-//            // rotate to position at other ball
-//            this.addSequential(
-//                    new TRotateToHeadingCommand(200, Robot.oi, Robot.driveSubsystem));
+            this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(8, 0, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem ));
+            // rotate to position at other ball
+            this.addSequential(
+                    new TRotateToHeadingCommand(60, Robot.oi, Robot.driveSubsystem));
 //            //drive into ball
-//            this.addSequential(
-//                    new TDriveBackwardsOnHeadingDistanceCommand(12, 200, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
-//                            Robot.oi, Robot.driveSubsystem));
+            this.addSequential(
+                    new TDriveBackwardsOnHeadingDistanceCommand(15, 240, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
 //            this.addSequential(
 //            		new StopIntakeCommand());
 //            
 //            this.addSequential(
 //                    new TRotateToHeadingCommand(5, Robot.oi, Robot.driveSubsystem));
 //            
-//            this.addSequential(
-//            		new SetShooterSpeedCommand(3000));
-//            //this.addSequential(
+            this.addSequential(
+            		new SetShooterSpeedCommand(3000));
+            //this.addSequential(
 //              //      new DriveOnCurveCommand(75, -1, 30, true));
 //            //rotate away from trench
 //            
@@ -114,18 +117,17 @@ public class AutonomousCommand extends CommandGroup {
 //                    //new DriveOnCurveCommand(100, -1, 70, false));
 //            // curve towards shooter
 //            
-//            this.addSequential(
-//                    new TDriveOnHeadingDistanceCommand(90, 60, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
-//                            Robot.oi, Robot.driveSubsystem ));
+            this.addSequential(
+                    new TDriveOnHeadingDistanceCommand(90, 60, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem ));
 //            
-//            this.addSequential(
-//                    new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
+            this.addSequential(
+                    new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
 //            // position right at goal
 //            
-//            this.addSequential(
-//            		new ShootCommand());
-//            //Start shooter midway through last drive
-//                
+            this.addSequential(
+            		new ShootCommand());
+            //Start shooter midway through last drive               
         }
         
         if (pattern.equals(AutoSelector.SHOOT_3_PICK_UP_3_SHOOT_3)) {

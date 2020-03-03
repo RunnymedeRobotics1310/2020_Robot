@@ -12,11 +12,11 @@ public class RobotConst {
     // *********************************************************
     public static final double  MAX_DRIVE_ENCODER_SPEED;
 
-    public static final double  DRIVE_GYRO_PID_KP = 0.007;
-    public static final double  DRIVE_GYRO_PID_KI = 0.0001;
+    public static final double  DRIVE_GYRO_PID_KP = 0.02;
+    public static final double  DRIVE_GYRO_PID_KI = 0.001;
     public static final double  DRIVE_GYRO_PID_KD = 0.000;
 
-    public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.6;
+    public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.4;
 
     public static final double  DRIVE_SPEED_PID_KP;
     public static final double  DRIVE_SPEED_PID_KI;
@@ -82,7 +82,7 @@ public static final double MAX_SHOOTER_SPEED;
 
             // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
-            MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+            MAX_DRIVE_ENCODER_SPEED = 5700.0; // Encoder counts/sec
 
             ROBOT_WIDTH = 30;
 
@@ -105,7 +105,7 @@ public static final double MAX_SHOOTER_SPEED;
 
             MAX_SHOOTER_SPEED = 5600;
 
-            ENCODER_COUNTS_PER_INCH = 55.6/2;
+            ENCODER_COUNTS_PER_INCH = 50.4;
 
             break;
 

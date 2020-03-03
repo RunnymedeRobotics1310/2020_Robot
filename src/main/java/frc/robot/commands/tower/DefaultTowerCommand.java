@@ -3,6 +3,7 @@ package frc.robot.commands.tower;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.oi.OI.TestMode;
@@ -56,6 +57,11 @@ public class DefaultTowerCommand extends TSafeCommand {
             return;
         }
 
+     // Do not look at the Joystick in auto.
+        if (DriverStation.getInstance().isAutonomous()) {
+            return;
+        }
+        
         // Always shoot before stopping at the sensor
         if (Robot.oi.runShooterTower()) {
             if (Robot.shooterPIDSubsystem.isShooterRunning()) {

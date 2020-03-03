@@ -3,6 +3,7 @@ package frc.robot.commands.carousel;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.oi.OI.TestMode;
@@ -53,6 +54,11 @@ public class DefaultCarouselCommand extends TSafeCommand {
                 Robot.carouselSubsystem.stopCarouselMotor();
             }
             // If in test mode, then do not look for other buttons
+            return;
+        }
+        
+     // Do not look at the Joystick in auto.
+        if (DriverStation.getInstance().isAutonomous()) {
             return;
         }
 

@@ -16,7 +16,7 @@ public class ShootCommand extends TSafeCommand {
 
     public ShootCommand() {
 
-        super(3, Robot.oi);
+        super(5, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
         requires(Robot.towerSubsystem);
@@ -48,10 +48,11 @@ public class ShootCommand extends TSafeCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (Robot.shooterPIDSubsystem.isShooterReady == false)
-        {
-        return;	
-        }
+//    	if (Robot.shooterPIDSubsystem.isShooterReady == false)
+//        {
+//        return;	
+//        }
+        Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
     	Robot.towerSubsystem.setTowerMotorSpeed(0.5);
     	Robot.carouselSubsystem.setCarouselMotorSpeed(0.3);
 
