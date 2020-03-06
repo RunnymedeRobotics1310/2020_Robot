@@ -8,6 +8,7 @@ import com.torontocodingcollective.commands.gyroDrive.TRotateToHeadingCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.carousel.IntakeCarouselCommand;
+import frc.robot.commands.carousel.StopCarouselCommand;
 import frc.robot.commands.drive.DriveBackwardsCommand;
 import frc.robot.commands.drive.DriveOnCurveCommand;
 import frc.robot.commands.drive.GyroTurnCommand;
@@ -86,33 +87,45 @@ public class AutonomousCommand extends CommandGroup {
  
             this.addSequential (
             		new GroundIntakeCommand());
+            this.addSequential(
+                    new IntakeCarouselCommand());
             // drive to pick up first ball
             this.addSequential(
-                    new TDriveBackwardsOnHeadingDistanceCommand(90, 180 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveBackwardsOnHeadingDistanceCommand(100, 180 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem));
             // drive back to reposition for second ball
+//            this.addSequential(
+//                    new TDriveOnHeadingDistanceCommand(8, 0, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
+//                            Robot.oi, Robot.driveSubsystem ));
+//            // rotate to position at other ball
+//            this.addSequential(
+//                    new TRotateToHeadingCommand(60, Robot.oi, Robot.driveSubsystem));
+////            //drive into ball
+//            this.addSequential(
+//                    new TDriveBackwardsOnHeadingDistanceCommand(15, 240, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
+//                            Robot.oi, Robot.driveSubsystem));
+//            
+            
+            
+            
+            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(8, 0, 0.2, 15,TConst.BRAKE_WHEN_FINISHED,
-                            Robot.oi, Robot.driveSubsystem ));
-            // rotate to position at other ball
-            this.addSequential(
-                    new TRotateToHeadingCommand(60, Robot.oi, Robot.driveSubsystem));
-//            //drive into ball
-            this.addSequential(
-                    new TDriveBackwardsOnHeadingDistanceCommand(15, 240, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
-                            Robot.oi, Robot.driveSubsystem));
+                    new TRotateToHeadingCommand(75, Robot.oi, Robot.driveSubsystem));
             
             this.addSequential(
                     new DelayCommand(0.5));
             
+            
+   
             this.addSequential(
-            		new StopIntakeCommand());
-//            
-//            this.addSequential(
-//                    new TRotateToHeadingCommand(5, Robot.oi, Robot.driveSubsystem));
-//            
+            		new SetShooterSpeedCommand(2600));
+            
             this.addSequential(
-            		new SetShooterSpeedCommand(2500));
+                    new StopIntakeCommand());
+            
+            this.addSequential(
+                    new StopCarouselCommand());
+            
             //this.addSequential(
 //              //      new DriveOnCurveCommand(75, -1, 30, true));
 //            //rotate away from trench
@@ -122,11 +135,11 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(78, 60, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(138, 75, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
 //            
             this.addSequential(
-                    new TRotateToHeadingCommand(15, Robot.oi, Robot.driveSubsystem));
+                    new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
 //            // position right at goal
 //            
             this.addSequential(
@@ -177,6 +190,7 @@ public class AutonomousCommand extends CommandGroup {
         if (pattern.equals(AutoSelector.NO_DRIVE)) {
 //            this.addSequential(
 //                  new TDriveOnHeadingDistanceCommand())
+           
             
         }
         
