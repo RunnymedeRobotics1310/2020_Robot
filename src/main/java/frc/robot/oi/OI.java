@@ -314,22 +314,22 @@ public class OI extends TOi {
        
         else if (operatorController.getButton(TButton.X) || driverController.getButton(TButton.Y)) {
 //        	new GyroTurnCommand();
-        	shooterSetpoint = 3000;
-
+        	shooterSetpoint = 2500;
+        	//initiation line
         	//Limelight
         }
         
         else if (operatorController.getButton(TButton.A)) {
-        	shooterSetpoint = 4000;
-        	//Back trench
+        	shooterSetpoint = 2850;
+        	//front trench
         }
         
         else if (operatorController.getButton(TButton.B)) {
-        	shooterSetpoint = 5000;
-        	//Target zone
+        	shooterSetpoint = 3800;
+        	//Back trench
         }
         else if(operatorController.getPOV() == 0) {
-        	shooterSetpoint = 3500;
+        	shooterSetpoint = 3000;
         }
         else {
         	shooterSetpoint = 0;
@@ -443,7 +443,7 @@ public class OI extends TOi {
     }
     
     public boolean runReverse() {
-    	if (operatorController.getButton(TStick.RIGHT)) {
+    	if (operatorController.getButton(TStick.LEFT)) {
     		return true;
     	}
     	return false;
@@ -479,9 +479,15 @@ public class OI extends TOi {
         }
         return false;
     }
+    public boolean runReverseTower() {
+    	if (operatorController.getButton(TStick.RIGHT)) {
+    		return true;
+    	}
+    	return false;
+    }
 
     public boolean stopTower() {
-    	if (!runIntakeTower() && !runShooterTower()) {
+    	if (!runIntakeTower() && !runShooterTower() && !runReverseTower()) {
     		return true;
     	}
     	return false;
@@ -492,7 +498,8 @@ public class OI extends TOi {
         }
         */
     }
-
+    
+   
     /* *********************************************************************
      * Climb Controls
      * *********************************************************************/

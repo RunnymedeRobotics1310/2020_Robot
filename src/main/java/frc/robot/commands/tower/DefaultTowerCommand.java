@@ -82,6 +82,10 @@ public class DefaultTowerCommand extends TSafeCommand {
         if (Robot.oi.runIntakeTower()) {
             Scheduler.getInstance().add(new IntakeTowerCommand());
         }
+        
+        if (Robot.oi.runReverseTower()) {
+            Scheduler.getInstance().add(new ReverseTowerCommand());
+        }
 
     }
 
