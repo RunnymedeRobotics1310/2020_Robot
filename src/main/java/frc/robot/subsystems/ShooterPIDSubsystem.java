@@ -157,7 +157,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
 //        if((i != RobotConst.SHOOTER_KI)) { pidController.setI(i); }
 //        if((d != RobotConst.SHOOTER_KD)) { pidController.setD(d); }
 //        if((ff != RobotConst.SHOOTER_FF)) { pidController.setFF(ff); }
-//    	pidController.setP(RobotConst.SHOOTER_KP);
+    	pidController.setP(RobotConst.SHOOTER_KP);
         pidController.setI(RobotConst.SHOOTER_KI);
         pidController.setD(RobotConst.SHOOTER_KP);
         pidController.setFF(RobotConst.SHOOTER_FF);

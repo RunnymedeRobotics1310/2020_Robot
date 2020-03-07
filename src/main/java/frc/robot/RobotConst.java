@@ -60,10 +60,10 @@ public class RobotConst {
     public static final double SHOOTER_BANGBANG_SPEED  = 1;
     public static final double SHOOTER_SPEED_PID_KP;
     public static final double SHOOTER_SPEED_PID_KI;
-    public static final double SHOOTER_KP = .002;
-    public static final double SHOOTER_KI = .000000001;
+    public static final double SHOOTER_KP = .0001;
+    public static final double SHOOTER_KI = .0000000001;
     public static final double SHOOTER_KD = .000;
-    public static final double SHOOTER_FF = 0.00019;
+    public static final double SHOOTER_FF = 0.000185;
 public static final double MAX_SHOOTER_SPEED;
     // *********************************************************
     // Climb Constants

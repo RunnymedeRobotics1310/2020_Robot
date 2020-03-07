@@ -39,8 +39,8 @@ public class ReverseTowerCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
 
-        Robot.towerSubsystem.setTowerMotorSpeed(-RobotConst.TOWER_INTAKE_SPEED);
-        Robot.towerSubsystem.setKickerMotorSpeed(-RobotConst.KICKER_MOTOR_SPEED);
+        Robot.towerSubsystem.setTowerMotorSpeed(-RobotConst.TOWER_INTAKE_SPEED * 0.7);
+        Robot.towerSubsystem.setKickerMotorSpeed(-RobotConst.KICKER_MOTOR_SPEED * 0.7);
 
     }
 

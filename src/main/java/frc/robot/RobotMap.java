@@ -124,7 +124,7 @@ public class RobotMap {
 
             INTAKE_TOP_MOTOR_CAN_SPEED_CONTROLLER_CAN_ADDRESS = 30;
             INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.VICTOR_SPX;
-            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
+            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.INVERTED;
 
             INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS  = 31;
             INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.VICTOR_SPX;
