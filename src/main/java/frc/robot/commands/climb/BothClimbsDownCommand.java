@@ -9,12 +9,12 @@ import frc.robot.RobotConst;
 /**
  *
  */
-public class RightClimbDownCommand extends TSafeCommand {
+public class BothClimbsDownCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
-            RightClimbDownCommand.class.getSimpleName();
+            BothClimbsDownCommand.class.getSimpleName();
 
-    public RightClimbDownCommand() {
+    public BothClimbsDownCommand() {
 
         super(TConst.NO_COMMAND_TIMEOUT, Robot.oi);
 
@@ -37,15 +37,13 @@ public class RightClimbDownCommand extends TSafeCommand {
         // called command (it was not sub-classed)
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
-      
-        if (Robot.oi.runRightClimbDown() == true) {
-        	Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_UP);
-        	Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_UP);
         }
+        if (Robot.oi.runLeftClimbUp() == true) {
+        	Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
+        	Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
         }
     }
 
-    
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
@@ -56,15 +54,14 @@ public class RightClimbDownCommand extends TSafeCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        if (Robot.oi.runRightClimbDown() == false) {
+        if (Robot.oi.runLeftClimbUp()==false) {
             return true;
         }
         return false;
-    }
 
-
+}
     @Override
     protected void end() {
-        Robot.climbSubsystem.stopBothClimb();
+    	Robot.climbSubsystem.stopBothClimb();
     }
-    }
+}

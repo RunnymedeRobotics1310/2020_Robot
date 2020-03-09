@@ -215,7 +215,7 @@ public class OI extends TOi {
     }
     
     public boolean gyroTurn () {
-    	if (operatorController.getButton(TButton.RIGHT_BUMPER) ) {
+    	if (operatorController.getButton(TButton.RIGHT_BUMPER) || driverController.getButton(TButton.Y) ) {
     		return true;
     	}
     	return false;
@@ -319,7 +319,7 @@ public class OI extends TOi {
         	// Front Trench
         }
        
-        else if (operatorController.getButton(TButton.X) || driverController.getButton(TButton.Y)) {
+        else if (operatorController.getButton(TButton.X)) {
 //        	new GyroTurnCommand();
         	shooterSetpoint = 2500;
         	//initiation line

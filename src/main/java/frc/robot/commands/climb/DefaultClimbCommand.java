@@ -64,6 +64,7 @@ public class DefaultClimbCommand extends TSafeCommand {
 //    	if (Robot.oi.stopBothClimb()) {
 //    		Scheduler.getInstance().add(new StopClimbCommand());
 //    	}
+    	
 
        
     }
