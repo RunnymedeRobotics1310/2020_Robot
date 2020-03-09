@@ -45,29 +45,53 @@ public class DefaultClimbCommand extends TSafeCommand {
 	protected void execute() {
 
 		if (Robot.oi.runLeftClimbUp()) {
+			Robot.climbSubsystem.retractLeftClimbPiston();
 			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_UP);
 		}
 		else if (Robot.oi.runLeftClimbDown()) {
+			Robot.climbSubsystem.retractLeftClimbPiston();
 			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
 		}
 		else {
 			Robot.climbSubsystem.setLeftClimbSpeed(0);
+			Robot.climbSubsystem.extendLeftClimbPiston();
 		}
 
 		if (Robot.oi.runRightClimbUp()) {
+			Robot.climbSubsystem.retractRightClimbPiston();
 			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_UP);
 		}
 		else if (Robot.oi.runRightClimbDown()) {
+			Robot.climbSubsystem.retractRightClimbPiston();
 			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
 		}
 		else {
 			Robot.climbSubsystem.setRightClimbSpeed(0);
+			Robot.climbSubsystem.extendLeftClimbPiston();
 		}
 
+		if (Robot.oi.runBothClimbUp()) {
+			Robot.climbSubsystem.retractRightClimbPiston();
+			Robot.climbSubsystem.retractLeftClimbPiston();
+			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_UP);
+			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_UP);
+		}
+		else if (Robot.oi.runBothClimbDown()) {
+			Robot.climbSubsystem.retractRightClimbPiston();
+			Robot.climbSubsystem.retractLeftClimbPiston();
+			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
+			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
+		}
+		else {
+			Robot.climbSubsystem.setRightClimbSpeed(0);
+			Robot.climbSubsystem.setLeftClimbSpeed(0);
+			Robot.climbSubsystem.extendRightClimbPiston();
+			Robot.climbSubsystem.extendLeftClimbPiston();
+		}
 
-		//    	if (Robot.oi.stopBothClimb()) {
-		//    		Scheduler.getInstance().add(new StopClimbCommand());
-		//    	}
+		if (Robot.oi.stopBothClimb()) {
+			Robot.climbSubsystem.stopBothClimb();
+		}
 
 
 

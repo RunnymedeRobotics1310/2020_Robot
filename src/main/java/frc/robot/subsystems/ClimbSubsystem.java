@@ -6,6 +6,7 @@ import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.climb.DefaultClimbCommand;
@@ -34,6 +35,23 @@ public class ClimbSubsystem extends TSubsystem {
 	@Override
 	public void init() {
 
+	}
+
+	public void extendRightClimbPiston() {
+		rightClimbPiston.set(Value.kForward);
+	}
+
+	public void retractRightClimbPiston() {
+		rightClimbPiston.set(Value.kReverse);
+
+	}
+
+	public void extendLeftClimbPiston() {
+		leftClimbPiston.set(Value.kForward);
+	}
+
+	public void retractLeftClimbPiston() {
+		leftClimbPiston.set(Value.kReverse);
 	}
 
 	public void setLeftClimbSpeed(double speed) {

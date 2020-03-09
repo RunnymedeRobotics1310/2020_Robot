@@ -509,39 +509,53 @@ public class OI extends TOi {
 	 * *********************************************************************/
 
 	public boolean runLeftClimbUp() {
-		if (operatorController.getButton(TButton.Y)) {
+		if (operatorController.getButton(TTrigger.LEFT)) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean runLeftClimbDown() {
-		if (operatorController.getButton(TButton.X)) {
+		if (operatorController.getButton(TButton.LEFT_BUMPER)) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean runRightClimbUp() {
-		if (operatorController.getButton(TButton.B)) {
+		if (operatorController.getButton(TTrigger.RIGHT)) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean runRightClimbDown() {
+		if (operatorController.getButton(TButton.RIGHT_BUMPER)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean runBothClimbUp() {
+		if (operatorController.getButton(TButton.Y)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean runBothClimbDown() {
 		if (operatorController.getButton(TButton.A)) {
 			return true;
 		}
 		return false;
 	}
 
-	//    public boolean stopBothClimb() {
-	//    	if (operatorController.getButton(TButton.B)) {
-	//    		return true;
-	//    	}
-	//    	return false;
-	//    }
+	public boolean stopBothClimb() {
+		if (operatorController.getButton(TButton.B)) {
+			return true;
+		}
+		return false;
+	}
 
 
 
