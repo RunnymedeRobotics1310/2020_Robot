@@ -60,6 +60,7 @@ public class AlignTargetCommand extends TSafeCommand {
         turnController.setSetpoint(0.0);
         turnController.setTolerance(0.5);
 
+        oi.startRumble();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -88,5 +89,6 @@ public class AlignTargetCommand extends TSafeCommand {
     @Override
     protected void end() {
         driveSubsystem.setSpeed(0,0);
+        oi.endRumble();
     }
 }
