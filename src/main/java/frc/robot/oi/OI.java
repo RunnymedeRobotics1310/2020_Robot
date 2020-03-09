@@ -211,13 +211,22 @@ public class OI extends TOi {
 		speedPidToggle.set(state);
 	}
 
-	public boolean gyroTurn () {
+	public boolean alignTarget () {
 		if (operatorController.getButton(TButton.RIGHT_BUMPER) || driverController.getButton(TButton.Y) ) {
 			return true;
 		}
 		return false;
 	}
 
+	public boolean isDriverDriving() {
+		TStickPosition left = getDriveStickPosition(TStick.LEFT);
+		TStickPosition right = getDriveStickPosition(TStick.RIGHT);
+		if (left.y!=0 || right.x != 0) {
+			return true;
+		}
+		return false;
+		
+	}
 	/* *********************************************************************
 	 * Shooter Controls
 	 * *********************************************************************/
@@ -324,7 +333,7 @@ public class OI extends TOi {
 		}
 
 		else if (operatorController.getButton(TButton.A)) {
-			shooterSetpoint = 2850;
+			shooterSetpoint = 2880;
 			//front trench
 		}
 

@@ -24,8 +24,8 @@ public class ClimbSubsystem extends TSubsystem {
 			(RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE,
 					RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS);
 
-	DoubleSolenoid rightClimbPiston = new DoubleSolenoid(RobotMap.RIGHT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.RIGHT_CLIMB_RETRACT_PNEUMATIC_PORT);
-	DoubleSolenoid leftClimbPiston = new DoubleSolenoid(RobotMap.LEFT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.LEFT_CLIMB_RETRACT_PNEUMATIC_PORT);
+//	DoubleSolenoid rightClimbPiston = new DoubleSolenoid(RobotMap.RIGHT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.RIGHT_CLIMB_RETRACT_PNEUMATIC_PORT);
+//	DoubleSolenoid leftClimbPiston = new DoubleSolenoid(RobotMap.LEFT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.LEFT_CLIMB_RETRACT_PNEUMATIC_PORT);
 
 	TLimitSwitch leftClimbTopLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_TOP_DETECT_DIO_PORT);
 	TLimitSwitch rightClimbTopLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_TOP_DETECT_DIO_PORT);
@@ -38,20 +38,20 @@ public class ClimbSubsystem extends TSubsystem {
 	}
 
 	public void extendRightClimbPiston() {
-		rightClimbPiston.set(Value.kForward);
+//		rightClimbPiston.set(Value.kForward);
 	}
 
 	public void retractRightClimbPiston() {
-		rightClimbPiston.set(Value.kReverse);
+//		rightClimbPiston.set(Value.kReverse);
 
 	}
 
 	public void extendLeftClimbPiston() {
-		leftClimbPiston.set(Value.kForward);
+//		leftClimbPiston.set(Value.kForward);
 	}
 
 	public void retractLeftClimbPiston() {
-		leftClimbPiston.set(Value.kReverse);
+//		leftClimbPiston.set(Value.kReverse);
 	}
 
 	public void setLeftClimbSpeed(double speed) {
