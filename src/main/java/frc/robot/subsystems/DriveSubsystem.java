@@ -10,7 +10,6 @@ import com.torontocodingcollective.subsystem.TGyroDriveSubsystem;
 import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.DefaultDriveCommand;
-import frc.robot.commands.drive.GyroTurnCommand;
 
 /**
  * Chassis Subsystem

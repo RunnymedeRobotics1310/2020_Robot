@@ -11,7 +11,7 @@ import frc.robot.commands.carousel.IntakeCarouselCommand;
 import frc.robot.commands.carousel.StopCarouselCommand;
 import frc.robot.commands.drive.DriveBackwardsCommand;
 import frc.robot.commands.drive.DriveOnCurveCommand;
-import frc.robot.commands.drive.GyroTurnCommand;
+import frc.robot.commands.drive.AlignTargetCommand;
 import frc.robot.commands.intake.GroundIntakeCommand;
 import frc.robot.commands.intake.StopIntakeCommand;
 import frc.robot.commands.shooter.SetShooterSpeedCommand;
@@ -140,7 +140,7 @@ public class AutonomousCommand extends CommandGroup {
 //            
             this.addSequential(
                     new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
-            this.addSequential(new GyroTurnCommand());
+            this.addSequential(new AlignTargetCommand());
 //            // position right at goal
 //            
             this.addSequential(
