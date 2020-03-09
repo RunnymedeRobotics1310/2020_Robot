@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CameraSubsystem extends TSubsystem {
 
+    private boolean isLightOn = false;
+
     public CameraSubsystem() {
 
         //Uncomment this line to start a USB camera feed
@@ -64,6 +66,7 @@ public class CameraSubsystem extends TSubsystem {
 		curCamera = Camera.FRONT;
 
          */
+
     }
 
     public boolean isTargetAvailable() {
@@ -72,7 +75,7 @@ public class CameraSubsystem extends TSubsystem {
         NetworkTableEntry tv = table.getEntry("tv");
 
         // Return the network table value or false if the value is not found
-        return tv.getBoolean(false);
+        return tv.getDouble(0) == 1.0;
     }
 
     public double getTargetX() {
@@ -102,8 +105,24 @@ public class CameraSubsystem extends TSubsystem {
         return ta.getDouble(0.0);
     }
 
+    public void setLightOn(boolean on) {
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry ledMode = table.getEntry("ledMode");
+
+        if (on) {
+            ledMode.setNumber(1);
+        }
+        else {
+            ledMode.forceSetNumber(3);
+        }
+
+        isLightOn = on;
+    }
+
     @Override
     public void init() {
+        setLightOn(false);
     }
 
     // Periodically update the dashboard and any PIDs or sensors
@@ -111,6 +130,7 @@ public class CameraSubsystem extends TSubsystem {
     public void updatePeriodic() {
 
         //post to smart dashboard periodically
+        SmartDashboard.putBoolean("Limelight Light", isLightOn);
         SmartDashboard.putBoolean("Limelight Target", isTargetAvailable());
         SmartDashboard.putNumber("LimelightX", getTargetX());
         SmartDashboard.putNumber("LimelightY", getTargetY());

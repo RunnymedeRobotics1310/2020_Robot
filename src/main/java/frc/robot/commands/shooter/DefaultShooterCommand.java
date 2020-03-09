@@ -12,6 +12,7 @@ import frc.robot.oi.OI.TestMode;
  *
  */
 public class DefaultShooterCommand extends TSafeCommand {
+
     double setpoint = 0;
     boolean set = false;
 
@@ -37,12 +38,14 @@ public class DefaultShooterCommand extends TSafeCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+
+        super.initialize();
+
         // Print the command parameters if this is the current
         // called command (it was not sub-classed)
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
-        set = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -57,7 +60,7 @@ public class DefaultShooterCommand extends TSafeCommand {
                 HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
                 Robot.shooterPIDSubsystem.setHoodPosition(userSelectedHoodPostion);
 
-                //Robot.shooterPIDSubsystem.setShooterMotorSpeed(Robot.oi.getTestMotorSpeed());
+                Robot.shooterPIDSubsystem.setSetpoint(Robot.oi.getTestMotorSpeed());
             }
             else {
                 Robot.shooterPIDSubsystem.stopShooterMotor();
@@ -71,19 +74,44 @@ public class DefaultShooterCommand extends TSafeCommand {
             return;
         }
 
-        // Set the hood position even when in test mode
+        if (Robot.oi.getAutoShoot()) {
+
+            if (!set) {
+                // Set the hood position based on the Y-Value of the vision target
+                double y = Robot.cameraSubsystem.getTargetY();
+
+                HoodPosition autoHoodPosition = HoodPosition.FAR;
+                double autoShootSpeed = 3800;
+
+                if (y > 3) {
+                    autoHoodPosition = HoodPosition.CLOSE;
+                    autoShootSpeed = 2500;
+                }
+                else if (y > -1) {
+                    autoHoodPosition = HoodPosition.MEDIUM;
+                    autoShootSpeed = 2880;
+                }
+                Robot.shooterPIDSubsystem.setHoodPosition(autoHoodPosition);
+                Robot.shooterPIDSubsystem.setSetpoint(autoShootSpeed);
+                set = true;
+            }
+            return;
+        }
+
         HoodPosition userSelectedHoodPostion = Robot.oi.getHoodPosition();
         Robot.shooterPIDSubsystem.setHoodPosition(userSelectedHoodPostion);
+
         if(setpoint!=Robot.oi.getShooterSetpoint()) {
             set = false;
         }
 
         setpoint = Robot.oi.getShooterSetpoint();
+
         if(setpoint == 0) {
             Robot.shooterPIDSubsystem.stopShooterMotor();
             set = false;
         }
-        else if(!set){
+        else if (!set) {
             Robot.shooterPIDSubsystem.setSetpoint(setpoint);
             set = true;
         }

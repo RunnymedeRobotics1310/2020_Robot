@@ -290,6 +290,10 @@ public class OI extends TOi {
         this.shooterSetpoint = shooterSetpoint;
     }
 
+    public boolean getAutoShoot() {
+        return operatorController.getPOV() == 0;
+    }
+
     /**
      * This routine is called by the update periodic to set the
      * shooter speed.
