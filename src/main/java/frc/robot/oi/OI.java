@@ -454,9 +454,12 @@ public class OI extends TOi {
     }
 
     public boolean runShooterCarousel() {
-        if((driverController.getButton(TButton.Y)
-                || operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
-                || operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()) {
+        if(     (  driverController.getButton(TButton.Y)
+                || operatorController.getButton(TButton.X)
+                || operatorController.getButton(TButton.A)
+                || operatorController.getButton(TButton.B)
+                || getAutoShoot())
+                && Robot.shooterPIDSubsystem.isShooterReady()) {
             return true;
         }
         return false;
@@ -499,9 +502,12 @@ public class OI extends TOi {
     }
 
     public boolean runShooterTower() {
-        if((driverController.getButton(TButton.Y)
-                || operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
-                || operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()){
+        if(     (  driverController.getButton(TButton.Y)
+                || operatorController.getButton(TButton.X)
+                || operatorController.getButton(TButton.A)
+                || operatorController.getButton(TButton.B)
+                || getAutoShoot())
+                && Robot.shooterPIDSubsystem.isShooterReady()){
             return true;
         }
         return false;
