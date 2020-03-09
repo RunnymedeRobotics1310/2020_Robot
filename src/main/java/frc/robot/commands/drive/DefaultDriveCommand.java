@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.commands.carousel.IntakeCarouselCommand;
 import frc.robot.commands.intake.FeederExtakeCommand;
+import frc.robot.commands.tower.IntakeTowerCommand;
 import frc.robot.oi.OI;
 import frc.robot.oi.OI.TestMode;
 import frc.robot.subsystems.DriveSubsystem;
@@ -72,10 +73,14 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
             }
             return;
         }
+        
+        
 
         // Check the driver controller buttons
         super.execute();
-
+        if (Robot.oi.gyroTurn()) {
+            Scheduler.getInstance().add(new GyroTurnCommand());
+        }
         // Drive according to the type of drive selected in the
         // operator input.
         TStickPosition leftStickPosition = oi.getDriveStickPosition(TStick.LEFT);

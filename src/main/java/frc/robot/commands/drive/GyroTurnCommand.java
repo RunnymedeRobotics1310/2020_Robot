@@ -70,7 +70,7 @@ public class GyroTurnCommand extends TSafeCommand {
             logMessage(getParmDesc() + " starting");
         }
         turnController.setSetpoint(0.0);
-        turnController.setTolerance(.1);
+        turnController.setTolerance(0.1);
         ahrs = new AHRS();
         super.initialize();
     }
@@ -80,21 +80,36 @@ public class GyroTurnCommand extends TSafeCommand {
     protected void execute() {
 //    	turnController.calculate(driveSubsystem.getGyroAngle());
     	//read values periodically
-        double x = tx.getDouble(0.0);
+        
+    	double x = tx.getDouble(0.0);
         double y = ty.getDouble(0.0);
         double area = ta.getDouble(0.0);
       //post to smart dashboard periodically
         SmartDashboard.putNumber("LimelightX", x);
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
-        
     	double turn = turnController.calculate(x);
-    	driveSubsystem.setSpeed(new TSpeeds(-turn,turn));
+        SmartDashboard.putNumber("Turn Speed", turn);
+        if (Robot.oi.gyroTurn()) {
+    	if (Math.abs(turn) < .04) {
+        	driveSubsystem.setSpeed(new TSpeeds(0 ,0));
+    		return;
+    	}
+    	SmartDashboard.putNumber("Last Turn Speed", turn);
+    	driveSubsystem.setSpeed(new TSpeeds(-turn ,turn));
+
+        }
+        else {
+        	return;
+        }
+
 	}
 
     @Override
     protected boolean isFinished() {
         // The default command does not end
-        return turnController.atSetpoint();
+    	return true;
+//        return turnController.atSetpoint();
+
     }
 }

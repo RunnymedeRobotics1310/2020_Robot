@@ -213,6 +213,13 @@ public class OI extends TOi {
     public void setSpeedPidEnabled(boolean state) {
         speedPidToggle.set(state);
     }
+    
+    public boolean gyroTurn () {
+    	if (operatorController.getButton(TButton.RIGHT_BUMPER) ) {
+    		return true;
+    	}
+    	return false;
+    }
 
     /* *********************************************************************
      * Shooter Controls
@@ -306,8 +313,8 @@ public class OI extends TOi {
         SmartDashboard.putNumber("RPM", rpm);
 
         if (operatorController.getButton(TButton.Y)) {
-        	
-        	shooterSetpoint = rpm;
+
+//        	shooterSetpoint = rpm;
         	
         	// Front Trench
         }
@@ -328,8 +335,8 @@ public class OI extends TOi {
         	shooterSetpoint = 3800;
         	//Back trench
         }
-        else if(operatorController.getPOV() == 0) {
-        	shooterSetpoint = 3000;
+        else if(operatorController.getButton(TButton.LEFT_BUMPER)) {
+        	shooterSetpoint = 2500;
         }
         else {
         	shooterSetpoint = 0;
@@ -361,7 +368,7 @@ public class OI extends TOi {
     }
     
     public boolean feederExtake() {
-    	if (driverController.getButton(TButton.X) || operatorController.getButton(TButton.LEFT_BUMPER)) {
+    	if (driverController.getButton(TButton.X)) {
     		return true;
     	}
     	return false;
@@ -379,7 +386,7 @@ public class OI extends TOi {
     }
     
     public boolean groundExtake() {
-    	if (driverController.getButton(TButton.B) || operatorController.getButton(TButton.RIGHT_BUMPER)) {
+    	if (driverController.getButton(TButton.B) ) {
     		return true;
     	}
     	return false;
@@ -427,7 +434,7 @@ public class OI extends TOi {
     }
 
     public boolean runShooterCarousel() {
-        if((driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
+        if((driverController.getButton(TButton.Y)
         		|| operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
         		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()) {
             return true;
@@ -443,7 +450,7 @@ public class OI extends TOi {
     }
     
     public boolean runReverse() {
-    	if (operatorController.getButton(TStick.LEFT)) {
+    	if (operatorController.getButton(TStick.RIGHT)) {
     		return true;
     	}
     	return false;
@@ -472,7 +479,7 @@ public class OI extends TOi {
     }
 
     public boolean runShooterTower() {
-        if((driverController.getButton(TButton.Y) || operatorController.getButton(TButton.Y)
+        if((driverController.getButton(TButton.Y) 
         		|| operatorController.getButton(TButton.X) || operatorController.getButton(TButton.A)
         		|| operatorController.getButton(TButton.B)) && Robot.shooterPIDSubsystem.isShooterReady()){
             return true;

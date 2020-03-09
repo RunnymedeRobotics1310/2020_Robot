@@ -12,7 +12,7 @@ public class RobotConst {
     // *********************************************************
     public static final double  MAX_DRIVE_ENCODER_SPEED;
 
-    public static final double  DRIVE_GYRO_PID_KP = 0.02;
+    public static final double  DRIVE_GYRO_PID_KP = 0.0095;
     public static final double  DRIVE_GYRO_PID_KI = 0.001;
     public static final double  DRIVE_GYRO_PID_KD = 0.000;
 

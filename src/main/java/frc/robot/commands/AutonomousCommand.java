@@ -135,11 +135,12 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(138, 75, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(135, 75, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
 //            
             this.addSequential(
                     new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
+            this.addSequential(new GyroTurnCommand());
 //            // position right at goal
 //            
             this.addSequential(
