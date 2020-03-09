@@ -2,9 +2,6 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode.PixelFormat;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -18,21 +15,21 @@ public class CameraSubsystem extends TSubsystem {
     public CameraSubsystem() {
 
         //Uncomment this line to start a USB camera feed
-//        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//        camera.setVideoMode(PixelFormat.kMJPEG, 120, 90, 50);
-//        camera.setExposureManual(40);
+        //        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        //        camera.setVideoMode(PixelFormat.kMJPEG, 120, 90, 50);
+        //        camera.setExposureManual(40);
 
         /*
          * Switchable camera feed
-         
+
     	// The cameraFeed used in grip should be the switchable camera.
     	//
-    	// The cameras are assigned IP addresses in order.  
-    	// Add the switchable source first so that it is assigned the 
+    	// The cameras are assigned IP addresses in order.
+    	// Add the switchable source first so that it is assigned the
     	// IP address:
     	// http://roborio-team-frc.local:1181/?action=stream
     	//
-    	// Use the above IP address to display the switching feed in the 
+    	// Use the above IP address to display the switching feed in the
     	// SmartDashboard (not shuffleboard) by adding an MJPEG Stream viewer at that URL.
     	//
     	// In GRIP, the selected camera source can be used for vision tracking
@@ -44,19 +41,19 @@ public class CameraSubsystem extends TSubsystem {
         cameraFeed = CameraServer.getInstance().addServer("Selected Camera");
 
         // Start the front camera.
-        // The URL of the front camera will be 
+        // The URL of the front camera will be
     	// http://roborio-team-frc.local:1182/?action=stream
         //
         // NOTE:  If there are no listeners on the 1182 port, the Camera Server will
         //        shift the port number of the frontCamera to 1181 whenever it is selected
-        //        as the source, and will return to port 1182 when the selection is set to 
+        //        as the source, and will return to port 1182 when the selection is set to
         //        another camera.
         frontCamera = CameraServer.getInstance().startAutomaticCapture("Front Camera", 1);
         frontCamera.setVideoMode(PixelFormat.kMJPEG, 120, 90, 50);
         frontCamera.setExposureManual(40);
-        
+
         // Start the Rear camera.
-        // The URL of the front camera will be 
+        // The URL of the front camera will be
     	// http://roborio-team-frc.local:1183/?action=stream
         rearCamera  = CameraServer.getInstance().startAutomaticCapture("Rear Camera", 0);
         rearCamera.setVideoMode(PixelFormat.kMJPEG, 120, 90, 50);
@@ -66,7 +63,43 @@ public class CameraSubsystem extends TSubsystem {
         cameraFeed.setSource(frontCamera);
 		curCamera = Camera.FRONT;
 
-		*/
+         */
+    }
+
+    public boolean isTargetAvailable() {
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry tv = table.getEntry("tv");
+
+        // Return the network table value or false if the value is not found
+        return tv.getBoolean(false);
+    }
+
+    public double getTargetX() {
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry tx = table.getEntry("tx");
+
+        // Return the network table value or false if the value is not found
+        return tx.getDouble(0.0);
+    }
+
+    public double getTargetY() {
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry ty = table.getEntry("ty");
+
+        // Return the network table value or false if the value is not found
+        return ty.getDouble(0.0);
+    }
+
+    public double getTargetArea() {
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry ta = table.getEntry("ta");
+
+        // Return the network table value or false if the value is not found
+        return ta.getDouble(0.0);
     }
 
     @Override
@@ -76,20 +109,12 @@ public class CameraSubsystem extends TSubsystem {
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-        NetworkTableEntry tx = table.getEntry("tx");
-        NetworkTableEntry ty = table.getEntry("ty");
-        NetworkTableEntry ta = table.getEntry("ta");
-
-        //read values periodically
-        double x = tx.getDouble(0.0);
-        double y = ty.getDouble(0.0);
-        double area = ta.getDouble(0.0);
 
         //post to smart dashboard periodically
-        SmartDashboard.putNumber("LimelightX", x);
-        SmartDashboard.putNumber("LimelightY", y);
-        SmartDashboard.putNumber("LimelightArea", area);
+        SmartDashboard.putBoolean("Limelight Target", isTargetAvailable());
+        SmartDashboard.putNumber("LimelightX", getTargetX());
+        SmartDashboard.putNumber("LimelightY", getTargetY());
+        SmartDashboard.putNumber("LimelightArea", getTargetArea());
     }
 
     @Override

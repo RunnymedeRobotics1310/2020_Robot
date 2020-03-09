@@ -78,8 +78,8 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
 
         // Check the driver controller buttons
         super.execute();
-        if (Robot.oi.gyroTurn()) {
-            Scheduler.getInstance().add(new GyroTurnCommand());
+        if (Robot.oi.alignTarget()) {
+            Scheduler.getInstance().add(new AlignTargetCommand());
         }
         // Drive according to the type of drive selected in the
         // operator input.
