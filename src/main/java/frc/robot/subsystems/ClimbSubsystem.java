@@ -7,7 +7,6 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.climb.DefaultClimbCommand;
 
@@ -56,10 +55,18 @@ public class ClimbSubsystem extends TSubsystem {
 
 	public void setLeftClimbSpeed(double speed) {
 		leftClimbMotor.set(speed);
+
+		if (speed > 0) {
+			retractLeftClimbPiston();
+		}
 	}
 
 	public void setRightClimbSpeed(double speed) {
 		rightClimbMotor.set(speed);
+
+		if (speed > 0) {
+			retractRightClimbPiston();
+		}
 	}
 
 	public boolean isLeftClimbTopLimit() {
@@ -102,8 +109,11 @@ public class ClimbSubsystem extends TSubsystem {
 	}
 
 	public void stopBothClimb() {
-		Robot.climbSubsystem.stopLeftClimbMotor();
-		Robot.climbSubsystem.stopRightClimbMotor();
+		stopLeftClimbMotor();
+		stopRightClimbMotor();
+
+		extendLeftClimbPiston();
+		extendRightClimbPiston();
 	}
 
 	@Override
@@ -115,6 +125,24 @@ public class ClimbSubsystem extends TSubsystem {
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
+
+		if (leftClimbMotor.get() < 0 && leftClimbBottomLimit.atLimit()) {
+			leftClimbMotor.set(0);
+			extendLeftClimbPiston();
+		}
+
+		if (leftClimbMotor.get()> 0 && leftClimbTopLimit.atLimit()) {
+			leftClimbMotor.set(0);
+		}
+
+		if (rightClimbMotor.get() < 0 && rightClimbBottomLimit.atLimit()) {
+			rightClimbMotor.set(0);
+			extendRightClimbPiston();
+		}
+
+		if (rightClimbMotor.get()> 0 && rightClimbTopLimit.atLimit()) {
+			rightClimbMotor.set(0);
+		}
 
 	}
 
