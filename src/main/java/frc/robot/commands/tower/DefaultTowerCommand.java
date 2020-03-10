@@ -64,8 +64,7 @@ public class DefaultTowerCommand extends TSafeCommand {
 
         // Always shoot before stopping at the sensor
         if (Robot.oi.runShooterTower()) {
-            if (       Robot.shooterPIDSubsystem.isShooterRunning()
-                    && Robot.shooterPIDSubsystem.isShooterReady()) {
+            if (Robot.shooterPIDSubsystem.isShooterRunning()) {
                 Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED);
                 Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
             }
