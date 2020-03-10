@@ -4,6 +4,7 @@ import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
 import frc.robot.oi.OI.TestMode;
@@ -55,6 +56,11 @@ public class DefaultCarouselCommand extends TSafeCommand {
             }
             // If in test mode, then do not look for other buttons
             return;
+        }
+
+        if (Robot.carouselSubsystem.isJammed()) {
+            // If jammed, unjam for the given time.
+            Scheduler.getInstance().add(new UnjamCarouselCommand(.25));
         }
 
         // Do not look at the Joystick in auto.

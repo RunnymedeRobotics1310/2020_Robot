@@ -52,6 +52,19 @@ public class CarouselSubsystem extends TSubsystem {
         return false;
     }
 
+    public double getCarouselMotorSpeed() {
+        return carouselMotor.get();
+    }
+
+    public double getCarouselMotorCurrent() {
+        return Robot.powerSubsystem.getMotorCurrent(RobotMap.CAROUSEL_MOTOR_POWER_PORT);
+    }
+
+    public boolean isJammed() {
+        // Jammed if > 6A current
+        return getCarouselMotorCurrent() > 6;
+    }
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new DefaultCarouselCommand());
@@ -60,10 +73,11 @@ public class CarouselSubsystem extends TSubsystem {
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
+
         SmartDashboard.putNumber("Carousel Speed", carouselMotor.get());
         SmartDashboard.putBoolean("Carousel Filled", isCarouselFull());
         SmartDashboard.putBoolean("Robot Filled", isRobotFull());
-        SmartDashboard.putNumber("Carousel Current", Robot.pdp.getCurrent(10));
+        SmartDashboard.putNumber("Carousel Current", getCarouselMotorCurrent());
 
     }
 
