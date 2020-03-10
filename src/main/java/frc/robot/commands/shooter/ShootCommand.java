@@ -16,7 +16,7 @@ public class ShootCommand extends TSafeCommand {
 
     public ShootCommand() {
 
-        super(5, Robot.oi);
+        super(4, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
         requires(Robot.towerSubsystem);
