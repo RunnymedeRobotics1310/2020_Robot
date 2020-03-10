@@ -4,8 +4,8 @@ import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.oi.OI.TestMode;
 
 /**
@@ -57,15 +57,17 @@ public class DefaultTowerCommand extends TSafeCommand {
             return;
         }
 
-     // Do not look at the Joystick in auto.
+        // Do not look at the Joystick in auto.
         if (DriverStation.getInstance().isAutonomous()) {
             return;
         }
-        
+
         // Always shoot before stopping at the sensor
         if (Robot.oi.runShooterTower()) {
-            if (Robot.shooterPIDSubsystem.isShooterRunning()) {
-                Scheduler.getInstance().add(new ShooterTowerCommand());
+            if (       Robot.shooterPIDSubsystem.isShooterRunning()
+                    && Robot.shooterPIDSubsystem.isShooterReady()) {
+                Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED);
+                Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
             }
         }
 
@@ -76,15 +78,18 @@ public class DefaultTowerCommand extends TSafeCommand {
         }
 
         if (Robot.oi.stopTower()) {
-            Scheduler.getInstance().add(new StopTowerCommand());
+            Robot.towerSubsystem.stopTowerMotor();
         }
 
         if (Robot.oi.runIntakeTower()) {
-            Scheduler.getInstance().add(new IntakeTowerCommand());
+            Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_INTAKE_SPEED);
+            Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
+
         }
-        
+
         if (Robot.oi.runReverseTower()) {
-            Scheduler.getInstance().add(new ReverseTowerCommand());
+            Robot.towerSubsystem.setTowerMotorSpeed(-RobotConst.TOWER_INTAKE_SPEED * 0.7);
+            Robot.towerSubsystem.setKickerMotorSpeed(-RobotConst.KICKER_MOTOR_SPEED * 0.7);
         }
 
     }
