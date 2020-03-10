@@ -6,6 +6,7 @@ import com.torontocodingcollective.commands.gyroDrive.TDriveOnHeadingDistanceCom
 import com.torontocodingcollective.commands.gyroDrive.TRotateToHeadingCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.HoodPosition;
 import frc.robot.Robot;
 import frc.robot.commands.carousel.IntakeCarouselCommand;
 import frc.robot.commands.carousel.StopCarouselCommand;
@@ -14,9 +15,12 @@ import frc.robot.commands.drive.DriveOnCurveCommand;
 import frc.robot.commands.drive.AlignTargetCommand;
 import frc.robot.commands.intake.GroundIntakeCommand;
 import frc.robot.commands.intake.StopIntakeCommand;
+import frc.robot.commands.shooter.SetHoodCommand;
 import frc.robot.commands.shooter.SetShooterSpeedCommand;
 import frc.robot.commands.shooter.ShootCommand;
+import frc.robot.commands.tower.IntakeTowerCommand;
 import frc.robot.oi.AutoSelector;
+import frc.robot.subsystems.TowerSubsystem;
 
 /**
  * AutonomousCommand
@@ -85,10 +89,14 @@ public class AutonomousCommand extends CommandGroup {
             // distance inches, degrees, speed, timeout
             Robot.driveSubsystem.setGyroAngle(0);
  
+            this.addSequential(
+            		new SetHoodCommand(HoodPosition.MEDIUM));
+            
             this.addSequential (
             		new GroundIntakeCommand());
             this.addSequential(
                     new IntakeCarouselCommand());
+            
             // drive to pick up first ball
             this.addSequential(
                     new TDriveBackwardsOnHeadingDistanceCommand(100, 180 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
@@ -110,21 +118,20 @@ public class AutonomousCommand extends CommandGroup {
             
             
             this.addSequential(
-                    new TRotateToHeadingCommand(75, Robot.oi, Robot.driveSubsystem));
+                    new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
+            
             
             this.addSequential(
-                    new DelayCommand(0.5));
+                    new DelayCommand(0.7));
             
             
    
             this.addSequential(
-            		new SetShooterSpeedCommand(2600));
+            		new SetShooterSpeedCommand(2750));
             
-            this.addSequential(
-                    new StopIntakeCommand());
+         
             
-            this.addSequential(
-                    new StopCarouselCommand());
+            
             
             //this.addSequential(
 //              //      new DriveOnCurveCommand(75, -1, 30, true));
@@ -135,11 +142,17 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(135, 75, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(140, 70, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
+            this.addSequential(
+                    new StopIntakeCommand());
+            this.addSequential(
+                    new StopCarouselCommand());
 //            
             this.addSequential(
                     new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
+            
+            this.addSequential(new AlignTargetCommand());
             this.addSequential(new AlignTargetCommand());
 //            // position right at goal
 //            

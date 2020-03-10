@@ -16,8 +16,8 @@ public class RobotConst {
     public static final double  DRIVE_GYRO_PID_KI = 0.001;
     public static final double  DRIVE_GYRO_PID_KD = 0.000;
 
-    public static final double  VISION_TARGET_PID_KP = 0.0095;
-    public static final double  VISION_TARGET_PID_KI = 0.001;
+    public static final double  VISION_TARGET_PID_KP = 0.009;
+    public static final double  VISION_TARGET_PID_KI = 0.025;
     public static final double  VISION_TARGET_PID_KD = 0.000;
 
     public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.4;
@@ -51,7 +51,7 @@ public class RobotConst {
     // Tower Constants
     // *********************************************************
     public static final double TOWER_INTAKE_SPEED  = .9;
-    public static final double TOWER_SHOOTER_SPEED = .9;
+    public static final double TOWER_SHOOTER_SPEED = 1;
 
     public static final double KICKER_MOTOR_SPEED = 0.4;
 
@@ -64,7 +64,7 @@ public class RobotConst {
     public static final double SHOOTER_BANGBANG_SPEED  = 1;
     public static final double SHOOTER_SPEED_PID_KP;
     public static final double SHOOTER_SPEED_PID_KI;
-    public static final double SHOOTER_KP = .0001;
+    public static final double SHOOTER_KP = .0003;
     public static final double SHOOTER_KI = .0000000001;
     public static final double SHOOTER_KD = .000;
     public static final double SHOOTER_FF = 0.000185;

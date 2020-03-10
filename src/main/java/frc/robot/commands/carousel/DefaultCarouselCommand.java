@@ -4,8 +4,8 @@ import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.oi.OI.TestMode;
 
 /**
@@ -56,8 +56,8 @@ public class DefaultCarouselCommand extends TSafeCommand {
             // If in test mode, then do not look for other buttons
             return;
         }
-        
-     // Do not look at the Joystick in auto.
+
+        // Do not look at the Joystick in auto.
         if (DriverStation.getInstance().isAutonomous()) {
             return;
         }
@@ -66,25 +66,26 @@ public class DefaultCarouselCommand extends TSafeCommand {
             Robot.carouselSubsystem.stopCarouselMotor();
             return;
         }
-        if (Robot.oi.joystickCarousel() !=0.0) {
-        	Scheduler.getInstance().add(new JoystickCarouselCommand());
+
+        if (Robot.oi.joystickCarousel() != 0.0) {
+            Robot.carouselSubsystem.setCarouselMotorSpeed(Robot.oi.joystickCarousel());
         }
 
         if (Robot.oi.stopCarousel()) {
-            Scheduler.getInstance().add(new StopCarouselCommand());
+            Robot.carouselSubsystem.stopCarouselMotor();
         }
 
         if (Robot.oi.runIntakeCarousel()) {
-            Scheduler.getInstance().add(new IntakeCarouselCommand());
+            Robot.carouselSubsystem.setCarouselMotorSpeed(RobotConst.CAROUSEL_INTAKE_SPEED);
         }
 
         if (Robot.oi.runShooterCarousel()) {
-            Scheduler.getInstance().add(new ShooterCarouselCommand());
+            Robot.carouselSubsystem.setCarouselMotorSpeed(RobotConst.CAROUSEL_SHOOTER_SPEED );
         }
         if (Robot.oi.runReverse()) {
-            Scheduler.getInstance().add(new ReverseCarouselCommand());
+            Robot.carouselSubsystem.setCarouselMotorSpeed(-RobotConst.CAROUSEL_SHOOTER_SPEED );
         }
-        
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
