@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -341,22 +342,23 @@ public class OI extends TOi {
 
         else if (operatorController.getButton(TButton.X)) {
             //        	new GyroTurnCommand();
-            shooterSetpoint = 2500;
+            shooterSetpoint = RobotConst.INITIATION_LINE_RPM;
             //initiation line
             //Limelight
         }
 
         else if (operatorController.getButton(TButton.A)) {
-            shooterSetpoint = 2880;
+            shooterSetpoint = RobotConst.FRONT_OF_TRENCH_RPM;
             //front trench
         }
 
         else if (operatorController.getButton(TButton.B)) {
-            shooterSetpoint = 3800;
+            shooterSetpoint = RobotConst.BACK_OF_TRENCH_RPM;
             //Back trench
         }
         else if(operatorController.getButton(TButton.LEFT_BUMPER)) {
-            shooterSetpoint = 2500;
+            shooterSetpoint = RobotConst.RAMP_UP_RPM;
+            //ramp up button
         }
         else {
             shooterSetpoint = 0;
@@ -473,7 +475,7 @@ public class OI extends TOi {
     }
 
     public boolean runReverse() {
-        if (operatorController.getButton(TStick.RIGHT)) {
+        if (operatorController.getButton(TStick.RIGHT) || operatorController.getButton(TStick.LEFT)) {
             return true;
         }
         return false;
@@ -494,8 +496,8 @@ public class OI extends TOi {
 
     public boolean runIntakeTower() {
         if ((       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT)) || operatorController.getButton(TTrigger.LEFT)
-                || operatorController.getButton(TTrigger.RIGHT)&& !Robot.towerSubsystem.isTowerFull()){
+                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.LEFT)
+                || operatorController.getButton(TTrigger.RIGHT)) && !Robot.towerSubsystem.isTowerFull()){
             return true;
         }
         return false;

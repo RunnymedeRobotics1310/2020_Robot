@@ -69,6 +69,12 @@ public class RobotConst {
     public static final double SHOOTER_KD = .000;
     public static final double SHOOTER_FF = 0.000185;
     public static final double MAX_SHOOTER_SPEED;
+    
+    public static final double INITIATION_LINE_RPM = 2500;
+    public static final double FRONT_OF_TRENCH_RPM = 2800;
+    public static final double BACK_OF_TRENCH_RPM = 3800;
+    public static final double RAMP_UP_RPM = 2500;
+
     // *********************************************************
     // Climb Constants
     // *********************************************************
