@@ -111,10 +111,10 @@ public class CameraSubsystem extends TSubsystem {
         NetworkTableEntry ledMode = table.getEntry("ledMode");
 
         if (on) {
-            ledMode.setNumber(1);
+            ledMode.setNumber(3);
         }
         else {
-            ledMode.forceSetNumber(3);
+            ledMode.setNumber(1);
         }
 
         isLightOn = on;

@@ -150,14 +150,37 @@ public class AutonomousCommand extends CommandGroup {
                     new TRotateToHeadingCommand(20, Robot.oi, Robot.driveSubsystem));
             
             this.addSequential(new AlignTargetCommand());
+            
             this.addSequential(new AlignTargetCommand());
 //            // position right at goal
 //            
             this.addSequential(
             		new ShootCommand());
+            this.addSequential (
+            		new GroundIntakeCommand());
+            this.addSequential(
+                    new IntakeCarouselCommand());
+            this.addSequential(
+            		new SetShooterSpeedCommand(2750));
             
             this.addSequential(
-                    new TRotateToHeadingCommand(50, Robot.oi, Robot.driveSubsystem));
+                    new TDriveBackwardsOnHeadingDistanceCommand(25, 192 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+            this.addSequential(
+                    new TDriveBackwardsOnHeadingDistanceCommand(25, 210 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
+                            Robot.oi, Robot.driveSubsystem));
+            this.addSequential(
+                    new StopIntakeCommand());
+            this.addSequential(
+                    new StopCarouselCommand());
+            
+            this.addSequential(new AlignTargetCommand());
+            
+            this.addSequential(new AlignTargetCommand());
+            
+            this.addSequential(
+            		new ShootCommand());
+            
             //Start shooter midway through last drive               
         }
         

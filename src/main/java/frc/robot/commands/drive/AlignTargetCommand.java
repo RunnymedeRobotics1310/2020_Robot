@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
 import frc.robot.oi.OI;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -21,6 +22,7 @@ public class AlignTargetCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
             DefaultDriveCommand.class.getSimpleName();
+    private static final double limeLightTime = 0.1;
 
     OI                oi                = Robot.oi;
     DriveSubsystem driveSubsystem    = Robot.driveSubsystem;
@@ -62,14 +64,16 @@ public class AlignTargetCommand extends TSafeCommand {
         turnController.setTolerance(0.5);
 
         oi.startRumble();
-    	
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+        Robot.cameraSubsystem.setLightOn (true);
+        
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-
+    	if (timeSinceInitialized()< limeLightTime) {
+    		return;
+    	}
         double turn = turnController.calculate(Robot.cameraSubsystem.getTargetX());
 
         SmartDashboard.putNumber("Turn Speed", turn);
@@ -84,7 +88,9 @@ public class AlignTargetCommand extends TSafeCommand {
         if (Robot.oi.isDriverDriving()) {
             return true;
         }
-
+        if (timeSinceInitialized() < limeLightTime) {
+        	return false;
+        }
         return turnController.atSetpoint();
 
     }
@@ -93,6 +99,7 @@ public class AlignTargetCommand extends TSafeCommand {
     protected void end() {
         driveSubsystem.setSpeed(0,0);
         oi.endRumble();
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+        Robot.cameraSubsystem.setLightOn(false);
+        
     }
 }
