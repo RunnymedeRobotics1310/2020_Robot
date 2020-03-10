@@ -4,6 +4,7 @@ import com.torontocodingcollective.commands.TDifferentialDrive;
 import com.torontocodingcollective.commands.TSafeCommand;
 import com.torontocodingcollective.speedcontroller.TSpeeds;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -61,6 +62,8 @@ public class AlignTargetCommand extends TSafeCommand {
         turnController.setTolerance(0.5);
 
         oi.startRumble();
+    	
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -90,5 +93,6 @@ public class AlignTargetCommand extends TSafeCommand {
     protected void end() {
         driveSubsystem.setSpeed(0,0);
         oi.endRumble();
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     }
 }

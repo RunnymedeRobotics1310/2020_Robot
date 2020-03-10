@@ -90,6 +90,9 @@ public class AutonomousCommand extends CommandGroup {
             Robot.driveSubsystem.setGyroAngle(0);
  
             this.addSequential(
+            		new SetHoodCommand(HoodPosition.FAR));
+            
+            this.addSequential(
             		new SetHoodCommand(HoodPosition.MEDIUM));
             
             this.addSequential (
@@ -113,10 +116,7 @@ public class AutonomousCommand extends CommandGroup {
 //                    new TDriveBackwardsOnHeadingDistanceCommand(15, 240, 0.2, 15, TConst.BRAKE_WHEN_FINISHED,
 //                            Robot.oi, Robot.driveSubsystem));
 //            
-            
-            
-            
-            
+           
             this.addSequential(
                     new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
             
@@ -129,9 +129,6 @@ public class AutonomousCommand extends CommandGroup {
             this.addSequential(
             		new SetShooterSpeedCommand(2750));
             
-         
-            
-            
             
             //this.addSequential(
 //              //      new DriveOnCurveCommand(75, -1, 30, true));
@@ -142,7 +139,7 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(140, 70, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(150, 70, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
             this.addSequential(
                     new StopIntakeCommand());
@@ -158,6 +155,9 @@ public class AutonomousCommand extends CommandGroup {
 //            
             this.addSequential(
             		new ShootCommand());
+            
+            this.addSequential(
+                    new TRotateToHeadingCommand(50, Robot.oi, Robot.driveSubsystem));
             //Start shooter midway through last drive               
         }
         
