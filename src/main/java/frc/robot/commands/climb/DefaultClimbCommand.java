@@ -3,6 +3,8 @@ package frc.robot.commands.climb;
 import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
 
@@ -44,12 +46,15 @@ public class DefaultClimbCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
+		if (!DriverStation.getInstance().isAutonomous() && Timer.getMatchTime() < .2) {
+			Robot.climbSubsystem.stopBothClimb();
+		}
+
 		if (Robot.oi.runBothClimbUp()) {
 			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_UP);
 			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_UP);
 		}
 		else if (Robot.oi.runBothClimbDown()) {
-
 			Robot.climbSubsystem.setRightClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
 			Robot.climbSubsystem.setLeftClimbSpeed(RobotConst.CLIMB_SPEED_DOWN);
 		}
