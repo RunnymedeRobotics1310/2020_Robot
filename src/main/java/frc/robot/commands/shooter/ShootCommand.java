@@ -53,7 +53,7 @@ public class ShootCommand extends TSafeCommand {
 //        return;	
 //        }
         Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
-    	Robot.towerSubsystem.setTowerMotorSpeed(0.6);
+    	Robot.towerSubsystem.setTowerMotorSpeed(0.8);
     	Robot.carouselSubsystem.setCarouselMotorSpeed(0.3);
 
     }

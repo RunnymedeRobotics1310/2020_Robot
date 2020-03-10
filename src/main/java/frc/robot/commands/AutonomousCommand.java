@@ -96,8 +96,7 @@ public class AutonomousCommand extends CommandGroup {
             		new GroundIntakeCommand());
             this.addSequential(
                     new IntakeCarouselCommand());
-            this.addSequential(
-                    new IntakeTowerCommand());
+            
             // drive to pick up first ball
             this.addSequential(
                     new TDriveBackwardsOnHeadingDistanceCommand(100, 180 , 0.4, 15, TConst.BRAKE_WHEN_FINISHED,
@@ -119,7 +118,7 @@ public class AutonomousCommand extends CommandGroup {
             
             
             this.addSequential(
-                    new TRotateToHeadingCommand(75, Robot.oi, Robot.driveSubsystem));
+                    new TRotateToHeadingCommand(70, Robot.oi, Robot.driveSubsystem));
             
             
             this.addSequential(
@@ -128,10 +127,9 @@ public class AutonomousCommand extends CommandGroup {
             
    
             this.addSequential(
-            		new SetShooterSpeedCommand(2800));
+            		new SetShooterSpeedCommand(2750));
             
-            this.addSequential(
-                    new StopIntakeCommand());
+         
             
             
             
@@ -144,8 +142,10 @@ public class AutonomousCommand extends CommandGroup {
 //            // curve towards shooter
 //            
             this.addSequential(
-                    new TDriveOnHeadingDistanceCommand(135, 75, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
+                    new TDriveOnHeadingDistanceCommand(140, 70, 0.4, 15,TConst.BRAKE_WHEN_FINISHED,
                             Robot.oi, Robot.driveSubsystem ));
+            this.addSequential(
+                    new StopIntakeCommand());
             this.addSequential(
                     new StopCarouselCommand());
 //            

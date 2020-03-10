@@ -55,7 +55,7 @@ public class ShooterPIDSubsystem extends TSubsystem {
         ff = RobotConst.SHOOTER_FF;
         pidController.setP(RobotConst.SHOOTER_KP);
         pidController.setI(RobotConst.SHOOTER_KI);
-        pidController.setD(RobotConst.SHOOTER_KP);
+        pidController.setD(RobotConst.SHOOTER_KD);
         pidController.setFF(RobotConst.SHOOTER_FF);
         pidController.setIZone(0);
         pidController.setOutputRange(-1, 1);
