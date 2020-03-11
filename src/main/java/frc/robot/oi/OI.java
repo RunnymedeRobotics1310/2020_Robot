@@ -64,6 +64,7 @@ public class OI extends TOi {
         SHOOTER,
         TOP_INTAKE, BOTTOM_INTAKE,
         CAROUSEL, TOWER,
+        LEFT_CLIMB, RIGHT_CLIMB,
         LEFT_DRIVE, RIGHT_DRIVE
     }
 
@@ -72,6 +73,13 @@ public class OI extends TOi {
     private double          testSpeed       = 0;
     private TButtonPressDetector nextModeDetector  = new TButtonPressDetector(driverController, TTrigger.RIGHT);
     private TButtonPressDetector prevModeDetector  = new TButtonPressDetector(driverController, TTrigger.LEFT);
+
+    private enum OperatorMode {
+        SHOOT,
+        CLIMB
+    }
+
+    private OperatorMode operatorMode = OperatorMode.SHOOT;
 
     /* *********************************************************************
      * General Controls
@@ -178,6 +186,19 @@ public class OI extends TOi {
         operatorRumble.rumbleOff();
     }
 
+    private void updateOperatorMode() {
+
+        // Shoot takes precedence over Climb if both are pressed
+        if (operatorController.getButton(TButton.BACK)) {
+            operatorMode = OperatorMode.SHOOT;
+            return;
+        }
+
+        if (operatorController.getButton(TButton.START)) {
+            operatorMode = OperatorMode.CLIMB;
+        }
+    }
+
     /* *********************************************************************
      * Drive Controls
      * *********************************************************************/
@@ -223,9 +244,14 @@ public class OI extends TOi {
     }
 
     public boolean alignTarget () {
-        if (operatorController.getButton(TButton.RIGHT_BUMPER) || driverController.getButton(TButton.Y) ) {
+    	if (driverController.getButton(TButton.Y)) {
             return true;
-        }
+    	}
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getButton(TButton.RIGHT_BUMPER) ) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
@@ -243,30 +269,35 @@ public class OI extends TOi {
      * *********************************************************************/
 
     public HoodPosition getHoodPosition() {
-
-        if (operatorController.getPOV() == 270) {
-            previousHoodPosition = HoodPosition.CLOSE;
-        }
-        if(operatorController.getPOV() == 180) {
-            previousHoodPosition = HoodPosition.MEDIUM;
-        }
-        if(operatorController.getPOV() == 90) {
-            previousHoodPosition = HoodPosition.FAR;
-        }
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getPOV() == 270) {
+	            previousHoodPosition = HoodPosition.CLOSE;
+	        }
+	        if(operatorController.getPOV() == 180) {
+	            previousHoodPosition = HoodPosition.MEDIUM;
+	        }
+	        if(operatorController.getPOV() == 90) {
+	            previousHoodPosition = HoodPosition.FAR;
+	        }
+    	}
         return previousHoodPosition;
     }
 
-    public boolean shooterExtend(){
-        if (operatorController.getPOV() == 270) {
-            return true;
-        }
+    public boolean shooterExtend() {
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getPOV() == 270) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean shooterRetract() {
-        if (operatorController.getPOV() == 90) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getPOV() == 90) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
@@ -292,7 +323,10 @@ public class OI extends TOi {
     }
 
     public boolean getAutoShoot() {
-        return operatorController.getPOV() == 0;
+    	if (operatorMode == OperatorMode.SHOOT) {
+    		return operatorController.getPOV() == 0;
+    	}
+    	return false;
     }
 
     /**
@@ -300,92 +334,64 @@ public class OI extends TOi {
      * shooter speed.
      */
     public void updateShooterSpeed() {
-        //
-        // 	if (isTestModeEnabled()) {
-        //            shooterSpeed = 0;
-        //            return;
-        //        }
-        //
-        //        if (driverController.getButton(TTrigger.LEFT)) {
-        //            shooterSpeed = 0;
-        //        }
-        //
-        //        if (driverController.getButton(TTrigger.RIGHT)) {
-        //            shooterSpeed = 0.5;
-        //        }
-        //
-        //        if (driverController.getButton(TButton.LEFT_BUMPER)) {
-        //            shooterSpeed = shooterSpeed - 0.005;
-        //            if (shooterSpeed < 0) {
-        //                shooterSpeed = 0;
-        //            }
-        //        }
-        //
-        //        if(driverController.getButton(TButton.RIGHT_BUMPER)) {
-        //           shooterSpeed = shooterSpeed + 0.005;
-        //            if (shooterSpeed > 1) {
-        //               shooterSpeed = 1;
-        //            }
-        //        }
-        //
 
         rpm = SmartDashboard.getNumber("RPM", 0);
 
         SmartDashboard.putNumber("RPM", rpm);
 
-        if (operatorController.getButton(TButton.Y)) {
-
-            //        	shooterSetpoint = rpm;
-
-            // Front Trench
+        if (operatorMode == OperatorMode.SHOOT) {
+        	
+	        if (operatorController.getButton(TButton.Y)) {
+	
+	            //        	shooterSetpoint = rpm;
+	
+	            // Front Trench
+	        }
+	
+	        else if (operatorController.getButton(TButton.X)) {
+	            //        	new GyroTurnCommand();
+	            shooterSetpoint = RobotConst.INITIATION_LINE_RPM;
+	            //initiation line
+	            //Limelight
+	        }
+	
+	        else if (operatorController.getButton(TButton.A)) {
+	            shooterSetpoint = RobotConst.FRONT_OF_TRENCH_RPM;
+	            //front trench
+	        }
+	
+	        else if (operatorController.getButton(TButton.B)) {
+	            shooterSetpoint = RobotConst.BACK_OF_TRENCH_RPM;
+	            //Back trench
+	        }
+	        else if(operatorController.getButton(TButton.LEFT_BUMPER)) {
+	            shooterSetpoint = RobotConst.RAMP_UP_RPM;
+	            //ramp up button
+	        }
+	        else {
+	            shooterSetpoint = 0;
+	        }
         }
-
-        else if (operatorController.getButton(TButton.X)) {
-            //        	new GyroTurnCommand();
-            shooterSetpoint = RobotConst.INITIATION_LINE_RPM;
-            //initiation line
-            //Limelight
-        }
-
-        else if (operatorController.getButton(TButton.A)) {
-            shooterSetpoint = RobotConst.FRONT_OF_TRENCH_RPM;
-            //front trench
-        }
-
-        else if (operatorController.getButton(TButton.B)) {
-            shooterSetpoint = RobotConst.BACK_OF_TRENCH_RPM;
-            //Back trench
-        }
-        else if(operatorController.getButton(TButton.LEFT_BUMPER)) {
-            shooterSetpoint = RobotConst.RAMP_UP_RPM;
-            //ramp up button
-        }
-        else {
-            shooterSetpoint = 0;
-        }
-
-    }
-
-    public boolean runShooterBB() {
-        //        if (driverController.getButton(TButton.A)) {
-        //            shooterSpeed = RobotConst.SHOOTER_BANGBANG_SPEED;
-        //            return true;
-        //        }
-        return false;
     }
 
     /* *********************************************************************
      * Intake Controls
      * *********************************************************************/
-
     /**
      * Start the feeder station intake
      */
     public boolean runFeederIntake() {
 
-        if(driverController.getButton(TTrigger.LEFT) || operatorController.getButton(TTrigger.LEFT)) {
+        if (driverController.getButton(TTrigger.LEFT)) {
             return true;
         }
+        
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getButton(TTrigger.LEFT)) {
+	            return true;
+	        }
+        }
+        
         return false;
     }
 
@@ -401,8 +407,14 @@ public class OI extends TOi {
      */
     public boolean runGroundIntake() {
 
-        if(driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.RIGHT)) {
+        if(driverController.getButton(TTrigger.RIGHT)) {
             return true;
+        }
+        
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getButton(TTrigger.RIGHT)) {
+	            return true;
+	        }
         }
         return false;
     }
@@ -448,21 +460,34 @@ public class OI extends TOi {
 
     public boolean runIntakeCarousel() {
         if (       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.RIGHT)
+                || driverController.getButton(TTrigger.RIGHT)) {
+        	return true;
+        }
+        
+        if (operatorMode == OperatorMode.SHOOT) {
+        	if (   operatorController.getButton(TTrigger.RIGHT)
                 || operatorController.getButton(TTrigger.LEFT)) {
             return true;
+        	}
         }
         return false;
     }
 
     public boolean runShooterCarousel() {
         if(     (  driverController.getButton(TButton.Y)
-                || operatorController.getButton(TButton.X)
-                || operatorController.getButton(TButton.A)
-                || operatorController.getButton(TButton.B)
                 || getAutoShoot())
                 && Robot.shooterPIDSubsystem.isShooterReady()) {
             return true;
+        }
+
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if(     (  operatorController.getButton(TButton.X)
+	                || operatorController.getButton(TButton.A)
+	                || operatorController.getButton(TButton.B)
+	                || getAutoShoot())
+	                && Robot.shooterPIDSubsystem.isShooterReady()) {
+	            return true;
+	        }
         }
         return false;
     }
@@ -475,16 +500,22 @@ public class OI extends TOi {
     }
 
     public boolean runReverse() {
-        if (operatorController.getButton(TStick.RIGHT) || operatorController.getButton(TStick.LEFT)) {
-            return true;
-        }
+    	
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (       operatorController.getButton(TStick.RIGHT) 
+	        		|| operatorController.getButton(TStick.LEFT)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
-    public double joystickCarousel(){
-        if (Math.abs(operatorController.getAxis(TStick.LEFT, TAxis.Y)) > 0.2) {
-            return operatorController.getAxis(TStick.LEFT, TAxis.Y);
-        }
+    public double joystickCarousel() {
+    	if (operatorMode == OperatorMode.SHOOT) {
+	        if (Math.abs(operatorController.getAxis(TStick.LEFT, TAxis.Y)) > 0.2) {
+	            return operatorController.getAxis(TStick.LEFT, TAxis.Y);
+	        }
+    	}
         return 0.0;
     }
 
@@ -495,43 +526,57 @@ public class OI extends TOi {
      * *********************************************************************/
 
     public boolean runIntakeTower() {
-        if ((       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.LEFT)
-                || operatorController.getButton(TTrigger.RIGHT)) && !Robot.towerSubsystem.isTowerFull()){
+        if ((      driverController.getButton(TTrigger.LEFT)
+                || driverController.getButton(TTrigger.RIGHT))
+                && !Robot.towerSubsystem.isTowerFull()) {
             return true;
         }
+
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if ((      operatorController.getButton(TTrigger.LEFT)
+	                || operatorController.getButton(TTrigger.RIGHT))
+	                && !Robot.towerSubsystem.isTowerFull()) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runShooterTower() {
         if(     (  driverController.getButton(TButton.Y)
-                || operatorController.getButton(TButton.X)
-                || operatorController.getButton(TButton.A)
-                || operatorController.getButton(TButton.B)
                 || getAutoShoot())
-                && Robot.shooterPIDSubsystem.isShooterReady()){
+                && Robot.shooterPIDSubsystem.isShooterReady()) {
             return true;
+        }
+        
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if(     (  operatorController.getButton(TButton.X)
+	                || operatorController.getButton(TButton.A)
+	                || operatorController.getButton(TButton.B)
+	                || getAutoShoot())
+	                && Robot.shooterPIDSubsystem.isShooterReady()) {
+	            return true;
+	        }
         }
         return false;
     }
+    
     public boolean runReverseTower() {
-        if (operatorController.getButton(TStick.RIGHT)) {
-            return true;
+        if (operatorMode == OperatorMode.SHOOT) {
+	        if (operatorController.getButton(TStick.RIGHT)) {
+	            return true;
+	        }
         }
         return false;
     }
 
     public boolean stopTower() {
-        if (!runIntakeTower() && !runShooterTower() && !runReverseTower()) {
+        if (       !runIntakeTower()
+                && !runShooterTower()
+                && !runReverseTower()) {
             return true;
         }
         return false;
-
-
-        /*if(driverController.getButton(TButton.X)) {
-            return true;
-        }
-         */
     }
 
 
@@ -540,51 +585,65 @@ public class OI extends TOi {
      * *********************************************************************/
 
     public boolean runLeftClimbUp() {
-        if (operatorController.getButton(TTrigger.LEFT)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TTrigger.LEFT)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runLeftClimbDown() {
-        if (operatorController.getButton(TButton.LEFT_BUMPER)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TButton.LEFT_BUMPER)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runRightClimbUp() {
-        if (operatorController.getButton(TTrigger.RIGHT)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TTrigger.RIGHT)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runRightClimbDown() {
-        if (operatorController.getButton(TButton.RIGHT_BUMPER)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TButton.RIGHT_BUMPER)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runBothClimbUp() {
-        if (operatorController.getButton(TButton.Y)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TButton.Y)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean runBothClimbDown() {
-        if (operatorController.getButton(TButton.A)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TButton.A)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
     public boolean stopBothClimb() {
-        if (operatorController.getButton(TButton.B)) {
-            return true;
-        }
+    	if (operatorMode == OperatorMode.CLIMB) {
+	        if (operatorController.getButton(TButton.B)) {
+	            return true;
+	        }
+    	}
         return false;
     }
 
@@ -593,6 +652,9 @@ public class OI extends TOi {
     @Override
     public void updatePeriodic() {
 
+    	// Update the Operator Mode
+    	updateOperatorMode();
+    	
         // Update all Toggles
         compressorToggle.updatePeriodic();
         speedPidToggle.updatePeriodic();
@@ -615,6 +677,7 @@ public class OI extends TOi {
         SmartDashboard.putBoolean("Test Mode Enabled", isTestModeEnabled());
         SmartDashboard.putString("Test Mode", getTestMode().toString());
         SmartDashboard.putNumber("Test Motor Speed", getTestMotorSpeed());
+        SmartDashboard.putString("Operator Mode", operatorMode.toString());
     }
 
 }
