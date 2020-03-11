@@ -38,7 +38,7 @@ public class StopClimbCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
-        Robot.climbSubsystem.stopBothClimb();
+        Robot.climbSubsystem.lockClimb();
       
     }
 

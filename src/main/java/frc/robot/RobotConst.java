@@ -28,6 +28,8 @@ public class RobotConst {
     public static final double  ENCODER_COUNTS_PER_INCH;
 
     public static final double  ROBOT_WIDTH;
+    
+    public static final double  OPERATOR_MAX_DRIVE_SPEED = 0.3;
 
     // *********************************************************
     // INTAKE

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
+import frc.robot.oi.OI.TestMode;
 
 /**
  *
@@ -46,8 +47,26 @@ public class DefaultClimbCommand extends TSafeCommand {
 	@Override
 	protected void execute() {
 
+        if (Robot.oi.isTestModeEnabled()) {
+            if (Robot.oi.getTestMode() == TestMode.LEFT_CLIMB) {
+                Robot.climbSubsystem.setLeftClimbSpeed(Robot.oi.getTestMotorSpeed());
+            }
+            else if (Robot.oi.getTestMode() == TestMode.RIGHT_CLIMB) {
+                Robot.climbSubsystem.setRightClimbSpeed(Robot.oi.getTestMotorSpeed());
+            }
+            else if (Robot.oi.lockClimb()){
+            	Robot.climbSubsystem.lockClimb();
+            }
+            else {
+                Robot.climbSubsystem.setLeftClimbSpeed(0);
+                Robot.climbSubsystem.setRightClimbSpeed(0);
+            }
+            return;
+        }
+
+        // End of match climb stop.
 		if (!DriverStation.getInstance().isAutonomous() && Timer.getMatchTime() < .2) {
-			Robot.climbSubsystem.stopBothClimb();
+			Robot.climbSubsystem.lockClimb();
 		}
 
 		if (Robot.oi.runBothClimbUp()) {
@@ -81,8 +100,8 @@ public class DefaultClimbCommand extends TSafeCommand {
 
 		}
 
-		if (Robot.oi.stopBothClimb()) {
-			Robot.climbSubsystem.stopBothClimb();
+		if (Robot.oi.lockClimb()) {
+			Robot.climbSubsystem.lockClimb();
 		}
 
 	}

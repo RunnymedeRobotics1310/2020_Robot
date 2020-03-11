@@ -8,6 +8,7 @@ import com.torontocodingcollective.speedcontroller.TSpeeds;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.commands.carousel.IntakeCarouselCommand;
 import frc.robot.commands.intake.FeederExtakeCommand;
 import frc.robot.commands.tower.IntakeTowerCommand;
@@ -73,14 +74,16 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
             }
             return;
         }
-        
-        
 
-        // Check the driver controller buttons
+        // super method implements POV turning and compressor and 
+        // PID toggles, and encoder and gyro reset.
         super.execute();
+        
+        // Align to a vision target
         if (Robot.oi.alignTarget()) {
             Scheduler.getInstance().add(new AlignTargetCommand());
         }
+        
         // Drive according to the type of drive selected in the
         // operator input.
         TStickPosition leftStickPosition = oi.getDriveStickPosition(TStick.LEFT);
@@ -89,10 +92,6 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         TStick singleStickSide = oi.getSelectedSingleStickSide();
 
         TSpeeds motorSpeeds;
-//        if(!Robot.oi.activated) {
-//        	Robot.oi.activated = true;
-//        	Scheduler.getInstance().add(new GyroTurnCommand(180));
-//        }
         switch (oi.getSelectedDriveType()) {
         
         case SINGLE_STICK:
@@ -111,6 +110,17 @@ public class DefaultDriveCommand extends TDefaultDriveCommand {
         default:
             motorSpeeds = differentialDrive.arcadeDrive(leftStickPosition, rightStickPosition);
             break;
+        }
+        
+        // If the speeds are zero, then allow the operator to drive
+        if (motorSpeeds.left == 0 && motorSpeeds.right == 0) {
+        	leftStickPosition = oi.getOperatorStickPosition(TStick.LEFT);
+        	leftStickPosition.x *= RobotConst.OPERATOR_MAX_DRIVE_SPEED;
+        	leftStickPosition.y *= RobotConst.OPERATOR_MAX_DRIVE_SPEED;
+            rightStickPosition = oi.getOperatorStickPosition(TStick.RIGHT);
+            rightStickPosition.x *= RobotConst.OPERATOR_MAX_DRIVE_SPEED;
+            rightStickPosition.y *= RobotConst.OPERATOR_MAX_DRIVE_SPEED;
+            motorSpeeds = differentialDrive.arcadeDrive(leftStickPosition, rightStickPosition);
         }
 
         driveSubsystem.setSpeed(motorSpeeds);

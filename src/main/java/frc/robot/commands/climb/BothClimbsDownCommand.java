@@ -62,6 +62,6 @@ public class BothClimbsDownCommand extends TSafeCommand {
 }
     @Override
     protected void end() {
-    	Robot.climbSubsystem.stopBothClimb();
+    	Robot.climbSubsystem.lockClimb();
     }
 }

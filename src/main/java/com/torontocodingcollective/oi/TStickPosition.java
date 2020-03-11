@@ -3,8 +3,6 @@ package com.torontocodingcollective.oi;
 /**
  * The TStickPosition class is used to represent the x,y coordinates (position)
  * of a stick.
- * <p>
- * The stick position is immutable.
  */
 public class TStickPosition {
 

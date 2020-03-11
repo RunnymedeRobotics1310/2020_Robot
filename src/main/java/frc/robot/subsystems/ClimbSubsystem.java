@@ -121,7 +121,7 @@ public class ClimbSubsystem extends TSubsystem {
 		rightClimbMotor.set(0);
 	}
 
-	public void stopBothClimb() {
+	public void lockClimb() {
 		stopLeftClimbMotor();
 		stopRightClimbMotor();
 
@@ -144,7 +144,7 @@ public class ClimbSubsystem extends TSubsystem {
 			extendLeftClimbPiston();
 		}
 
-		if (leftClimbMotor.get()> 0 && leftClimbTopLimit.atLimit()) {
+		if (leftClimbMotor.get() > 0 && leftClimbTopLimit.atLimit()) {
 			leftClimbMotor.set(0);
 		}
 
@@ -157,7 +157,7 @@ public class ClimbSubsystem extends TSubsystem {
 			extendRightClimbPiston();
 		}
 
-		if (rightClimbMotor.get()> 0 && rightClimbTopLimit.atLimit()) {
+		if (rightClimbMotor.get() > 0 && rightClimbTopLimit.atLimit()) {
 			rightClimbMotor.set(0);
 		}
 

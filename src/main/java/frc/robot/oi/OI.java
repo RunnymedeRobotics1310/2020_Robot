@@ -228,6 +228,13 @@ public class OI extends TOi {
         return driverController.getStickPosition(stick);
     }
 
+    public TStickPosition getOperatorStickPosition(TStick stick) {
+    	if (operatorMode == OperatorMode.CLIMB) {
+    		return operatorController.getStickPosition(stick);
+    	}
+    	return new TStickPosition(0,0);
+    }
+
     @Override
     public int getRotateToHeading() {
         return driverController.getPOV();
@@ -638,7 +645,7 @@ public class OI extends TOi {
         return false;
     }
 
-    public boolean stopBothClimb() {
+    public boolean lockClimb() {
     	if (operatorMode == OperatorMode.CLIMB) {
 	        if (operatorController.getButton(TButton.B)) {
 	            return true;
