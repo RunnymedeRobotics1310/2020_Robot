@@ -1,11 +1,14 @@
 package frc.robot.subsystems;
 
+import com.torontocodingcollective.sensors.encoder.TEncoder;
 import com.torontocodingcollective.sensors.limitSwitch.TLimitSwitch;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TSpeedController;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotConst;
 import frc.robot.RobotMap;
 import frc.robot.commands.climb.DefaultClimbCommand;
 
@@ -25,10 +28,11 @@ public class ClimbSubsystem extends TSubsystem {
     Solenoid rightClimbPiston = new Solenoid(RobotMap.RIGHT_CLIMB_LOCK_PNEUMATIC_PORT);
     Solenoid leftClimbPiston = new Solenoid(RobotMap.LEFT_CLIMB_LOCK_PNEUMATIC_PORT);
 
-    TLimitSwitch leftClimbTopLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_TOP_DETECT_DIO_PORT);
-    TLimitSwitch rightClimbTopLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_TOP_DETECT_DIO_PORT);
     TLimitSwitch leftClimbBottomLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT);
     TLimitSwitch rightClimbBottomLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT);
+
+    TEncoder leftClimbEncoder = leftClimbMotor.getEncoder();
+    TEncoder rightClimbEncoder = rightClimbMotor.getEncoder();
 
     @Override
     public void init() {
@@ -82,22 +86,6 @@ public class ClimbSubsystem extends TSubsystem {
         }
     }
 
-    public boolean isLeftClimbTopLimit() {
-
-        if(leftClimbTopLimit.atLimit()) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isRightClimbTopLimit() {
-
-        if(rightClimbTopLimit.atLimit()) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean isLeftClimbBottomLimit() {
 
         if(leftClimbBottomLimit.atLimit()) {
@@ -129,11 +117,18 @@ public class ClimbSubsystem extends TSubsystem {
         extendRightClimbPiston();
     }
 
+    public boolean isLeftClimbAtExtendedLimit() {
+        return leftClimbEncoder.get() > RobotConst.CLIMB_EXTENDED_ENCODER_COUNTS;
+    }
+
+    public boolean isRightClimbAtExtendedLimit() {
+        return rightClimbEncoder.get() > RobotConst.CLIMB_EXTENDED_ENCODER_COUNTS;
+    }
+
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new DefaultClimbCommand());
     }
-
 
     // Periodically update the dashboard and any PIDs or sensors
     @Override
@@ -144,7 +139,7 @@ public class ClimbSubsystem extends TSubsystem {
             extendLeftClimbPiston();
         }
 
-        if (leftClimbMotor.get() > 0 && leftClimbTopLimit.atLimit()) {
+        if (leftClimbMotor.get() > 0 && isLeftClimbAtExtendedLimit()) {
             leftClimbMotor.set(0);
         }
 
@@ -157,7 +152,7 @@ public class ClimbSubsystem extends TSubsystem {
             extendRightClimbPiston();
         }
 
-        if (rightClimbMotor.get() > 0 && rightClimbTopLimit.atLimit()) {
+        if (rightClimbMotor.get() > 0 && isRightClimbAtExtendedLimit()) {
             rightClimbMotor.set(0);
         }
 
@@ -165,6 +160,14 @@ public class ClimbSubsystem extends TSubsystem {
             retractRightClimbPiston();
         }
 
+        SmartDashboard.putNumber("Left Climb Motor Speed", leftClimbMotor.get());
+        SmartDashboard.putBoolean("Left Climb Bottom Limit", leftClimbBottomLimit.atLimit());
+        SmartDashboard.putNumber("Left Climb Encoder", leftClimbEncoder.get());
+        SmartDashboard.putBoolean("Left Climb Upper Limit", isLeftClimbAtExtendedLimit());
+
+        SmartDashboard.putNumber("Right Climb Motor Speed", rightClimbMotor.get());
+        SmartDashboard.putNumber("Left Climb Motor Speed", leftClimbMotor.get());
+        SmartDashboard.putNumber("Left Climb Motor Speed", leftClimbMotor.get());
     }
 
 }

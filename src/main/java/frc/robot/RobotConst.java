@@ -83,6 +83,8 @@ public class RobotConst {
     // *********************************************************
     public static final double CLIMB_SPEED_UP       = 0.25;
     public static final double CLIMB_SPEED_DOWN 	= -0.25;
+    public static final int CLIMB_EXTENDED_ENCODER_COUNTS = 100000;
+
     // The TorontoCodingCollective framework was developed to run on different
     // robots through the use of multiple mappings and constants.
     public static String robot = PRACTICE_ROBOT;
