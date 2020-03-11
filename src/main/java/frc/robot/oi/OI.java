@@ -64,6 +64,7 @@ public class OI extends TOi {
         SHOOTER,
         TOP_INTAKE, BOTTOM_INTAKE,
         CAROUSEL, TOWER,
+        LEFT_CLIMB, RIGHT_CLIMB,
         LEFT_DRIVE, RIGHT_DRIVE
     }
 
@@ -72,6 +73,13 @@ public class OI extends TOi {
     private double          testSpeed       = 0;
     private TButtonPressDetector nextModeDetector  = new TButtonPressDetector(driverController, TTrigger.RIGHT);
     private TButtonPressDetector prevModeDetector  = new TButtonPressDetector(driverController, TTrigger.LEFT);
+
+    private enum OperatorMode {
+        SHOOT,
+        CLIMB
+    }
+
+    private OperatorMode operatorMode = OperatorMode.SHOOT;
 
     /* *********************************************************************
      * General Controls
@@ -176,6 +184,19 @@ public class OI extends TOi {
     public void endRumble() {
         driverRumble.rumbleOff();
         operatorRumble.rumbleOff();
+    }
+
+    private void updateOperatorMode() {
+
+        // Shoot takes precedence over Climb if both are pressed
+        if (operatorController.getButton(TButton.BACK)) {
+            operatorMode = OperatorMode.SHOOT;
+            return;
+        }
+
+        if (operatorController.getButton(TButton.START)) {
+            operatorMode = OperatorMode.CLIMB;
+        }
     }
 
     /* *********************************************************************
@@ -448,7 +469,8 @@ public class OI extends TOi {
 
     public boolean runIntakeCarousel() {
         if (       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.RIGHT)
+                || driverController.getButton(TTrigger.RIGHT)
+                || operatorController.getButton(TTrigger.RIGHT)
                 || operatorController.getButton(TTrigger.LEFT)) {
             return true;
         }
@@ -495,9 +517,11 @@ public class OI extends TOi {
      * *********************************************************************/
 
     public boolean runIntakeTower() {
-        if ((       driverController.getButton(TTrigger.LEFT)
-                || driverController.getButton(TTrigger.RIGHT) || operatorController.getButton(TTrigger.LEFT)
-                || operatorController.getButton(TTrigger.RIGHT)) && !Robot.towerSubsystem.isTowerFull()){
+        if ((      driverController.getButton(TTrigger.LEFT)
+                || driverController.getButton(TTrigger.RIGHT)
+                || operatorController.getButton(TTrigger.LEFT)
+                || operatorController.getButton(TTrigger.RIGHT))
+                && !Robot.towerSubsystem.isTowerFull()){
             return true;
         }
         return false;
@@ -522,7 +546,9 @@ public class OI extends TOi {
     }
 
     public boolean stopTower() {
-        if (!runIntakeTower() && !runShooterTower() && !runReverseTower()) {
+        if (       !runIntakeTower()
+                && !runShooterTower()
+                && !runReverseTower()) {
             return true;
         }
         return false;
@@ -615,6 +641,7 @@ public class OI extends TOi {
         SmartDashboard.putBoolean("Test Mode Enabled", isTestModeEnabled());
         SmartDashboard.putString("Test Mode", getTestMode().toString());
         SmartDashboard.putNumber("Test Motor Speed", getTestMotorSpeed());
+        SmartDashboard.putString("Operator Mode", operatorMode.toString());
     }
 
 }
