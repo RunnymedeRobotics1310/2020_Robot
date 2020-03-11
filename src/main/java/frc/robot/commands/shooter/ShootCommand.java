@@ -1,8 +1,8 @@
 package frc.robot.commands.shooter;
 
-import com.torontocodingcollective.TConst;
 import com.torontocodingcollective.commands.TSafeCommand;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
 
@@ -15,8 +15,13 @@ public class ShootCommand extends TSafeCommand {
             ShootCommand.class.getSimpleName();
 
     public ShootCommand() {
+        this(4);
+    }
 
-        super(4, Robot.oi);
+    public ShootCommand(double timeSec) {
+
+
+        super(timeSec, Robot.oi);
 
         // Use requires() here to declare subsystem dependencies
         requires(Robot.towerSubsystem);
@@ -40,36 +45,40 @@ public class ShootCommand extends TSafeCommand {
         if (getCommandName().equals(COMMAND_NAME)) {
             logMessage(getParmDesc() + " starting");
         }
-        
-        
-        	
+
+
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-//    	if (Robot.shooterPIDSubsystem.isShooterReady == false)
-//        {
-//        return;	
-//        }
+        //    	if (Robot.shooterPIDSubsystem.isShooterReady == false)
+        //        {
+        //        return;
+        //        }
         Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
-    	Robot.towerSubsystem.setTowerMotorSpeed(0.8);
-    	Robot.carouselSubsystem.setCarouselMotorSpeed(0.3);
+        Robot.towerSubsystem.setTowerMotorSpeed(0.8);
+        Robot.carouselSubsystem.setCarouselMotorSpeed(0.3);
 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-    	if (super.isFinished()) {
-    		return true;
-    	}
+        if (super.isFinished()) {
+            return true;
+        }
         return false;
     }
     @Override
     protected void end() {
         Robot.towerSubsystem.stopTowerMotor();
         Robot.carouselSubsystem.stopCarouselMotor();
-        Robot.shooterPIDSubsystem.stopShooterMotor();
+
+        // In auto, do not stop the shooter
+        if (!DriverStation.getInstance().isAutonomous()) {
+            Robot.shooterPIDSubsystem.stopShooterMotor();
+        }
     }
 }

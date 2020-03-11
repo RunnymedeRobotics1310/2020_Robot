@@ -16,8 +16,8 @@ public class RobotConst {
     public static final double  DRIVE_GYRO_PID_KI = 0.001;
     public static final double  DRIVE_GYRO_PID_KD = 0.000;
 
-    public static final double  VISION_TARGET_PID_KP = 0.009;
-    public static final double  VISION_TARGET_PID_KI = 0.025;
+    public static final double  VISION_TARGET_PID_KP = 0.006;
+    public static final double  VISION_TARGET_PID_KI = 0.02;
     public static final double  VISION_TARGET_PID_KD = 0.000;
 
     public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.4;
@@ -28,7 +28,7 @@ public class RobotConst {
     public static final double  ENCODER_COUNTS_PER_INCH;
 
     public static final double  ROBOT_WIDTH;
-    
+
     public static final double  OPERATOR_MAX_DRIVE_SPEED = 0.3;
 
     // *********************************************************
@@ -74,7 +74,7 @@ public class RobotConst {
     public static final double MAX_SHOOTER_SPEED;
 
     public static final double INITIATION_LINE_RPM = 2500;
-    public static final double FRONT_OF_TRENCH_RPM = 2800;
+    public static final double FRONT_OF_TRENCH_RPM = 2790;
     public static final double BACK_OF_TRENCH_RPM = 3800;
     public static final double RAMP_UP_RPM = 2500;
 

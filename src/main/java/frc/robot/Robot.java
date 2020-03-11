@@ -149,9 +149,9 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
 
-        if (autoCommand != null) {
-            autoCommand.cancel();
-        }
+        //        if (autoCommand != null) {
+        //            autoCommand.cancel();
+        //        }
 
         // Turn off the drive PIDs
         // Save the battery in teleop by using the

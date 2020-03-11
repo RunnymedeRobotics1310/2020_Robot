@@ -4,13 +4,12 @@ import com.torontocodingcollective.commands.TDifferentialDrive;
 import com.torontocodingcollective.commands.TSafeCommand;
 import com.torontocodingcollective.speedcontroller.TSpeeds;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotConst;
 import frc.robot.oi.OI;
-import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -22,7 +21,8 @@ public class AlignTargetCommand extends TSafeCommand {
 
     private static final String COMMAND_NAME =
             DefaultDriveCommand.class.getSimpleName();
-    private static final double limeLightTime = 0.1;
+
+    private static final double limeLightTime = 0.4;
 
     OI                oi                = Robot.oi;
     DriveSubsystem driveSubsystem    = Robot.driveSubsystem;
@@ -65,15 +65,17 @@ public class AlignTargetCommand extends TSafeCommand {
 
         oi.startRumble();
         Robot.cameraSubsystem.setLightOn (true);
-        
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (timeSinceInitialized()< limeLightTime) {
-    		return;
-    	}
+
+        if (timeSinceInitialized() < limeLightTime) {
+            return;
+        }
+
         double turn = turnController.calculate(Robot.cameraSubsystem.getTargetX());
 
         SmartDashboard.putNumber("Turn Speed", turn);
@@ -89,7 +91,7 @@ public class AlignTargetCommand extends TSafeCommand {
             return true;
         }
         if (timeSinceInitialized() < limeLightTime) {
-        	return false;
+            return false;
         }
         return turnController.atSetpoint();
 
@@ -99,7 +101,11 @@ public class AlignTargetCommand extends TSafeCommand {
     protected void end() {
         driveSubsystem.setSpeed(0,0);
         oi.endRumble();
-        Robot.cameraSubsystem.setLightOn(false);
-        
+
+        // In auto, do not turn the light off
+        if (!DriverStation.getInstance().isAutonomous()) {
+            Robot.cameraSubsystem.setLightOn(false);
+        }
+
     }
 }

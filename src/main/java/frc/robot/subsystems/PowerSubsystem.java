@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Power Subsystem
@@ -26,7 +25,7 @@ public class PowerSubsystem extends TSubsystem {
     // Periodically update the dashboard and any PIDs or sensors
     @Override
     public void updatePeriodic() {
-        SmartDashboard.putData("PDP", pdp);
+        //SmartDashboard.putData("PDP", pdp);
     }
 
     @Override

@@ -68,6 +68,7 @@ public class DefaultTowerCommand extends TSafeCommand {
                 Robot.towerSubsystem.setTowerMotorSpeed(RobotConst.TOWER_SHOOTER_SPEED);
                 Robot.towerSubsystem.setKickerMotorSpeed(RobotConst.KICKER_MOTOR_SPEED);
             }
+            return;
         }
 
         // Always check for shooting first ^^^

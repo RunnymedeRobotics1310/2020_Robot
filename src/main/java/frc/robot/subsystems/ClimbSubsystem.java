@@ -14,157 +14,157 @@ import frc.robot.commands.climb.DefaultClimbCommand;
  */
 public class ClimbSubsystem extends TSubsystem {
 
-	TSpeedController leftClimbMotor = new TCanSpeedController
-			(RobotMap.LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE,
-					RobotMap.LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS);
+    TSpeedController leftClimbMotor = new TCanSpeedController
+            (RobotMap.LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS);
 
-	TSpeedController rightClimbMotor = new TCanSpeedController
-			(RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE,
-					RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS);
+    TSpeedController rightClimbMotor = new TCanSpeedController
+            (RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE,
+                    RobotMap.RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS);
 
-	Solenoid rightClimbPiston = new Solenoid(RobotMap.RIGHT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.RIGHT_CLIMB_RETRACT_PNEUMATIC_PORT);
-	Solenoid leftClimbPiston = new Solenoid(RobotMap.LEFT_CLIMB_EXTEND_PNEUMATIC_PORT, RobotMap.LEFT_CLIMB_RETRACT_PNEUMATIC_PORT);
+    Solenoid rightClimbPiston = new Solenoid(RobotMap.RIGHT_CLIMB_LOCK_PNEUMATIC_PORT);
+    Solenoid leftClimbPiston = new Solenoid(RobotMap.LEFT_CLIMB_LOCK_PNEUMATIC_PORT);
 
-	TLimitSwitch leftClimbTopLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_TOP_DETECT_DIO_PORT);
-	TLimitSwitch rightClimbTopLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_TOP_DETECT_DIO_PORT);
-	TLimitSwitch leftClimbBottomLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT);
-	TLimitSwitch rightClimbBottomLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT);
+    TLimitSwitch leftClimbTopLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_TOP_DETECT_DIO_PORT);
+    TLimitSwitch rightClimbTopLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_TOP_DETECT_DIO_PORT);
+    TLimitSwitch leftClimbBottomLimit = new TLimitSwitch (RobotMap.LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT);
+    TLimitSwitch rightClimbBottomLimit = new TLimitSwitch (RobotMap.RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT);
 
-	@Override
-	public void init() {
+    @Override
+    public void init() {
 
-	}
+    }
 
-	public boolean isRightClimbPistonExtended() {
-		if (rightClimbPiston.get()) {
-			return true;
-		}
-		return false;
-	}
+    public boolean isRightClimbPistonExtended() {
+        if (rightClimbPiston.get()) {
+            return true;
+        }
+        return false;
+    }
 
-	public boolean isLeftClimbPistonExtended() {
-		if(leftClimbPiston.get()) {
-			return true;
-		}
-		return false;
-	}
+    public boolean isLeftClimbPistonExtended() {
+        if(leftClimbPiston.get()) {
+            return true;
+        }
+        return false;
+    }
 
-	public void extendRightClimbPiston() {
-		//		rightClimbPiston.set(Value.kForward);
-	}
+    public void extendRightClimbPiston() {
+        //		rightClimbPiston.set(Value.kForward);
+    }
 
-	public void retractRightClimbPiston() {
-		//		rightClimbPiston.set(Value.kReverse);
+    public void retractRightClimbPiston() {
+        //		rightClimbPiston.set(Value.kReverse);
 
-	}
+    }
 
-	public void extendLeftClimbPiston() {
-		//		leftClimbPiston.set(Value.kForward);
-	}
+    public void extendLeftClimbPiston() {
+        //		leftClimbPiston.set(Value.kForward);
+    }
 
-	public void retractLeftClimbPiston() {
-		//		leftClimbPiston.set(Value.kReverse);
-	}
+    public void retractLeftClimbPiston() {
+        //		leftClimbPiston.set(Value.kReverse);
+    }
 
-	public void setLeftClimbSpeed(double speed) {
-		leftClimbMotor.set(speed);
+    public void setLeftClimbSpeed(double speed) {
+        leftClimbMotor.set(speed);
 
-		if (speed > 0) {
-			retractLeftClimbPiston();
-		}
-	}
+        if (speed > 0) {
+            retractLeftClimbPiston();
+        }
+    }
 
-	public void setRightClimbSpeed(double speed) {
-		rightClimbMotor.set(speed);
+    public void setRightClimbSpeed(double speed) {
+        rightClimbMotor.set(speed);
 
-		if (speed > 0) {
-			retractRightClimbPiston();
-		}
-	}
+        if (speed > 0) {
+            retractRightClimbPiston();
+        }
+    }
 
-	public boolean isLeftClimbTopLimit() {
+    public boolean isLeftClimbTopLimit() {
 
-		if(leftClimbTopLimit.atLimit()) {
-			return true;
-		}
-		return false;
-	}
+        if(leftClimbTopLimit.atLimit()) {
+            return true;
+        }
+        return false;
+    }
 
-	public boolean isRightClimbTopLimit() {
+    public boolean isRightClimbTopLimit() {
 
-		if(rightClimbTopLimit.atLimit()) {
-			return true;
-		}
-		return false;
-	}
+        if(rightClimbTopLimit.atLimit()) {
+            return true;
+        }
+        return false;
+    }
 
-	public boolean isLeftClimbBottomLimit() {
+    public boolean isLeftClimbBottomLimit() {
 
-		if(leftClimbBottomLimit.atLimit()) {
-			return true;
-		}
-		return false;
-	}
+        if(leftClimbBottomLimit.atLimit()) {
+            return true;
+        }
+        return false;
+    }
 
-	public boolean isRightClimbBottomLimit() {
+    public boolean isRightClimbBottomLimit() {
 
-		if(rightClimbBottomLimit.atLimit()) {
-			return true;
-		}
-		return false;
-	}
-	public void stopLeftClimbMotor() {
-		leftClimbMotor.set(0);
-	}
+        if(rightClimbBottomLimit.atLimit()) {
+            return true;
+        }
+        return false;
+    }
+    public void stopLeftClimbMotor() {
+        leftClimbMotor.set(0);
+    }
 
-	public void stopRightClimbMotor() {
-		rightClimbMotor.set(0);
-	}
+    public void stopRightClimbMotor() {
+        rightClimbMotor.set(0);
+    }
 
-	public void lockClimb() {
-		stopLeftClimbMotor();
-		stopRightClimbMotor();
+    public void lockClimb() {
+        stopLeftClimbMotor();
+        stopRightClimbMotor();
 
-		extendLeftClimbPiston();
-		extendRightClimbPiston();
-	}
+        extendLeftClimbPiston();
+        extendRightClimbPiston();
+    }
 
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new DefaultClimbCommand());
-	}
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new DefaultClimbCommand());
+    }
 
 
-	// Periodically update the dashboard and any PIDs or sensors
-	@Override
-	public void updatePeriodic() {
+    // Periodically update the dashboard and any PIDs or sensors
+    @Override
+    public void updatePeriodic() {
 
-		if (leftClimbMotor.get() < 0 && (leftClimbBottomLimit.atLimit() || isLeftClimbPistonExtended())) {
-			leftClimbMotor.set(0);
-			extendLeftClimbPiston();
-		}
+        if (leftClimbMotor.get() < 0 && (leftClimbBottomLimit.atLimit() || isLeftClimbPistonExtended())) {
+            leftClimbMotor.set(0);
+            extendLeftClimbPiston();
+        }
 
-		if (leftClimbMotor.get() > 0 && leftClimbTopLimit.atLimit()) {
-			leftClimbMotor.set(0);
-		}
+        if (leftClimbMotor.get() > 0 && leftClimbTopLimit.atLimit()) {
+            leftClimbMotor.set(0);
+        }
 
-		if (leftClimbMotor.get() > 0 && isLeftClimbPistonExtended()) {
-			retractLeftClimbPiston();
-		}
+        if (leftClimbMotor.get() > 0 && isLeftClimbPistonExtended()) {
+            retractLeftClimbPiston();
+        }
 
-		if (rightClimbMotor.get() < 0 && (rightClimbBottomLimit.atLimit() || isRightClimbPistonExtended())) {
-			rightClimbMotor.set(0);
-			extendRightClimbPiston();
-		}
+        if (rightClimbMotor.get() < 0 && (rightClimbBottomLimit.atLimit() || isRightClimbPistonExtended())) {
+            rightClimbMotor.set(0);
+            extendRightClimbPiston();
+        }
 
-		if (rightClimbMotor.get() > 0 && rightClimbTopLimit.atLimit()) {
-			rightClimbMotor.set(0);
-		}
+        if (rightClimbMotor.get() > 0 && rightClimbTopLimit.atLimit()) {
+            rightClimbMotor.set(0);
+        }
 
-		if (rightClimbMotor.get() > 0 && isRightClimbPistonExtended()) {
-			retractRightClimbPiston();
-		}
+        if (rightClimbMotor.get() > 0 && isRightClimbPistonExtended()) {
+            retractRightClimbPiston();
+        }
 
-	}
+    }
 
 }

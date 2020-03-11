@@ -78,11 +78,8 @@ public class RobotMap {
     // Pneumatics Ports
     // ******************************************
 
-    public static final int						RIGHT_CLIMB_EXTEND_PNEUMATIC_PORT = 8;
-    public static final int						RIGHT_CLIMB_RETRACT_PNEUMATIC_PORT = 9;
-
-    public static final int						LEFT_CLIMB_EXTEND_PNEUMATIC_PORT = 6;
-    public static final int						LEFT_CLIMB_RETRACT_PNEUMATIC_PORT = 7;
+    public static final int						RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
+    public static final int						LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
 
     public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT = 4;
     public static final int                     INTAKE_RETRACT_PNEUMATIC_PORT = 5;

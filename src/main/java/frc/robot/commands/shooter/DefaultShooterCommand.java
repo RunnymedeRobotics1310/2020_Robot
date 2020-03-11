@@ -6,6 +6,7 @@ import com.torontocodingcollective.commands.TSafeCommand;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.HoodPosition;
 import frc.robot.Robot;
+import frc.robot.RobotConst;
 import frc.robot.oi.OI.TestMode;
 
 /**
@@ -81,15 +82,15 @@ public class DefaultShooterCommand extends TSafeCommand {
                 double y = Robot.cameraSubsystem.getTargetY();
 
                 HoodPosition autoHoodPosition = HoodPosition.FAR;
-                double autoShootSpeed = 3800;
+                double autoShootSpeed = RobotConst.BACK_OF_TRENCH_RPM;
 
                 if (y > 3) {
                     autoHoodPosition = HoodPosition.CLOSE;
-                    autoShootSpeed = 2500;
+                    autoShootSpeed = RobotConst.INITIATION_LINE_RPM;
                 }
                 else if (y > -1) {
                     autoHoodPosition = HoodPosition.MEDIUM;
-                    autoShootSpeed = 2880;
+                    autoShootSpeed = RobotConst.FRONT_OF_TRENCH_RPM;
                 }
                 Robot.shooterPIDSubsystem.setHoodPosition(autoHoodPosition);
                 Robot.shooterPIDSubsystem.setSetpoint(autoShootSpeed);
