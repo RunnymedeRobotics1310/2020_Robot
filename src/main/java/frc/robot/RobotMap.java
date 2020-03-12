@@ -147,9 +147,10 @@ public class RobotMap {
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
             TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
 
-            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 46;
-            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
-            KICKER_MOTOR_ISINVERTED                            = TConst.INVERTED;
+            // Kicker is not used in the production robot
+            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS         = 46;
+            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                = TCanSpeedControllerType.VICTOR_SPX;
+            KICKER_MOTOR_ISINVERTED                           = TConst.INVERTED;
 
             SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
@@ -158,18 +159,18 @@ public class RobotMap {
             SHOOTER_MOTOR_ISINVERTED                          = TConst.NOT_INVERTED;
             SHOOTER_ENCODER_ISINVERTED                        = TConst.NOT_INVERTED;
 
-            GYRO_ANALOG_PORT                                  = 0; // Not used
-            GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;
-
-            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 60;
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 61;
             LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 		      = TCanSpeedControllerType.TALON_SRX;
             LEFT_CLIMB_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
             LEFT_CLIMB_ENCODER_ISINVERTED                     = TConst.NOT_INVERTED;
 
-            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 61;
-            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.TALON_SRX;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 60;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE           = TCanSpeedControllerType.TALON_SRX;
             RIGHT_CLIMB_MOTOR_ISINVERTED                      = TConst.INVERTED;
             RIGHT_CLIMB_ENCODER_ISINVERTED                    = TConst.INVERTED;
+
+            GYRO_ANALOG_PORT                                  = 0; // Not used
+            GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;
 
             // ******************************************
             // Pneumatics Ports
