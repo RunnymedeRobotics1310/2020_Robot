@@ -10,20 +10,20 @@ public class RobotConst {
     // *********************************************************
     // Drive Constants
     // *********************************************************
-    public static final double  MAX_DRIVE_ENCODER_SPEED;
 
-    public static final double  DRIVE_GYRO_PID_KP = 0.0095;
-    public static final double  DRIVE_GYRO_PID_KI = 0.001;
-    public static final double  DRIVE_GYRO_PID_KD = 0.000;
+    public static final double  DRIVE_GYRO_PID_KP;
+    public static final double  DRIVE_GYRO_PID_KI;
+    public static final double  DRIVE_GYRO_PID_KD;
 
-    public static final double  VISION_TARGET_PID_KP = 0.006;
-    public static final double  VISION_TARGET_PID_KI = 0.02;
-    public static final double  VISION_TARGET_PID_KD = 0.000;
+    public static final double  VISION_TARGET_PID_KP;
+    public static final double  VISION_TARGET_PID_KI;
+    public static final double  VISION_TARGET_PID_KD;
 
-    public static final double  DRIVE_MAX_ROTATION_OUTPUT     = 0.4;
+    public static final double  DRIVE_MAX_ROTATION_OUTPUT;
 
     public static final double  DRIVE_SPEED_PID_KP;
     public static final double  DRIVE_SPEED_PID_KI;
+    public static final double  MAX_DRIVE_ENCODER_SPEED;
 
     public static final double  ENCODER_COUNTS_PER_INCH;
 
@@ -39,9 +39,9 @@ public class RobotConst {
     // *********************************************************
     // Carousel Constants
     // *********************************************************
-    public static final double CAROUSEL_INTAKE_SPEED = 0.25;
-    public static final double CAROUSEL_SHOOTER_SPEED = 0.25;
-    public static final double CAROUSEL_UNJAM_SPEED = -.075;
+    public static final double CAROUSEL_INTAKE_SPEED;
+    public static final double CAROUSEL_SHOOTER_SPEED;
+    public static final double CAROUSEL_UNJAM_SPEED;
 
     // *********************************************************
     // For Ultrasonic Calibration
@@ -58,25 +58,22 @@ public class RobotConst {
 
     public static final double KICKER_MOTOR_SPEED = 0.4;
 
-    public static enum Direction {
-        FORWARD, BACKWARD
-    };
     // *********************************************************
     // Shooter Constants
     // *********************************************************
-    public static final double SHOOTER_BANGBANG_SPEED  = 1;
+    public static final double SHOOTER_KP;
+    public static final double SHOOTER_KI;
+    public static final double SHOOTER_KD;
+    public static final double SHOOTER_FF;
+    
     public static final double SHOOTER_SPEED_PID_KP;
     public static final double SHOOTER_SPEED_PID_KI;
-    public static final double SHOOTER_KP = .0003;
-    public static final double SHOOTER_KI = .0000000001;
-    public static final double SHOOTER_KD = .000;
-    public static final double SHOOTER_FF = 0.000185;
     public static final double MAX_SHOOTER_SPEED;
 
-    public static final double INITIATION_LINE_RPM = 2500;
-    public static final double FRONT_OF_TRENCH_RPM = 2790;
-    public static final double BACK_OF_TRENCH_RPM = 3800;
-    public static final double RAMP_UP_RPM = 2500;
+    public static final double INITIATION_LINE_RPM;
+    public static final double FRONT_OF_TRENCH_RPM;
+    public static final double BACK_OF_TRENCH_RPM;
+    public static final double RAMP_UP_RPM;
 
     // *********************************************************
     // Climb Constants
@@ -87,38 +84,91 @@ public class RobotConst {
 
     // The TorontoCodingCollective framework was developed to run on different
     // robots through the use of multiple mappings and constants.
-    public static String robot = PRACTICE_ROBOT;
+    public static String robot = PROD_ROBOT;
 
     static {
 
         switch (robot) {
+
+        case PROD_ROBOT:
+
+            // The max drive encoder speed should be set just below the
+            // maximum loaded speed of the robot
+            MAX_DRIVE_ENCODER_SPEED = 5700.0; // Encoder counts/sec
+            DRIVE_MAX_ROTATION_OUTPUT = 0.4;
+
+            ROBOT_WIDTH = 30;
+
+            DRIVE_SPEED_PID_KP = 0.4;
+            DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KP = 0.0095;
+            DRIVE_GYRO_PID_KI = 0.001;
+            DRIVE_GYRO_PID_KD = 0.000;
+
+            VISION_TARGET_PID_KP = 0.006;
+            VISION_TARGET_PID_KI = 0.02;
+            VISION_TARGET_PID_KD = 0.000;
+
+            INITIATION_LINE_RPM = 2500;
+            FRONT_OF_TRENCH_RPM = 2790;
+            BACK_OF_TRENCH_RPM = 3800;
+            RAMP_UP_RPM = 2500;
+            
+            SHOOTER_KP = .0003;
+            SHOOTER_KI = .0000000001;
+            SHOOTER_KD = .000;
+            SHOOTER_FF = 0.000185;
+
+            SHOOTER_SPEED_PID_KP = 0.5;
+            SHOOTER_SPEED_PID_KI = 0.05;
+
+            MAX_SHOOTER_SPEED = 5600;
+
+            CAROUSEL_INTAKE_SPEED = 0.25;
+            CAROUSEL_SHOOTER_SPEED = 0.25;
+            CAROUSEL_UNJAM_SPEED = -.4;
+
+            ENCODER_COUNTS_PER_INCH = 50.4;
+
+            break;
 
         case PRACTICE_ROBOT:
 
             // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
             MAX_DRIVE_ENCODER_SPEED = 5700.0; // Encoder counts/sec
+            DRIVE_MAX_ROTATION_OUTPUT = 0.4;
 
             ROBOT_WIDTH = 30;
 
-            // Typically set the integral gain at 1/20 of the
-            // proportional gain.  The gain can often be increased
-            // above this value, but typically gives good
-            // stability and acceptable performance
-            //            DRIVE_GYRO_PID_KP = .07;
-            //            DRIVE_GYRO_PID_KI = .00;
-            //            DRIVE_GYRO_PID_KD = .00;
-
-
-
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KP = 0.0095;
+            DRIVE_GYRO_PID_KI = 0.001;
+            DRIVE_GYRO_PID_KD = 0.000;
 
+            VISION_TARGET_PID_KP = 0.006;
+            VISION_TARGET_PID_KI = 0.02;
+            VISION_TARGET_PID_KD = 0.000;
+
+            INITIATION_LINE_RPM = 2500;
+            FRONT_OF_TRENCH_RPM = 2790;
+            BACK_OF_TRENCH_RPM = 3800;
+            RAMP_UP_RPM = 2500;
+            
+            SHOOTER_KP = .0003;
+            SHOOTER_KI = .0000000001;
+            SHOOTER_KD = .000;
+            SHOOTER_FF = 0.000185;
 
             SHOOTER_SPEED_PID_KP = 0.5;
             SHOOTER_SPEED_PID_KI = 0.05;
 
             MAX_SHOOTER_SPEED = 5600;
+
+            CAROUSEL_INTAKE_SPEED = 0.25;
+            CAROUSEL_SHOOTER_SPEED = 0.25;
+            CAROUSEL_UNJAM_SPEED = -.4;
 
             ENCODER_COUNTS_PER_INCH = 50.4;
 
@@ -129,6 +179,7 @@ public class RobotConst {
             // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
             MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+            DRIVE_MAX_ROTATION_OUTPUT = 0.4;
 
             ROBOT_WIDTH = 30;
 
@@ -136,17 +187,35 @@ public class RobotConst {
             // proportional gain.  The gain can often be increased
             // above this value, but typically gives good
             // stability and acceptable performance
-            //            DRIVE_GYRO_PID_KP = .07;
-            //            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
-            //            DRIVE_GYRO_PID_KD = .07;
+            DRIVE_GYRO_PID_KP = .07;
+            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
+
+            VISION_TARGET_PID_KP = 0.006;
+            VISION_TARGET_PID_KI = 0.02;
+            VISION_TARGET_PID_KD = 0.000;
+
+            INITIATION_LINE_RPM = 2500;
+            FRONT_OF_TRENCH_RPM = 2790;
+            BACK_OF_TRENCH_RPM = 3800;
+            RAMP_UP_RPM = 2500;
+            
+            SHOOTER_KP = .0003;
+            SHOOTER_KI = .0000000001;
+            SHOOTER_KD = .000;
+            SHOOTER_FF = 0.000185;
 
             SHOOTER_SPEED_PID_KP = 0.5;
             SHOOTER_SPEED_PID_KI = 0.05;
 
             MAX_SHOOTER_SPEED = 5600;
+
+            CAROUSEL_INTAKE_SPEED = 0.25;
+            CAROUSEL_SHOOTER_SPEED = 0.25;
+            CAROUSEL_UNJAM_SPEED = -.4;
 
             ENCODER_COUNTS_PER_INCH = 55.6/2;
 
@@ -158,6 +227,7 @@ public class RobotConst {
             // The max drive encoder speed should be set just below the
             // maximum loaded speed of the robot
             MAX_DRIVE_ENCODER_SPEED = 320.0; // Encoder counts/sec
+            DRIVE_MAX_ROTATION_OUTPUT = 0.4;
 
             ROBOT_WIDTH = 30;
 
@@ -165,17 +235,35 @@ public class RobotConst {
             // proportional gain.  The gain can often be increased
             // above this value, but typically gives good
             // stability and acceptable performance
-            //            DRIVE_GYRO_PID_KP = .07;
-            //            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
-            //            DRIVE_GYRO_PID_KD = .07;
+            DRIVE_GYRO_PID_KP = .07;
+            DRIVE_GYRO_PID_KI = DRIVE_GYRO_PID_KP / 20.0;
+            DRIVE_GYRO_PID_KD = .07;
 
             DRIVE_SPEED_PID_KP = 0.4;
             DRIVE_SPEED_PID_KI = DRIVE_SPEED_PID_KP / 20.0;
+
+            VISION_TARGET_PID_KP = 0.006;
+            VISION_TARGET_PID_KI = 0.02;
+            VISION_TARGET_PID_KD = 0.000;
+
+            INITIATION_LINE_RPM = 2500;
+            FRONT_OF_TRENCH_RPM = 2790;
+            BACK_OF_TRENCH_RPM = 3800;
+            RAMP_UP_RPM = 2500;
+            
+            SHOOTER_KP = .0003;
+            SHOOTER_KI = .0000000001;
+            SHOOTER_KD = .000;
+            SHOOTER_FF = 0.000185;
 
             SHOOTER_SPEED_PID_KP = 0;
             SHOOTER_SPEED_PID_KI = 0;
 
             MAX_SHOOTER_SPEED = 5800;
+
+            CAROUSEL_INTAKE_SPEED = 0.25;
+            CAROUSEL_SHOOTER_SPEED = 0.25;
+            CAROUSEL_UNJAM_SPEED = -.4;
 
             ENCODER_COUNTS_PER_INCH = 55.6/2;
 

@@ -82,29 +82,29 @@ public class RobotMap {
     // Pneumatics Ports
     // ******************************************
 
-    public static final int						RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
-    public static final int						LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
+    public static final int						RIGHT_CLIMB_LOCK_PNEUMATIC_PORT;
+    public static final int						LEFT_CLIMB_LOCK_PNEUMATIC_PORT;
 
-    public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT = 4;
-    public static final int                     INTAKE_RETRACT_PNEUMATIC_PORT = 5;
+    public static final int                     INTAKE_EXTEND_PNEUMATIC_PORT;
+    public static final int                     INTAKE_RETRACT_PNEUMATIC_PORT;
 
-    public static final int						STOPPER_RETRACT_PNEUMATIC_PORT = 2;
-    public static final int						STOPPER_EXTEND_PNEUMATIC_PORT = 3;
+    public static final int						STOPPER_RETRACT_PNEUMATIC_PORT;
+    public static final int						STOPPER_EXTEND_PNEUMATIC_PORT;
 
 
-    public static final int						HOOD_RETRACT_PNEUMATIC_PORT = 0;
-    public static final int						HOOD_EXTEND_PNEUMATIC_PORT = 1;
+    public static final int						HOOD_RETRACT_PNEUMATIC_PORT;
+    public static final int						HOOD_EXTEND_PNEUMATIC_PORT;
 
 
     // ******************************************
     // DIO Ports
     // ******************************************
-    public static final int                      TOWER_BALL_DETECT_DIO_PORT = 0;
-    public static final int                      CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+    public static final int                      TOWER_BALL_DETECT_DIO_PORT;
+    public static final int                      CAROUSEL_BALL_DETECT_DIO_PORT;
 
     //FIND REAL ADDRESSES
-    public static final int 					 LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
-    public static final int 					 RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
+    public static final int 					 LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT;
+    public static final int 					 RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT;
 
 
     // Initializers if this code will be deployed to more than one
@@ -113,7 +113,7 @@ public class RobotMap {
 
         switch (RobotConst.robot) {
 
-        case RobotConst.PRACTICE_ROBOT:
+        case RobotConst.PROD_ROBOT:
 
             LEFT_DRIVE_SPEED_CONTROLLER_CAN_ADDRESS           = 20;
             LEFT_DRIVE_SPEED_CONTROLLER_TYPE                  = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
@@ -170,6 +170,114 @@ public class RobotMap {
             RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.TALON_SRX;
             RIGHT_CLIMB_MOTOR_ISINVERTED                      = TConst.INVERTED;
             RIGHT_CLIMB_ENCODER_ISINVERTED                    = TConst.INVERTED;
+
+            // ******************************************
+            // Pneumatics Ports
+            // ******************************************
+            RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
+            LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
+
+            INTAKE_EXTEND_PNEUMATIC_PORT = 4;
+            INTAKE_RETRACT_PNEUMATIC_PORT = 5;
+
+            STOPPER_RETRACT_PNEUMATIC_PORT = 2;
+            STOPPER_EXTEND_PNEUMATIC_PORT = 3;
+
+            HOOD_RETRACT_PNEUMATIC_PORT = 0;
+            HOOD_EXTEND_PNEUMATIC_PORT = 1;
+
+            // ******************************************
+            // DIO Ports
+            // ******************************************
+            TOWER_BALL_DETECT_DIO_PORT = 0;
+            CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+
+            LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
+            RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
+
+            break;
+
+        case RobotConst.PRACTICE_ROBOT:
+
+            LEFT_DRIVE_SPEED_CONTROLLER_CAN_ADDRESS           = 20;
+            LEFT_DRIVE_SPEED_CONTROLLER_TYPE                  = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_CAN_ADDRESS  = 21;
+            LEFT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            LEFT_DRIVE_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
+            LEFT_DRIVE_ENCODER_ISINVERTED                     = TConst.NOT_INVERTED;
+
+            RIGHT_DRIVE_SPEED_CONTROLLER_ADDRESS              = 10;
+            RIGHT_DRIVE_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_ADDRESS     = 11;
+            RIGHT_DRIVE_FOLLOWER_SPEED_CONTROLLER_TYPE        = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            RIGHT_DRIVE_MOTOR_ISINVERTED                      = TConst.INVERTED;
+            RIGHT_DRIVE_ENCODER_ISINVERTED                    = TConst.INVERTED;
+
+            INTAKE_TOP_MOTOR_CAN_SPEED_CONTROLLER_CAN_ADDRESS = 30;
+            INTAKE_TOP_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_TOP_MOTOR_ISINVERTED                       = TConst.INVERTED;
+
+            INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS  = 31;
+            INTAKE_BOTTOM_MOTOR_SPEED_CONTROLLER_TYPE         = TCanSpeedControllerType.VICTOR_SPX;
+            INTAKE_BOTTOM_MOTOR_ISINVERTED                    = TConst.INVERTED;
+
+            CAROUSEL_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS       = 39;
+            CAROUSEL_MOTOR_SPEED_CONTROLLER_TYPE              = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            CAROUSEL_MOTOR_ISINVERTED                         = TConst.NOT_INVERTED;
+            CAROUSEL_ENCODER_ISINVERTED                       = TConst.NOT_INVERTED;
+            CAROUSEL_MOTOR_POWER_PORT                         = 11;
+
+            TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
+            TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
+            TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+
+            KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 46;
+            KICKER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
+            KICKER_MOTOR_ISINVERTED                            = TConst.INVERTED;
+
+            SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
+            SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS                = 51;
+            SHOOTER_SPEED_FOLLOWER_TYPE                       = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
+            SHOOTER_MOTOR_ISINVERTED                          = TConst.NOT_INVERTED;
+            SHOOTER_ENCODER_ISINVERTED                        = TConst.NOT_INVERTED;
+
+            GYRO_ANALOG_PORT                                  = 0; // Not used
+            GYRO_ISINVERTED                                   = TConst.NOT_INVERTED;
+
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS     = 60;
+            LEFT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE            = TCanSpeedControllerType.TALON_SRX;
+            LEFT_CLIMB_MOTOR_ISINVERTED                       = TConst.NOT_INVERTED;
+            LEFT_CLIMB_ENCODER_ISINVERTED                     = TConst.NOT_INVERTED;
+
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS    = 61;
+            RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE           = TCanSpeedControllerType.TALON_SRX;
+            RIGHT_CLIMB_MOTOR_ISINVERTED                      = TConst.INVERTED;
+            RIGHT_CLIMB_ENCODER_ISINVERTED                    = TConst.INVERTED;
+
+            // ******************************************
+            // Pneumatics Ports
+            // ******************************************
+            RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
+            LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
+
+            INTAKE_EXTEND_PNEUMATIC_PORT = 4;
+            INTAKE_RETRACT_PNEUMATIC_PORT = 5;
+
+            STOPPER_RETRACT_PNEUMATIC_PORT = 2;
+            STOPPER_EXTEND_PNEUMATIC_PORT = 3;
+
+            HOOD_RETRACT_PNEUMATIC_PORT = 0;
+            HOOD_EXTEND_PNEUMATIC_PORT = 1;
+
+            // ******************************************
+            // DIO Ports
+            // ******************************************
+            TOWER_BALL_DETECT_DIO_PORT = 0;
+            CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+
+            LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
+            RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
 
             break;
 
@@ -232,6 +340,30 @@ public class RobotMap {
             RIGHT_CLIMB_MOTOR_ISINVERTED                      = TConst.NOT_INVERTED;
             RIGHT_CLIMB_ENCODER_ISINVERTED                    = TConst.NOT_INVERTED;
 
+            // ******************************************
+            // Pneumatics Ports
+            // ******************************************
+            RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
+            LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
+
+            INTAKE_EXTEND_PNEUMATIC_PORT = 4;
+            INTAKE_RETRACT_PNEUMATIC_PORT = 5;
+
+            STOPPER_RETRACT_PNEUMATIC_PORT = 2;
+            STOPPER_EXTEND_PNEUMATIC_PORT = 3;
+
+            HOOD_RETRACT_PNEUMATIC_PORT = 0;
+            HOOD_EXTEND_PNEUMATIC_PORT = 1;
+
+            // ******************************************
+            // DIO Ports
+            // ******************************************
+            TOWER_BALL_DETECT_DIO_PORT = 0;
+            CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+
+            LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
+            RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
+
             break;
 
         case RobotConst.TEST_ROBOT:
@@ -293,6 +425,31 @@ public class RobotMap {
             RIGHT_CLIMB_MOTOR_SPEED_CONTROLLER_TYPE 	      = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             RIGHT_CLIMB_MOTOR_ISINVERTED                      = TConst.NOT_INVERTED;
             RIGHT_CLIMB_ENCODER_ISINVERTED                    = TConst.NOT_INVERTED;
+
+            // ******************************************
+            // Pneumatics Ports
+            // ******************************************
+            RIGHT_CLIMB_LOCK_PNEUMATIC_PORT = 7;
+            LEFT_CLIMB_LOCK_PNEUMATIC_PORT = 6;
+
+            INTAKE_EXTEND_PNEUMATIC_PORT = 4;
+            INTAKE_RETRACT_PNEUMATIC_PORT = 5;
+
+            STOPPER_RETRACT_PNEUMATIC_PORT = 2;
+            STOPPER_EXTEND_PNEUMATIC_PORT = 3;
+
+            HOOD_RETRACT_PNEUMATIC_PORT = 0;
+            HOOD_EXTEND_PNEUMATIC_PORT = 1;
+
+            // ******************************************
+            // DIO Ports
+            // ******************************************
+            TOWER_BALL_DETECT_DIO_PORT = 0;
+            CAROUSEL_BALL_DETECT_DIO_PORT = 1;
+
+            LEFT_CLIMB_BOTTOM_DETECT_DIO_PORT = 3;
+            RIGHT_CLIMB_BOTTOM_DETECT_DIO_PORT = 5;
+
 
         }
     }

@@ -60,7 +60,7 @@ public class DefaultCarouselCommand extends TSafeCommand {
 
         if (Robot.carouselSubsystem.isJammed()) {
             // If jammed, unjam for the given time.
-            Scheduler.getInstance().add(new UnjamCarouselCommand(.25));
+            Scheduler.getInstance().add(new UnjamCarouselCommand(1));
         }
 
         // Do not look at the Joystick in auto.
