@@ -48,26 +48,19 @@ public class DefaultIntakeCommand extends TSafeCommand {
 
         if (Robot.oi.isTestModeEnabled()) {
 
-            // If testing the bottom or the top intake, then
-            // also activate the piston using the intake buttons (but not the motor)
-            if (       Robot.oi.getTestMode() == TestMode.BOTTOM_INTAKE
-                    || Robot.oi.getTestMode() == TestMode.TOP_INTAKE) {
-                if (Robot.oi.runFeederIntake()) {
-                    Robot.intakeSubsystem.retractIntake();
-                }
-                if (Robot.oi.runGroundIntake()) {
-                    Robot.intakeSubsystem.extendIntake();
-                }
-            }
-            else {
-                Robot.intakeSubsystem.retractIntake();
-            }
-
             if (Robot.oi.getTestMode() == TestMode.BOTTOM_INTAKE) {
                 Robot.intakeSubsystem.setIntakeSpeed(0, Robot.oi.getTestMotorSpeed());
             }
             else if (Robot.oi.getTestMode() == TestMode.TOP_INTAKE) {
                 Robot.intakeSubsystem.setIntakeSpeed(Robot.oi.getTestMotorSpeed(), 0);
+            }
+            else if (Robot.oi.getTestMode() == TestMode.INTAKE_PISTON) {
+                if (Robot.oi.getTestPistonValue() > 0) {
+                    Robot.intakeSubsystem.extendIntake();
+                }
+                if (Robot.oi.getTestPistonValue() < 0) {
+                    Robot.intakeSubsystem.retractIntake();
+                }
             }
             else {
                 Robot.intakeSubsystem.stopIntake();
@@ -75,27 +68,27 @@ public class DefaultIntakeCommand extends TSafeCommand {
             // If in test mode, then do not look for other buttons
             return;
         }
-        
+
 
         if (Robot.carouselSubsystem.isRobotFull()) {
             Robot.intakeSubsystem.stopIntake();
             return;
         }
 
-     // Do not look at the Joystick in auto.
+        // Do not look at the Joystick in auto.
         if (DriverStation.getInstance().isAutonomous()) {
             return;
         }
-        
+
         if (Robot.oi.stopIntake()) {
             Robot.intakeSubsystem.stopIntake();
             return;
         }
-         
+
         if (Robot.oi.feederExtake()) {
             Scheduler.getInstance().add(new FeederExtakeCommand());
         }
-        
+
         if (Robot.oi.groundExtake()) {
             Scheduler.getInstance().add(new GroundExtakeCommand());
         }

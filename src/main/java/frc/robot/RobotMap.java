@@ -145,16 +145,16 @@ public class RobotMap {
 
             TOWER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS          = 45;
             TOWER_MOTOR_SPEED_CONTROLLER_TYPE                 = TCanSpeedControllerType.VICTOR_SPX;
-            TOWER_MOTOR_ISINVERTED                            = TConst.NOT_INVERTED;
+            TOWER_MOTOR_ISINVERTED                            = TConst.INVERTED;
 
             // Kicker is not used in the production robot
             KICKER_MOTOR_SPEED_CONTROLLER_CAN_ADDRESS         = 46;
             KICKER_MOTOR_SPEED_CONTROLLER_TYPE                = TCanSpeedControllerType.VICTOR_SPX;
             KICKER_MOTOR_ISINVERTED                           = TConst.INVERTED;
 
-            SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 50;
+            SHOOTER_SPEED_CONTROLLER_CAN_ADDRESS              = 51;
             SHOOTER_SPEED_CONTROLLER_TYPE                     = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
-            SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS                = 51;
+            SHOOTER_SPEED_FOLLOWER_CAN_ADDRESS                = 50;
             SHOOTER_SPEED_FOLLOWER_TYPE                       = TCanSpeedControllerType.SPARK_MAX_BRUSHLESS;
             SHOOTER_MOTOR_ISINVERTED                          = TConst.NOT_INVERTED;
             SHOOTER_ENCODER_ISINVERTED                        = TConst.NOT_INVERTED;

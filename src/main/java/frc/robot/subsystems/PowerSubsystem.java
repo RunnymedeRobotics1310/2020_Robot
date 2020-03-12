@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-
 /**
  * Power Subsystem
  * <p>
@@ -12,10 +10,11 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  */
 public class PowerSubsystem extends TSubsystem {
 
-    PowerDistributionPanel pdp = new PowerDistributionPanel();
+    //    PowerDistributionPanel pdp = new PowerDistributionPanel();
 
     public double getMotorCurrent(int port) {
-        return pdp.getCurrent(port);
+        return 0;
+        //        return pdp.getCurrent(port);
     };
 
     @Override

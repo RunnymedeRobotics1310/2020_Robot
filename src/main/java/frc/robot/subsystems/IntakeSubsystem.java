@@ -6,7 +6,6 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.intake.DefaultIntakeCommand;
@@ -32,7 +31,7 @@ public class IntakeSubsystem extends TSubsystem {
 
     @Override
     public void init() {
-
+        retractIntake();
     }
 
     public void setIntakeSpeed (double topSpeed, double bottomSpeed) {

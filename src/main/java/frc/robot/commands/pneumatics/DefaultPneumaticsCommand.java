@@ -49,6 +49,11 @@ public class DefaultPneumaticsCommand extends TSafeCommand {
         } else {
             Robot.pneumaticsSubsystem.disableCompressor();
         }
+        
+        if (Robot.oi.isTestModeEnabled()) {
+            return;
+        }
+        
         if (Robot.oi.intakeUp()) {
         	Robot.intakeSubsystem.extendIntake();
         }
